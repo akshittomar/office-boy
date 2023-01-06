@@ -9,7 +9,7 @@ const UserSchema = new Schema({
         type:String,
         unique:true,
         required:true ,
-        expires: 30
+        
     },
     password:{
         type:String,
