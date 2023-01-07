@@ -131,7 +131,6 @@ router.delete('/delete/:id',fetchuser, async(req,res)=>{
 
     try{
         
-        // let user =await  Notes.findOne({updateID: req.body.email});
         
         
         

@@ -6,8 +6,7 @@ const fetchuser = (req,res,next) =>
 {
     // GET THE USER FROM THE JWT TOKEN AND ADD ID TO REQUEST OBJECT 
     const token = req.header('authToken');
-    // const sacchiMai = req.header('canWe')
-    // console.log(sacchiMai);
+    
     if(!token)
     {
         res.status(401).send({error:"PLEASE AUTHENTICATE USING A VALID TOKEN "})

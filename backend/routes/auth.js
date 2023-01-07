@@ -52,7 +52,7 @@ const errors = validationResult(req);
     const authToken  = jwt.sign(data,JWT_SECRET);
     console.log(authToken);
 
-
+//new user 200 ->>> auth token 
     // .then(user => res.json(user)).catch(err => {console.log(err);res.json({error:'PLEASE ENTER  A UNIQUE VALUE FOR EMAIL'})});
     res.json({authToken});
   }
@@ -104,7 +104,7 @@ const data = {
 }
 const JWT_SECRET = 'AUR LADKE KYA HAL HAI TERE PURA KAM CHAL RHA MAUJ KR '
 const authToken  = jwt.sign(data,JWT_SECRET);//user ki id ko istmal krke ek token bna liya 
-const canWe = 'I AM A STRING SENT AS RESPONSE CAN I COME TO HEADER '
+
 console.log(authToken);
 res.json({authToken});
 // res.json({canWe});
@@ -125,9 +125,7 @@ catch(error){
 
 // ROUTER 3 GET LOGGED IN USER DETAILS WITH POST : /api/auth/getUser here login is required 
 router.post('/getuser',fetchuser,async(req,res)=>{
-  //1.if we wrote header code here then we have to write header code every where , where authenticated request is required thats it 
-  //2. there can be a case where we have to add video calling features to our app, blog features to our app , shop features to our app so, for all this we will add a middelware 
-  //3.middelware ek voh function hoga jo har time call hoga jab bhi authenticated request ki call aeygi , isse har bar ka authentication request ka code likhne se bacche ge hum log thats it 
+  
 try{
 userId=req.user.id;
 const user = await User.findById(userId).select("-password");
