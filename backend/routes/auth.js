@@ -1,10 +1,10 @@
-const express = require('express');
-const User = require('../models/User');
+const express = require('express');//express js ki file hai yeh puri 
+const User = require('../models/User');//databse ko lekr aagye 
 const router = express.Router();
-const { body, validationResult } = require('express-validator');
-const { default: userEvent } = require('@testing-library/user-event');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const { body, validationResult } = require('express-validator');// isko install kiya tha bhai yahan express ka validator package hai yeh 
+// const { default: userEvent } = require('@testing-library/user-event');
+const bcrypt = require('bcryptjs');//bcrypting ko bhi install kiya tha humne bhai 
+const jwt = require('jsonwebtoken');//isko bhi install kiya tha humne vro 
 var fetchuser = require('./middleware/fetchuser')
 //all importing is completed
 
@@ -26,7 +26,7 @@ body('password','ENTER A VALID EMAIL').isLength({min:5}),
   // if there are errors return bad request and the errors 
 const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.array()});
     }
     //check whether the email exisits already 
     try {
@@ -52,7 +52,7 @@ const errors = validationResult(req);
     const authToken  = jwt.sign(data,JWT_SECRET);
     console.log(authToken);
 
-//new user 200 ->>> auth token 
+
     // .then(user => res.json(user)).catch(err => {console.log(err);res.json({error:'PLEASE ENTER  A UNIQUE VALUE FOR EMAIL'})});
     res.json({authToken});
   }
@@ -70,7 +70,7 @@ const errors = validationResult(req);
 
 
 
-// ROUTER 2 FOE Authenticating  a user with endpoint name /api/auth/login
+// ROUTER 2 FOR Authenticating  a user with endpoint name /api/auth/login
 router.post('/login',[
  body('email','ENTER A VALID EMAIL').isEmail(),
  body('password','PASSWORD CANNOT BE BLANK').exists(),

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const {Schema} = mongoose;
+const mongoose = require('mongoose');// yeh hua import moongose 
+const {Schema} = mongoose;//
 const NotesSchema = new Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,//foreign key
