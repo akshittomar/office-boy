@@ -38,8 +38,8 @@ const errors = validationResult(req);
   const salt =await  bcrypt.genSalt(10);
  const  secPass =await bcrypt.hash(req.body.password,salt);
   //creating a user 
-    user = await  User.create({
-      name:req.body.name,
+    user = await  User.create({//yeh boht important function use hua idhar User database mai ".create" function keep a eye on it 
+      name:req.body.name,//idhar tai kiya humne thunderclient se MongoDB tak ka safar 
       email:req.body.email,
       password:secPass,
     })

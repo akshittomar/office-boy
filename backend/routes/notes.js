@@ -24,6 +24,11 @@ const notes = await Notes.find({user: req.user.id});//bahi baddi batt idhar yeh 
 //Notes model mai refrence diya gya hai User model ko 
 //ouske vjh se yahan par req.user.id k basis par direct user fetch ho gya hai
 
+
+
+
+
+//second important thing here is saare NOTES fetch honge jidhar jidhar user id math hogi user.id se ,  mai "Notes.find({user : ..... })" is method ki baat kr rha hu 
 res.json(notes);
 }
 catch(error)
@@ -59,10 +64,10 @@ try{
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-const note  = new Notes({
+const note  = new Notes({// "new Notes" karke bhai request k body ka content ek mongoDB model ban gya hai 
     title , description , tag , user: req.user.id ,time ,alarmTime,shareEmail
 })
-const savedNote = await note.save()
+const savedNote = await note.save()// lo bhai thunderClient se ab MongoDB database tak ka safar idhar establish hua  note.save() krke 
 res.send(savedNote)
 }
 catch(error){
@@ -100,7 +105,7 @@ router.put('/update/:id',fetchuser, async(req,res)=>{
         
     // finding the note  to get updated and making sure this note belongs to the same person who requested for it 
 
-    let note =await Notes.findById(req.params.id);
+    let note =await Notes.findById(req.params.id);//idhar url mai id attatched hai 
     if(!note){
        return res.status(404).send("NOT FOUND !!!!!");
     }
