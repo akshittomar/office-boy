@@ -125,9 +125,10 @@ catch(error){
 
 // ROUTER 3 GET LOGGED IN USER DETAILS WITH POST : /api/auth/getUser here login is required 
 router.post('/getuser',fetchuser,async(req,res)=>{
-  
+  // console.log("INSIDE EXPRESS");
+  // console.log(req); 
 try{
-userId=req.user.id;
+let userId=req.user.id;
 const user = await User.findById(userId).select("-password");
 res.send(user);
 }

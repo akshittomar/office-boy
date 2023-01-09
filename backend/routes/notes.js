@@ -3,7 +3,7 @@ const router = express.Router();
 var fetchuser = require('./middleware/fetchuser');
 const Notes = require('../models/Notes');
 const { body, validationResult } = require('express-validator');
-const { route } = require('./auth');
+// const { route } = require('./auth');
 // ALL IMPORTS ARE DONE 
 
 
@@ -20,7 +20,10 @@ router.get ('/fetchallnotes',fetchuser,async (req,res)=> {
 // ISKI REQUEST JO HOGI WOH GET HOGI BECAUSE WE WILL GET TOKEN FROM HEADER 
 
 try{
-const notes = await Notes.find({user: req.user.id});
+const notes = await Notes.find({user: req.user.id});//bahi baddi batt idhar yeh hai ki 
+//Notes model mai refrence diya gya hai User model ko 
+//ouske vjh se yahan par req.user.id k basis par direct user fetch ho gya hai
+
 res.json(notes);
 }
 catch(error)
@@ -40,16 +43,17 @@ catch(error)
 
 
 
-
+//post request hai bhaiya yeh reminder 
 router.post('/addnote',fetchuser,[
 body('title','ENTER A VALID TITLE NAME ').isLength({min:3}),
 body('description','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({min:5}),
 body('time','ENTER A VALID TIME ').isString(),
 body('shareEmail','ENTER A VALID EMAIL').isEmail(),
 ],async (req,res)=> {
-    //ROUTE:2 jo user logged in hai voh apne notes app kr skte hai api/notes/addnote
+    //ROUTE:2 jo user logged in hai voh apne notes add kr skte hai api/notes/addnote
 try{
     const {title ,description,tag,time,alarmTime,shareEmail} = req.body ;
+    //thunderclient mai jakr humne body mai diya tha yeh sab kuch to vhi se aagya yeh sab idhar 
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
