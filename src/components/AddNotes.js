@@ -7,15 +7,15 @@ import { useState } from 'react';
 export default function AddNotes() {
     const context = useContext(noteContext);
     const {addNote} = context ;
-    const [note, setnote] = useState({Title: "", Description: "" , Tag:"default"});
+    const [note2add, setnote2add] = useState({Title: "", Description: "" , Tag:"default"});
     const handelClick= (e) =>{
       e.preventDefault();
       
-      addNote(note.Title,note.Description,note.Tag);
+      addNote(note2add.Title,note2add.Description,note2add.Tag);
       
     }
     const handelOnChange= (e) =>{
- setnote({...note, [e.target.name]:e.target.value})
+ setnote2add({...note2add, [e.target.name]:e.target.value})
     }
   return (
     <div>

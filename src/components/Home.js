@@ -11,7 +11,7 @@ export default function Home() {
 
   return (<>
     <h1>
-        Add Notes Here 
+       Add Notes Here  
     </h1>
 
 <AddNotes/>

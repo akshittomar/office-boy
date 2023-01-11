@@ -4,11 +4,11 @@ import { useState } from "react";
 const NoteState = (props) =>{
 
   const host = "http://localhost:5000";
-    const state = {
+    const a = {
         "name" : "AKSHIT",
         "class" : "5D"
     }
-
+ 
 
 
 
@@ -174,7 +174,7 @@ setnotes(newNotes)
 
     return (
 
-        <var1.Provider value={{state,notes,setnotes,addNote,deleteNote,editNote,getNotes}}>
+        <var1.Provider value={{a,notes,setnotes,addNote,deleteNote,editNote,getNotes}}>
             {props.children}
         </var1.Provider>
     )
