@@ -8,11 +8,11 @@ import { useRef , useState } from 'react';
 
 
 export default function Notes() {
-  const context = useContext(noteContext);//bhai curly brackets use krega to exact cheez  load hogi context api mai se nhi to phir koi xyz variabel bna kr usme se dot . ka use krke nikalte rehna 
+  const context = useContext(noteContext);//bhai curly brackets use krega to exact cheez  load hogi context api mai se nhi to phir koi xyz variabel bna kr usme se dot . ka use krke niklega  
 
   const notes = context.notes;//bhai function import hua hai yeh kuch extra nhi likhna padta function k liye mtlb parantheses vgra nhi hai idhar par 
-  const getNotes = context.getNotes;
-  const editNote = context.editNote;
+const {getNotes} = context;
+  const {editNote} = context;
   // const setnotes = context.setnotes;
   const [note, setnote] = useState({id:"",eTitle: "", eDescription: "" , eTag:"default"});
   useEffect(() => {// will find out what is useeffect used for 
@@ -23,9 +23,15 @@ export default function Notes() {
 
   }, [])
 
-  const updateNotes = (currentNotes) => {// responsibel to update id & eTitle & eDescription iske parameters mai jo currentNotes mille hai voh context API se aa rhe hai Notesitem ne call kiya h is function ko aur "notes" as props bheje gye the Notes.js k dware 
+  const updateNotes =  (currentNotes) => {// responsibel to update id & eTitle & eDescription iske parameters mai jo currentNotes mille hai voh context API se aa rhe hai Notesitem ne call kiya h is function ko aur "notes" as props bheje gye the Notes.js k dware 
+    console.log(currentNotes);
     ref.current.click();
-    setnote({id:currentNotes._id, eTitle:currentNotes.title,eDescription:currentNotes.description, etag:currentNotes.tag});
+    // setnote({id:currentNotes._id, eTitle:currentNotes.title,eDescription:currentNotes.description, etag:currentNotes.tag});
+
+    // setnote({...note, [note.name]:note.value})
+   setnote(currentNotes);
+    console.log("AFTER SETNOTE");
+    console.log(note);
   }
   const ref = useRef(null);
   const refClose = useRef(null);
@@ -34,7 +40,7 @@ export default function Notes() {
 
 
   const handelClick= (e) =>{
-    
+     e.preventDefault();
     // addNote(note.Title,note.Description,note.Tag);
     editNote(note._id , note.eTitle, note.eDescription, note.eTag)
     refClose.current.click();

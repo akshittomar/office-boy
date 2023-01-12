@@ -28,6 +28,8 @@ const notesInitial = [
 
     
 
+    
+
 
     const response = await fetch( `${host}/api/notes/fetchallnotes`, {
       method: 'GET',
@@ -119,6 +121,7 @@ setnotes(notes.concat(note));
       body: JSON.stringify()
     });
     const json = response.json();
+    console.log("BECHARA DELETED HUA KA RESPONSE JSON ")
     console.log(json);
     
 
@@ -153,17 +156,23 @@ setnotes(newNotes)
       body: JSON.stringify()
     });
     const json = response.json(Title,Description,Tag);
+    console.log("KYA TUM PROMISE HO")
     console.log(json);
     
     
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
+      console.log("ALL OK ");
       if(element._id === id){
         notes[index].title=Title;
         notes[index].description=Description;
         notes[index].tag=Tag;
+        break;
       }
-       break;
+      else{
+        console.log("eroooor ");
+      }
+       
     }
     
     setnotes(notes);
