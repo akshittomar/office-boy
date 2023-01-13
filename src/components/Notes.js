@@ -30,6 +30,7 @@ const {getNotes} = context;
 
     // setnote({...note, [note.name]:note.value})
    setnote(currentNotes);
+   setnote(currentNotes);
     console.log("AFTER SETNOTE");
     console.log(note);
   }
@@ -39,8 +40,8 @@ const {getNotes} = context;
 
 
 
-  const handelClick= (e) =>{
-     e.preventDefault();
+  const handelClick= () =>{
+    //  e.preventDefault();
     // addNote(note.Title,note.Description,note.Tag);
     editNote(note._id , note.eTitle, note.eDescription, note.eTag)
     refClose.current.click();

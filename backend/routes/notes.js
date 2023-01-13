@@ -86,11 +86,13 @@ catch(error){
 
 //route3 : it is used to update the existing notes of a user 
 router.put('/update/:id',fetchuser, async(req,res)=>{
-
+console.log("THIS USER REQUESTED "+req.params.id);
 
     try{
         
         // let user =await  Notes.findOne({updateID: req.body.email});
+        console.log("BODY OF THE REQUEST ");
+        console.log(req.body);
         const {title ,description,tag,time,alarmTime,shareEmail} = req.body ;
         
         
@@ -115,8 +117,17 @@ router.put('/update/:id',fetchuser, async(req,res)=>{
     {
         return res.status(401).send("X X X NOT ALLOWED X X X X");
     }
+    
+   
+
+        console.log("NEW NOTE IS THIS"+newNote.title)
+
+    
    note = await Notes.findByIdAndUpdate(req.params.id,{$set : newNote}, {new :true}) ;
    res.json({note});
+   
+   console.log("updated notes"+note);
+   
     }
     catch(error){
         console.error(error.message);

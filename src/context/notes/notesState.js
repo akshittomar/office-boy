@@ -45,6 +45,7 @@ const notesInitial = [
 
 
 const json = await response.json();
+console.log("i am running");
 setnotes(json);
 
 
@@ -142,7 +143,7 @@ setnotes(newNotes)
 
   //edit a note 
   const editNote  = async(id,Title,Description,Tag)=>{
-
+console.log("PARAMETERS in frontend ARE : "+id+Title+Description+Tag);
     const response = await fetch( `${host}/api/notes/update/${id}`, {
       method: 'PUT',
       headers:{
@@ -167,15 +168,17 @@ setnotes(newNotes)
         notes[index].title=Title;
         notes[index].description=Description;
         notes[index].tag=Tag;
-        break;
+        
       }
       else{
         console.log("eroooor ");
       }
        
     }
-    
-    setnotes(notes);
+    console.log("YEH HUA H UPDATION MAI NOTES ")
+    console.log(notes);
+    const newNotes = notes;
+    setnotes(newNotes);
     
     
     }
