@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
 import { useState } from 'react';
 
+
 export default function AddNotes() {
     const context = useContext(noteContext);
     const {addNote} = context ;
@@ -17,6 +18,7 @@ export default function AddNotes() {
     const handelOnChange= (e) =>{
  setnote2add({...note2add, [e.target.name]:e.target.value})
     }
+   
   return (
     <div>
 
@@ -24,22 +26,22 @@ export default function AddNotes() {
 <form>
   <div className="mb-3">
     <label htmlFor="Title" className="form-label"  >Title</label>
-    <input type="text" className="form-control" id="Title" name="Title" onChange={handelOnChange} />
+    <input type="text" className="form-control" id="Title" name="Title" onChange={handelOnChange} minLength={5} required  />
    
   </div>
   <div className="mb-3">
     <label htmlFor="Description" className="form-label"  >Description</label>
-    <input type="text" className="form-control" id="Description" name="Description"   onChange={handelOnChange} />
+    <input type="text" className="form-control" id="Description" name="Description"   onChange={handelOnChange} minLength={5}required/>
   </div>
 
 
 
   <div className="mb-3">
     <label htmlFor="Tag" className="form-label"  >TAG</label>
-    <input type="text" className="form-control" id="Tag" name="Tag"   onChange={handelOnChange} />
+    <input type="text" className="form-control" id="Tag" name="Tag"   onChange={handelOnChange} minLength={5} required/>
   </div>
  
-  <button type="submit" className="btn btn-primary" onClick={handelClick}>ADD A NOTE</button>
+  <button  disabled={note2add.Title.length<5 || note2add.Description.length<5}  type="submit" className="btn btn-primary" onClick={handelClick}>ADD A NOTE</button>
 </form>
 <h1>
 <Notes></Notes>

@@ -93,18 +93,19 @@ console.log("THIS USER REQUESTED "+req.params.id);
         // let user =await  Notes.findOne({updateID: req.body.email});
         console.log("BODY OF THE REQUEST ");
         console.log(req.body);
-        const {title ,description,tag,time,alarmTime,shareEmail} = req.body ;
+        const {id,title ,description,tag} = req.body ;
         
         
         const newNote  = {};
+        if(id){newNote.id = id};
         if(title){newNote.title = title};
         if(description){newNote.description = description};
         if(tag){newNote.tag = tag};
-        if(time){newNote.time = time};
-        if(alarmTime){newNote.alarmTime = alarmTime};
-        if(shareEmail){newNote.shareEmail = shareEmail};
+        // if(time){newNote.time = time};
+        // if(alarmTime){newNote.alarmTime = alarmTime};
+        // if(shareEmail){newNote.shareEmail = shareEmail};
         
-        
+        console.log("NEW NOTE"+newNote);
     // finding the note  to get updated and making sure this note belongs to the same person who requested for it 
 
     let note =await Notes.findById(req.params.id);//idhar url mai id attatched hai 
@@ -117,7 +118,14 @@ console.log("THIS USER REQUESTED "+req.params.id);
     {
         return res.status(401).send("X X X NOT ALLOWED X X X X");
     }
-    
+    const abc = {
+        "title":"My papa jindabad",
+        "description":"Please send me your file AND ALSO ATTACH boobs WITH IT ",
+        "tag":"profeesional",
+        "time":"4",
+        "alarmTime":"6",
+        "shareEmail":"kjdfgjgdlkj@sggmail.com"
+      }
    
 
         console.log("NEW NOTE IS THIS"+newNote.title)

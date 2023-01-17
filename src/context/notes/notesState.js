@@ -61,7 +61,7 @@ setnotes(json);
   //ADDING A NOTE 
   const addNote = async (title,description,tag)=>{
 
-    
+    console.log("PARAMETERS OF ADD NOTE"+title+" "+description+" "+tag);
 
 
     const response = await fetch( `${host}/api/notes/addnote`, {
@@ -70,29 +70,18 @@ setnotes(json);
         'Content-Type':'application/json',
        'authToken' :'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNiNTUwYWYwZmE3ZjM3YzFjYWQ5NzZiIn0sImlhdCI6MTY3MjkxMTM0Mn0.Uu4rAhHcDL2Pnj0-5CNQBt7jT7eL61oFx-FZvkM36a0'
       },
-      body: JSON.stringify(title,description,tag)
+      body: JSON.stringify({title,description,tag})
     });
 
     const json = response.json(title,description,tag);
-    console.log(json);
+    console.log("ADDED NOTE IS THIS "+json.title);
 
 
 
 
 
 
- const   note= {
-        "_id": "63b7f210e227d8rrrffffrdd4fddf5b5eac8"+Date.now(),
-        "user": "63b550af0fa7f37c1cad976b",
-        "title": title,
-        "description": description,
-        "tag": "profeesional",
-        "time": tag,
-        "alarmTime": "6",
-        "shareEmail": "kjdfgkljgdlkj@sggmail.com",
-        "date": "2023-01-06T10:04:00.130Z",
-        "__v": 0
-      }
+ const   note= json ;
 setnotes(notes.concat(note));
   }
 
@@ -142,8 +131,8 @@ setnotes(newNotes)
 
 
   //edit a note 
-  const editNote  = async(id,Title,Description,Tag)=>{
-console.log("PARAMETERS in frontend ARE : "+id+Title+Description+Tag);
+  const editNote  = async(id,title,description,tag)=>{
+console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
     const response = await fetch( `${host}/api/notes/update/${id}`, {
       method: 'PUT',
       headers:{
@@ -152,11 +141,11 @@ console.log("PARAMETERS in frontend ARE : "+id+Title+Description+Tag);
       },
 
 
-
+     
       
-      body: JSON.stringify()
+      body: JSON.stringify({id,title,description,tag})
     });
-    const json = response.json(Title,Description,Tag);
+    const json = response.json(id,title,description,tag);
     console.log("KYA TUM PROMISE HO")
     console.log(json);
     
@@ -165,9 +154,9 @@ console.log("PARAMETERS in frontend ARE : "+id+Title+Description+Tag);
       const element = notes[index];
       console.log("ALL OK ");
       if(element._id === id){
-        notes[index].title=Title;
-        notes[index].description=Description;
-        notes[index].tag=Tag;
+        notes[index].title=title;
+        notes[index].description=description;
+        notes[index].tag=tag;
         
       }
       else{
