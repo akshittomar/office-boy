@@ -1,9 +1,9 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext ,useEffect} from 'react';
 import noteContext from "../context/notes/noteContext";
 import NoteItem from './NoteItem';
 // import AddNotes from './AddNotes';
-import { useEffect } from 'react';
+
 import { useRef , useState } from 'react';
 
 
@@ -16,14 +16,16 @@ export default function Notes() {
 const {getNotes} = context;
   const {editNote} = context;
   // const setnotes = context.setnotes;
+
+  
   const [note, setnote] = useState({id:"",eTitle: "", eDescription: "" , eTag:"default"});
-  useEffect(() => {// will find out what is useeffect used for 
-
-
-
+  
+  useEffect(() => {
     getNotes();
+   },[note]);
 
-  },[] )
+
+  
 
   const updateNotes =  (currentNotes) => {// responsibel to update id & eTitle & eDescription iske parameters mai jo currentNotes mille hai voh context API se aa rhe hai Notesitem ne call kiya h is function ko aur "notes" as props bheje gye the Notes.js k dware 
     console.log(currentNotes);
@@ -31,7 +33,7 @@ const {getNotes} = context;
     
     // setnote({...note, [note.name]:note.value})
     setnote(currentNotes);       
-    setnote(currentNotes);
+    // setnote(currentNotes);
     console.log("AFTER SETNOTE");
     console.log(note);
     ref.current.click();
@@ -42,14 +44,15 @@ const {getNotes} = context;
 
   const handelClick= (e) =>{
   
-    setnote(note._id,note.eTitle,note.eDescription,note.eTag);
+    // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     setnote({...note, [e.target.name]:e.target.value})
-    setnote({...note, [note.name]:note.value})
+    // setnote({...note, [note.name]:note.value})
     editNote(note._id , note.eTitle, note.eDescription, note.eTag)
-    setnote(note._id,note.eTitle,note.eDescription,note.eTag);
+    // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     setnote({...note, [e.target.name]:e.target.value})
-    setnote({...note, [note.name]:note.value})
-    e.preventDefault();  getNotes();
+    // setnote({...note, [note.name]:note.value})
+    e.preventDefault(); 
+     getNotes();
     refClose.current.click();
   }
   const handelOnChange= (e) =>{

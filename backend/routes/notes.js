@@ -52,8 +52,8 @@ catch(error)
 router.post('/addnote',fetchuser,[
 body('title','ENTER A VALID TITLE NAME ').isLength({min:3}),
 body('description','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({min:5}),
-body('time','ENTER A VALID TIME ').isString(),
-body('shareEmail','ENTER A VALID EMAIL').isEmail(),
+// body('time','ENTER A VALID TIME ').isString(),
+// body('shareEmail','ENTER A VALID EMAIL').isEmail(),
 ],async (req,res)=> {
     //ROUTE:2 jo user logged in hai voh apne notes add kr skte hai api/notes/addnote
 try{
@@ -68,6 +68,7 @@ const note  = new Notes({// "new Notes" karke bhai request k body ka content ek 
     title , description , tag , user: req.user.id ,time ,alarmTime,shareEmail
 })
 const savedNote = await note.save()// lo bhai thunderClient se ab MongoDB database tak ka safar idhar establish hua  note.save() krke 
+console.log("THIS NOTE GOT SAVED "+savedNote)
 res.send(savedNote)
 }
 catch(error){
@@ -118,14 +119,7 @@ console.log("THIS USER REQUESTED "+req.params.id);
     {
         return res.status(401).send("X X X NOT ALLOWED X X X X");
     }
-    const abc = {
-        "title":"My papa jindabad",
-        "description":"Please send me your file AND ALSO ATTACH boobs WITH IT ",
-        "tag":"profeesional",
-        "time":"4",
-        "alarmTime":"6",
-        "shareEmail":"kjdfgjgdlkj@sggmail.com"
-      }
+   
    
 
         console.log("NEW NOTE IS THIS"+newNote.title)

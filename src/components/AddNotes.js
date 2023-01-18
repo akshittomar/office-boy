@@ -2,18 +2,22 @@ import React from 'react'
 import Notes from "./Notes";
 import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 
 export default function AddNotes() {
     const context = useContext(noteContext);
     const {addNote} = context ;
+    const {getNotes} = context;
     const [note2add, setnote2add] = useState({Title: "", Description: "" , Tag:"default"});
+    useEffect(() => {
+      getNotes();
+     },[note2add]);
     const handelClick= (e) =>{
       e.preventDefault();
       
       addNote(note2add.Title,note2add.Description,note2add.Tag);
-      
+      getNotes();
     }
     const handelOnChange= (e) =>{
  setnote2add({...note2add, [e.target.name]:e.target.value})

@@ -3,10 +3,8 @@ import AddNotes from './AddNotes';
 
 
 
+
 export default function Home() {
-
-
-
 
 
   return (<>
