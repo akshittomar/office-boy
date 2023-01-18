@@ -83,6 +83,7 @@ setnotes(json);
 
  const   note= json ;
 setnotes(notes.concat(note));
+getNotes();
   }
 
 
@@ -121,7 +122,8 @@ setnotes(notes.concat(note));
 
 console.log("DELETING A NOTE WITH ID "+id)
 const newNotes = notes.filter((note)=>{ return note._id!==id})
-setnotes(newNotes)
+setnotes(newNotes);
+getNotes();
   }
 
 
@@ -168,7 +170,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
     console.log(notes);
     const newNotes = notes;
     setnotes(newNotes);
-    
+    getNotes();
     
     }
 
