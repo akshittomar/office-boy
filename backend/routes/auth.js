@@ -50,7 +50,7 @@ const errors = validationResult(req);
     }
     const JWT_SECRET = 'AUR LADKE KYA HAL HAI TERE PURA KAM CHAL RHA MAUJ KR '
     const authToken  = jwt.sign(data,JWT_SECRET);
-    console.log(authToken);
+    console.log("tera new user "+authToken);
 
 
     // .then(user => res.json(user)).catch(err => {console.log(err);res.json({error:'PLEASE ENTER  A UNIQUE VALUE FOR EMAIL'})});
@@ -76,17 +76,20 @@ router.post('/login',[
  body('password','PASSWORD CANNOT BE BLANK').exists(),
  ],async(req,res)=>{
 //checking for errors in same way as it e=was done aboove 
+var  success = false ; 
 const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 // destructuring karke hmne user ka email, password nikala
 const {email,password} = req.body ;
+console.log("MERE PASS YEH PARAMETERS HAI"+email+" "+password)
 try{
   
 let user =await User.findOne({email});
 
 if(!user){
+  
   return res.status(400).json({error:"PLEASE TRY TO LOGIN WITH CORRECT CREDENTIALS"});
 }
 
@@ -106,8 +109,10 @@ const JWT_SECRET = 'AUR LADKE KYA HAL HAI TERE PURA KAM CHAL RHA MAUJ KR '
 const authToken  = jwt.sign(data,JWT_SECRET);//user ki id ko istmal krke ek token bna liya 
 
 console.log(authToken);
-res.json({authToken});
-// res.json({canWe});
+success = true ;
+
+res.json({authToken,success});
+// res.json({canWe},);
 
 }
 catch(error){
