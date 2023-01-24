@@ -5,8 +5,7 @@ import AddNotes from './AddNotes';
 
 
 export default function Home() {
-
-
+ 
   return (<>
     <h1>
        Add Notes Here  

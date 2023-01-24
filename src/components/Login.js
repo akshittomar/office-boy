@@ -36,12 +36,14 @@ function Login() {
   
     
    if(json.success === true ){
-    localStorage.setItem('token' , json.authtoken);
+    console.log(json.authToken);
+    localStorage.setItem('token' , json.authToken);
     navigate("/");
    }
    else 
    {
     alert("YOU ENTERED WRONG CREDENTIALS ");
+    navigate("/login");
   
    }
 

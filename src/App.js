@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from './components/Login';
 import Signup from './components/Signup';
 
+
 function App() {
   return (
    
@@ -22,6 +23,7 @@ function App() {
    <Route exact path='/about' element={<div className='my-5 mx-4'><About/></div>} ></Route> 
    <Route exact path='/login' element={<Login/>} />
    <Route exact path='/sign-up' element={<Signup/>} />
+   
    </Routes >
    </Router>
    </NoteState>

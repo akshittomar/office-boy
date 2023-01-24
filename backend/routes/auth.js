@@ -54,6 +54,7 @@ const errors = validationResult(req);
 
 
     // .then(user => res.json(user)).catch(err => {console.log(err);res.json({error:'PLEASE ENTER  A UNIQUE VALUE FOR EMAIL'})});
+    
     res.json({authToken});
   }
   catch(error){

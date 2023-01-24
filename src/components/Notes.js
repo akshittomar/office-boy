@@ -3,11 +3,13 @@ import { useContext ,useEffect} from 'react';
 import noteContext from "../context/notes/noteContext";
 import NoteItem from './NoteItem';
 // import AddNotes from './AddNotes';
+import {useNavigate} from 'react-router-dom';
 
 import { useRef , useState } from 'react';
 
 
 export default function Notes() {
+  let navigate = useNavigate();
   const ref = useRef(null);
   const refClose = useRef(null);
   const context = useContext(noteContext);//bhai curly brackets use krega to exact cheez  load hogi context api mai se nhi to phir koi xyz variabel bna kr usme se dot . ka use krke niklega  
@@ -21,7 +23,12 @@ const {getNotes} = context;
   const [note, setnote] = useState({id:"",eTitle: "", eDescription: "" , eTag:"default"});
   
   useEffect(() => {
-    getNotes();
+    if(localStorage.getItem('token')){
+    getNotes();}
+    else{
+      navigate("/login");
+
+    }
    },[note]);
 
 

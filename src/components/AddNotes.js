@@ -3,15 +3,24 @@ import Notes from "./Notes";
 import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
 import { useState,useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 
 
 export default function AddNotes() {
     const context = useContext(noteContext);
     const {addNote} = context ;
+    
     const {getNotes} = context;
     const [note2add, setnote2add] = useState({Title: "", Description: "" , Tag:"default"});
+    let navigate = useNavigate();
     useEffect(() => {
-      getNotes();
+      if(localStorage.getItem('token')){
+        getNotes();}
+        else{
+          navigate("/login");
+    
+        }
+        
      },[note2add]);
     const handelClick= (e) =>{
       e.preventDefault();
