@@ -24,17 +24,17 @@ export default function Navbar() {
         <div>
             <nav className="navbar navbar-expand-lg bg-secondary">
                 <div className="container-fluid">
-                    <Link className={`navbar-brand my-3 ${location.pathname==='/'?"active   ":""} `} to={"/"}><h3>OFFICE-BOY <i class="fa fa-envelope" aria-hidden="true"></i></h3></Link>
+                    <Link className={`navbar-brand my-3 ${location.pathname==='/'?"active   ":""} `} to={"/"}><h2>OFFICE-BOY <i className="fa fa-envelope" aria-hidden="true"></i></h2></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 nav nav-tabs ">
                             <li className="nav-item">
-                                <Link className={`nav-link my-3 mx-3  ${location.pathname==='/'?"active bg-secondary ":""} `} aria-current="page" to={"/"}>Home<i class="fa fa-home fa-1x my-2" aria-hidden="true"></i></Link>
+                                <Link className={`nav-link my-3 mx-3  ${location.pathname==='/'?"active bg-secondary ":""} `} aria-current="page" to={"/"}><h4>Home<i className="fa fa-home fa-1x my-2" aria-hidden="true"></i></h4></Link>
                             </li>
                             <li className="nav-item">
-                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/about'?"active bg-secondary ":""} `} aria-current="page" to={"/about"}>About  <i class="fa fa-1x fa-id-badge my-2" aria-hidden="true"></i></Link>
+                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/about'?"active bg-secondary ":""} `} aria-current="page" to={"/about"}><h4>About  <i className="fa fa-1x fa-id-badge my-2" aria-hidden="true"></i></h4></Link>
                             </li>
                            
                         </ul>

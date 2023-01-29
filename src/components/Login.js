@@ -42,9 +42,13 @@ function Login() {
    }
    else 
    {
+    
+    
     alert("YOU ENTERED WRONG CREDENTIALS ");
+    
     navigate("/login");
-  
+    
+    
    }
 
 
