@@ -1,12 +1,19 @@
-import {React,useState} from 'react'
+import {React,useCallback,useState} from 'react'
 import {useNavigate} from 'react-router-dom';
 function Login() {
   let navigate = useNavigate();
 
   const [userInfo, setuserInfo] = useState({email: "", password: "" });
   
+  // useEffect(() => {
+    
+  //   // setuserInfo(userInfo.email,userInfo.password);
+   
+  // }, [userInfo])
   
-
+  
+// var copyEmail = "";
+// var copyPass = "";
 
 
   const addUser = async (email,password )=>{
@@ -42,12 +49,13 @@ function Login() {
    }
    else 
    {
+
     
-    
-    alert("YOU ENTERED WRONG CREDENTIALS ");
+    console.log(json.error);
+    alert(json.error+"    "+json.success);
     
     navigate("/login");
-    
+    window.location.reload();
     
    }
 
@@ -65,21 +73,54 @@ function Login() {
 
   const afterSubmit= (e) =>{
     e.preventDefault();
-    
+    if(userInfo.email && userInfo.password){
+      console.log(" before submition  "+userInfo.email+"   "+userInfo.password)
     setuserInfo(userInfo.email,userInfo.password);
+    console.log(" after submition  "+userInfo.email+"   "+userInfo.password)
    addUser(userInfo.email,userInfo.password);
+    }
+    else {
+      alert("YOU ENTERED WRONG CREDENTIALS ");
+      window.location.reload();
+    }
     // setuserInfo({email: "", password: "" });
     
   }
-  const handelOnChange= (e) =>{
-    // e.preventDefault();
+  const handelOnChange= (e) =>{ 
+    e.preventDefault();
     console.log("GUNGA BOLLA ")
+    // setLightState(prevLightState => ({...prevLightState, ...newState}))
+ 
 setuserInfo({...userInfo, [e.target.name]:e.target.value})
-  }
-
-
+// setuserInfo({...userInfo,["password"]:userInfo.password})
+  // setTodos((t) => [...t, "New Todo"]);
   
+}
+// const handelOnChange= useCallback(()=>{ console.log("GUNGA BOLLA "); setuserInfo((e)=>[...userInfo, [e.target.name]=e.target.value]) ;},[]);
 
+// const  handelOnChange = useCallback((e)=>{
+//   const newS ={ e.target.value}
+//   setuserInfo(userInfo =>[...userInfo,)
+// })
+
+// }
+
+// function TodoList() {
+//   const [todos, setTodos] = useState([]);
+
+//   const handleAddTodo = useCallback((text) => {
+//     const newTodo = { id: nextId++, text };
+//     setTodos(todos => [...todos, newTodo]);
+//   }, []); 
+
+// }
+  
+// const addTodo = () => {
+//   setTodos((t) => [...t, "New Todo"]);
+// };
+// const addTodo = useCallback(() => {
+//   setTodos((t) => [...t, "New Todo"]);
+// }, [todos]);
 
 
 

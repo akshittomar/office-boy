@@ -78,9 +78,17 @@ router.post('/login',[
  ],async(req,res)=>{
 //checking for errors in same way as it e=was done aboove 
 var  success = false ; 
+var error = "";
 const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      errors.array().map((element)=>{
+        error=element.msg;
+        return res.status(400).json({error,success})
+      })
+
+      
+      
+      
     }
 // destructuring karke hmne user ka email, password nikala
 const {email,password} = req.body ;
@@ -90,15 +98,16 @@ try{
 let user =await User.findOne({email});
 
 if(!user){
-  
-  return res.status(400).json({error:"PLEASE TRY TO LOGIN WITH CORRECT CREDENTIALS"});
+  error="PLEASE TRY TO LOGIN WITH CORRECT CREDENTIALS";
+  return res.status(400).json({error,success});
 }
 
 const passwordCompare =await  bcrypt.compare(password,user.password);//send true is password matched else false 
 
 if(!passwordCompare)
 {
-  return res.status(400).json({error:"PLEASE TRY TO LOGIN WITH CORRECT CREDENTIALS"});
+  error="PLEASE TRY TO LOGIN WITH CORRECT CREDENTIALS";
+  return res.status(400).json({error,success});
 }
 
 const data = { 
@@ -118,7 +127,8 @@ res.json({authToken,success});
 }
 catch(error){
   console.error(error.message);
-  res.status(500).send("INTERNAL SERVER  ERROR ");
+  error="INTERNAL SERVER ERROR ";
+  res.status(500).json({error,success});
 }
 
  })
