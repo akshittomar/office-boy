@@ -19,20 +19,35 @@ const [newUser, setnewUser] = useState({name:"",email:"",password:""})
       method: 'POST',
       headers:{
         'Content-Type':'application/json',
-     
+        
       },
       body: JSON.stringify({name:newUser.name,email:newUser.email,password:newUser.password})
     });
 
     const json = await response.json();
-    console.log(json);
+    if(json.success===true){
+     
+    localStorage.setItem('token' , json.authToken);
     navigate("/");
+
+
+
+    }
+    else
+    {
+      console.log(json.error);
+    alert(json.error+"    "+json.success);
+    
+    // navigate("/sign-up");
+    }
 
 }
 
 const afterSubmit=(e)=>{
   e.preventDefault();
-  setnewUser(newUser.name,newUser.email,newUser.password);
+  
+  setnewUser({name:newUser.name,email:newUser.email,password:newUser.password});
+  console.log("THE NEW USER IS "+newUser);
   createUser(newUser.name,newUser.email,newUser.password);
 
 
@@ -50,7 +65,7 @@ const handelOnChange=(e)=>{
     <form onSubmit={afterSubmit} >
     <div className="mb-3">
     <label htmlFor="uname" className="form-label">ENTER YOUR NAME </label>
-    <input type="text" className="form-control" id="uname" name='name'onChange={handelOnChange} value={newUser.name} aria-describedby="user-name"/>
+    <input type="text" className="form-control" id="uname" name="name" onChange={handelOnChange} value={newUser.name} aria-describedby="user-name" minLength={5} required/>
     
   </div>
   <div className="mb-3">
@@ -60,13 +75,13 @@ const handelOnChange=(e)=>{
   </div>
   <div className="mb-3">
     <label htmlFor="password" className="form-label">Password</label>
-    <input type="password" className="form-control" id="password" onChange={handelOnChange} value={newUser.password} name="password"/>
+    <input type="password" className="form-control" id="password" onChange={handelOnChange} value={newUser.password} name="password" minLength={5} required/>
   </div>
-  <div className="mb-3">
+  {/* <div className="mb-3">
     <label htmlFor="cpassword" className="form-label">Confirm Password</label>
     <input type="password" className="form-control" id="cpassword" onChange={handelOnChange}  value={newUser.password}  name="cpassword"/>
-  </div>
-  <button type="submit" className="btn btn-dark">Submit</button>
+  </div> */}
+  <button type="submit" className="btn btn-dark" disabled={ !newUser.email || !newUser.password || !newUser.name}>Submit</button>
 </form>
     </div>
     </>

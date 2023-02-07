@@ -2,13 +2,22 @@ import React from 'react';
 import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
 import NoteItem from './NoteItem';
+
 // import AddNotes from './AddNotes';
 // import {useNavigate} from 'react-router-dom';
 
 import { useRef , useState } from 'react';
 
 
+
+
 export default function Notes() {
+
+
+
+
+
+  
   // let navigate = useNavigate();
   const ref = useRef(null);
   const refClose = useRef(null);
@@ -146,15 +155,14 @@ getNotes();
 
 
 
-
-
-
-      <div className="row">
+      <div className="row" >  
         {notes.length === 0 && 'NO NOTES TO DISPLAY '}
         {notes.map((notes) => {
-          return <NoteItem key={notes._id+Date.now()} notes={notes} updateNotes={updateNotes} />;
+          return <NoteItem key={notes._id+Date.now()} notes={notes} updateNotes={updateNotes}  />;
         })}
-      </div>
+      </div>  
+
+      
     </>
   )
 }

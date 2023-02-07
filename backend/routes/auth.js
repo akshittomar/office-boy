@@ -19,21 +19,35 @@ var fetchuser = require('./middleware/fetchuser')
 
 // ROUTE 1 :CREATING A USER USING : POST "api/auth/createUser" DOESNOT REQUIRE AUTH 
 router.post('/createUser',[
-body('name','ENTER A VALID NAME ').isLength({min:3}),
+body('name','ENTER A VALID NAME ').isLength({min:5}),
 body('email','ENTER A VALID EMAIL').isEmail(),
 body('password','ENTER A VALID EMAIL').isLength({min:5}),
 ],async(req,res)=>{
   // if there are errors return bad request and the errors 
+  var success = false;
+  var error = "" ;
 const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array()});
+      success=false;
+      // errors.array().map((element)=>{
+        // console.log(element);
+        // error=element.msg;
+        // console.log("i  am running ")
+        error="RE-SUBMIT USING COREECT DATA"
+       return  res.status(400).json({error,success})
+      // })
+
+
+
+
+      
     }
     //check whether the email exisits already 
     try {
   let user =await  User.findOne({email: req.body.email});
   if(user)
   {
-    return res.status(400).json({error:"SORRY A USER WITH THIS NAME ALREADY EXISTS "})
+    return res.status(400).json({error:"SORRY A USER WITH THIS NAME ALREADY EXISTS ",success})
   }
   const salt =await  bcrypt.genSalt(10);
  const  secPass =await bcrypt.hash(req.body.password,salt);
@@ -41,7 +55,7 @@ const errors = validationResult(req);
     user = await  User.create({//yeh boht important function use hua idhar User database mai ".create" function keep a eye on it 
       name:req.body.name,//idhar tai kiya humne thunderclient se MongoDB tak ka safar 
       email:req.body.email,
-      password:secPass,
+      password:secPass, 
     })
     const data = { 
       user:{
@@ -54,12 +68,16 @@ const errors = validationResult(req);
 
 
     // .then(user => res.json(user)).catch(err => {console.log(err);res.json({error:'PLEASE ENTER  A UNIQUE VALUE FOR EMAIL'})});
-    
-    res.json({authToken});
+    success=true;
+   return  res.json({authToken,success});
   }
   catch(error){
     console.error(error.message);
-    res.status(500).send("INTERNAL SERVER  ERROR ");
+    // res.status(500).send("INTERNAL SERVER  ERROR ");
+    
+  error="INTERNAL SERVER ERROR ";
+  
+ return  res.status(500).json({error,success});
   }
   
 })
@@ -81,10 +99,11 @@ var  success = false ;
 var error = "";
 const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      errors.array().map((element)=>{
-        error=element.msg;
+     
+        // error=element.msg;
+        error="RE-SUBMIT FORM USING CORRECT CREDENTIALS"
         return res.status(400).json({error,success})
-      })
+
 
       
       

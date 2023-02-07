@@ -1,4 +1,4 @@
-import {React,useCallback,useState} from 'react'
+import {React,useState} from 'react'
 import {useNavigate} from 'react-router-dom';
 function Login() {
   let navigate = useNavigate();
@@ -55,7 +55,7 @@ function Login() {
     alert(json.error+"    "+json.success);
     
     navigate("/login");
-    window.location.reload();
+    
     
    }
 
@@ -73,16 +73,12 @@ function Login() {
 
   const afterSubmit= (e) =>{
     e.preventDefault();
-    if(userInfo.email && userInfo.password){
+    
       console.log(" before submition  "+userInfo.email+"   "+userInfo.password)
-    setuserInfo(userInfo.email,userInfo.password);
+    setuserInfo({email:userInfo.email,password:userInfo.password});
     console.log(" after submition  "+userInfo.email+"   "+userInfo.password)
    addUser(userInfo.email,userInfo.password);
-    }
-    else {
-      alert("YOU ENTERED WRONG CREDENTIALS ");
-      window.location.reload();
-    }
+   
     // setuserInfo({email: "", password: "" });
     
   }
@@ -122,7 +118,7 @@ setuserInfo({...userInfo, [e.target.name]:e.target.value})
 //   setTodos((t) => [...t, "New Todo"]);
 // }, [todos]);
 
-
+// https://www.fastrack.in/product/fastrack-gamify-watch-black-dial-analog-for-guys-3251km01
 
 
 
@@ -138,10 +134,10 @@ setuserInfo({...userInfo, [e.target.name]:e.target.value})
   </div>
   <div className="mb-3">
     <label htmlFor="password" className="form-label">password</label>
-    <input type="password" className="form-control" value={userInfo.password}  onChange={handelOnChange} name="password" id="password"/>
+    <input type="password" className="form-control" value={userInfo.password}  onChange={handelOnChange} name="password" id="password" minLength={5} required/>
   </div>
   
-  <button type="submit" className="btn btn-primary" >Submit</button>
+  <button type="submit" className="btn btn-primary" disabled={ !userInfo.email || !userInfo.password}>Submit</button>
 </form>
     </div>
     </>
@@ -149,3 +145,14 @@ setuserInfo({...userInfo, [e.target.name]:e.target.value})
 }
 
 export default Login
+
+
+
+
+
+
+
+
+
+
+
