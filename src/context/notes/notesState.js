@@ -60,9 +60,9 @@ setnotes(json);
 
 
   //ADDING A NOTE 
-  const addNote = async (title,description,tag)=>{
+  const addNote = async (title,description,tag,hrs,min,sec)=>{
 
-    console.log("PARAMETERS OF ADD NOTE"+title+" "+description+" "+tag);
+    console.log("PARAMETERS OF ADD NOTE"+title+" "+description+" "+tag+" "+hrs+" "+min+" "+sec);
 
 
     const response = await fetch( `${host}/api/notes/addnote`, {
@@ -71,10 +71,10 @@ setnotes(json);
         'Content-Type':'application/json',
        'authToken' :localStorage.getItem('token'),
       },
-      body: JSON.stringify({title,description,tag})
+      body: JSON.stringify({title,description,tag,hrs,min,sec})
     });
 
-    const json = response.json(title,description,tag);
+    const json = response.json(title,description,tag,hrs,min,sec);
     console.log("ADDED NOTE IS THIS "+json.title);
 
 
@@ -85,7 +85,7 @@ setnotes(json);
 
  const   note= json ;
 setnotes(notes.concat(note));
-getNotes();
+
   }
 
 
@@ -128,7 +128,7 @@ getNotes();
 console.log("DELETING A NOTE WITH ID "+id)
 const newNotes = notes.filter((note)=>{ return note._id!==id})
 setnotes(newNotes);
-getNotes();
+
   }
 
 
@@ -175,7 +175,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
     console.log(notes);
     const newNotes = notes;
     setnotes(newNotes);
-    getNotes();
+    
     
     }
 

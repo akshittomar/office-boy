@@ -24,14 +24,21 @@ const NotesSchema = new Schema({
         type:Date,
         default:Date.now
     },
-    time:{
-        type:String,
-        default:"4"
+   
+    hrs:{
+        type:Number,
+        default:0
+
     },
-    alarmTime:{
-        type:String,
-        default:"4"
+    min:{
+        type:Number,
+        default:0
     },
+    sec:{
+        type:Number,
+        default:0
+    },
+   
     shareEmail:{
         type:String,
     }

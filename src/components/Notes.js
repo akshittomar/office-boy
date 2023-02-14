@@ -24,10 +24,10 @@ export default function Notes() {
   const context = useContext(noteContext);//bhai curly brackets use krega to exact cheez  load hogi context api mai se nhi to phir koi xyz variabel bna kr usme se dot . ka use krke niklega  
 
   const notes = context.notes;//bhai function import hua hai yeh kuch extra nhi likhna padta function k liye mtlb parantheses vgra nhi hai idhar par 
-const {getNotes} = context;
+
   const {editNote} = context;
   // const setnotes = context.setnotes;
-
+  const {getNotes} = context;
   // const [title, settitle] = useState({tit:""});
   const [note, setnote] = useState({id:"",eTitle: "your title here", eDescription: "your description here " , eTag:"default"});
   
@@ -70,12 +70,12 @@ const {getNotes} = context;
     // setnote({...note, [e.target.name]:e.target.value})
     // setnote({...note, [note.name]:note.value})
     
-     getNotes();
+     getNotes()
     refClose.current.click();
   }
   const handelOnChange= (e) =>{
 setnote({...note, [e.target.name]:e.target.value})
-getNotes();
+
   }
 
   return (

@@ -11,23 +11,15 @@ export default function AddNotes() {
     const {addNote} = context ;
     
     const {getNotes} = context;
-    const [note2add, setnote2add] = useState({Title: "", Description: "" , Tag:"default"});
+    const [note2add, setnote2add] = useState({Title: "", Description: "" , Tag:"default",Hrs:0,Min:0,Sec:0});
     let navigate = useNavigate();
-    useEffect(() => {
-      if(localStorage.getItem('token')){
-        getNotes();}
-        else{
-          navigate("/login");
     
-        }
-        
-     },[note2add]);
     const handelClick= (e) =>{
       e.preventDefault();
       
-      addNote(note2add.Title,note2add.Description,note2add.Tag);
+      addNote(note2add.Title,note2add.Description,note2add.Tag,note2add.Hrs,note2add.Min,note2add.Sec);
      
-      setnote2add({Title: "", Description: "" , Tag:"default"});
+      setnote2add({Title: "", Description: "" , Tag:"default",Hrs:0,Min:0,Sec:0});
       getNotes();
     }
     const handelOnChange= (e) =>{
@@ -55,6 +47,28 @@ export default function AddNotes() {
     <label htmlFor="Tag" className="form-label"  >TAG</label>
     <input type="text" className="form-control" id="Tag" name="Tag"   onChange={handelOnChange} value={note2add.Tag} minLength={5} required/>
   </div>
+
+
+  <div className="input-group w-25 mb-3">
+  <span className="input-group-text ">Finish Time </span>
+  <input type="text" aria-label="Hrs" name='Hrs'value={note2add.Hrs} onChange={handelOnChange} className="form-control "/>
+  <input type="text" aria-label="Min" name='Min'value={note2add.Min} onChange={handelOnChange} className="form-control "/>
+  <input type="text" aria-label="Sec" name='Sec'value={note2add.Sec} onChange={handelOnChange} className="form-control "/>
+  </div>
+  
+  <small ><p className='mx-6 my-6'>Enter Time In hh:mm:ss Format </p></small>
+  
+  
+ 
+  
+  
+
+
+
+  
+
+
+
  
   <button  disabled={note2add.Title.length<5 || note2add.Description.length<5}  type="submit" className="btn btn-primary" onClick={handelClick}>ADD A NOTE</button>
 </form>

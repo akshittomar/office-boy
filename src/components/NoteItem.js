@@ -1,22 +1,23 @@
 import React, { useContext,useEffect } from 'react'
 import noteContext from "../context/notes/noteContext";
+import Time from './Time';
+// import AOS from 'aos'
+// import 'aos/dist/aos.css'
 
-import AOS from 'aos'
-import 'aos/dist/aos.css'
 
 export default function NoteItem(props) {
 
 
-    useEffect(() => {
-        AOS.init({ 
-        //   animatedClassName: 'aos-animate',
-          duration: 1000,
-          anchorPlacement: 'top-bottom',
+    // useEffect(() => {
+    //     AOS.init({ 
+    //     //   animatedClassName: 'aos-animate',
+    //       duration: 1000,
+    //       anchorPlacement: 'top-bottom',
           
-        });
+    //     });
       
        
-      }, [])
+    //   }, [])
 
 
 
@@ -25,24 +26,30 @@ export default function NoteItem(props) {
    const {deleteNote}= context ;
    const updateNote = props.updateNotes;
     return (
-        <div className="col-md-3 my-4 mx-3 "    data-aos="zoom-in-up" >
+        // <div className="col-md-3 my-4 mx-3 "    data-aos="zoom-in-up" >
+            <div className="col-md-3 my-4 mx-3 "     >
             <div className="card my-4  " >
 
                 <div className="card-body ">
                   
                     <div className='d-flex align-items-center '>
-                    <h4 className="card-title container">Title:<br/>{note.title}</h4>
+                    <h2 className="card-title container"><u><strong>Title:</strong></u><br/><i>{note.title}</i></h2>
                     
                     </div>
                     <hr/>
-                    <h6 className="card-text container">Description:<br/>{note.description}</h6>
+                    <h3 className="card-text container"><u><strong>Description:</strong></u><br/>{note.description}</h3>
+                    <br/>
+
 
                     <div className=" card-footer d-flex justify-content-between " >
                         
                             <div className="d-flex justify-content-center">
                   <h6>Delete <i className="fa-solid fa-trash    " onClick={()=>{deleteNote(note._id)}}></i></h6>  
                   </div>
-                  
+                  <div className="d-flex justify-content-center">
+               { ( note.hrs!==0 || note.min!==0 || note.sec!==0 )&&  <h6><Time  hrs={note.hrs} min={note.min} sec={note.sec}  title={note.title}></Time></h6>  }
+                  {/* <h6><CountDown  hrs={note.hrs} min={note.min} sec={note.sec}  title={note.title}></CountDown></h6> */}
+                  </div>
                   <div   className="d-flex justify-content-center">
                    <h6>Edit <i className="fa-solid fa-file-pen sm  " onClick={()=>{updateNote(note)}}></i></h6>
                    </div>
