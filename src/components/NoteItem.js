@@ -8,6 +8,19 @@ import Time from './Time';
 export default function NoteItem(props) {
 
 
+    const Delay=()=>{
+        return <><Time  hrs={note.hrs} min={note.min} sec={note.sec}  title={note.title}></Time></>
+    }
+useEffect(() => {
+
+
+ Delay();
+}, [])
+
+
+
+
+
     // useEffect(() => {
     //     AOS.init({ 
     //     //   animatedClassName: 'aos-animate',
@@ -18,7 +31,20 @@ export default function NoteItem(props) {
       
        
     //   }, [])
+    
+        // useEffect(() => {
+      
+    
+        //     return () => {
+        //       {
+        //           <div className="d-flex justify-content-center">
+        //            ( note.hrs!==0 || note.min!==0 || note.sec!==0 )&&  <h6><Time  hrs={note.hrs} min={note.min} sec={note.sec}  title={note.title}></Time></h6></div>  }
+        //     }
+        //   }, []) 
+    
 
+  
+    
 
 
     const note = props.notes;
@@ -46,10 +72,18 @@ export default function NoteItem(props) {
                             <div className="d-flex justify-content-center">
                   <h6>Delete <i className="fa-solid fa-trash    " onClick={()=>{deleteNote(note._id)}}></i></h6>  
                   </div>
-                  <div className="d-flex justify-content-center">
-               { ( note.hrs!==0 || note.min!==0 || note.sec!==0 )&&  <h6><Time  hrs={note.hrs} min={note.min} sec={note.sec}  title={note.title}></Time></h6>  }
-                  {/* <h6><CountDown  hrs={note.hrs} min={note.min} sec={note.sec}  title={note.title}></CountDown></h6> */}
+                  
+                  <div className=" card-footer d-flex justify-content-between " >
+                 <h6><Delay></Delay></h6>
                   </div>
+                  
+                
+                  
+
+
+
+
+                  
                   <div   className="d-flex justify-content-center">
                    <h6>Edit <i className="fa-solid fa-file-pen sm  " onClick={()=>{updateNote(note)}}></i></h6>
                    </div>
