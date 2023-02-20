@@ -209,6 +209,8 @@ const Timer = (props:any) => {
     let myInterval = setInterval(() => {
             if (seconds > 0) {
                 setSeconds(seconds - 1);
+                
+                
             }
             if (seconds === 0) {
                 if (minutes === 0) {
@@ -250,10 +252,17 @@ export default function Time(props) {
   const [hours,sethours] = useState(props.hrs);
   const [ minutes, setMinutes ] = useState(props.min);
   const [seconds, setSeconds ] =  useState(props.sec);
+//   const sethh=props.sethh;
+//   const setmm=props.setmm;
+//   const setss=props.setss;
+  // 1 way is to set hrs , min and sec , before refresh of page in datbase by calling update api every time a refresh or closing operation is about to get performed 
+  // 2nd way is to store data in local storage and rtreive data from localstorage before refresh of page or before performing close operations 
+  // i will use 1st way only because local strage can only store till 5mb of data and in case of high-end application data may exceed 5mb . 
   useEffect(()=>{
   let myInterval = setInterval(() => {
           if (seconds > 0) {
               setSeconds(seconds - 1);
+              props.setss(seconds-1);
           }
           if (seconds === 0) {
               if (minutes === 0) {
@@ -263,16 +272,24 @@ export default function Time(props) {
                   clearInterval(myInterval);
                 //   alert("Hogya");
                   setMinutes(0);
+                  props.setmm(0);
                   setSeconds(0);
+                  props.setss(0);
+                  props.sethh(0);
                   sethours(0);
                  }
                  else{
                   sethours(hours-1);
+                  props.sethh(hours-1);
+                  props.setmm(59);
                   setMinutes(59);
+                  props.setss(59);
                   setSeconds(59);
                  }
               } else {
                   setMinutes(minutes - 1);
+                  props.setmm(minutes-1);
+                  props.setss(59);
                   setSeconds(59);
               }
           } 

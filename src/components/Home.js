@@ -19,7 +19,7 @@ useEffect(() => {
     }
   },[]);
   return (<>
-    <h1>
+    <h1 >
        Add Notes Here  
     </h1>
 

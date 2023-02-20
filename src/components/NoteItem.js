@@ -1,4 +1,5 @@
-import React, { useContext,useEffect } from 'react'
+import React, { useContext,useEffect,useState } from 'react'
+// import { Beforeunload } from 'react-beforeunload';
 import noteContext from "../context/notes/noteContext";
 import Time from './Time';
 // import AOS from 'aos'
@@ -6,16 +7,40 @@ import Time from './Time';
 
 
 export default function NoteItem(props) {
+    const note = props.notes;
+    const context = useContext(noteContext);
+   const {deleteNote}= context ;
+   const updateNote = props.updateNotes;
+
+const [hh, sethh] = useState(0);
+const [mm, setmm] = useState(0);
+const [ss, setss] = useState(0);
 
 
-    const Delay=()=>{
-        return <><Time  hrs={note.hrs} min={note.min} sec={note.sec}  title={note.title}></Time></>
-    }
+
+
+
+    // const Delay=()=>{
+    //     return <><Time  hrs={hh} min={mm} sec={ss} sethh={sethh} setss={setss} setmm={setmm} ></Time></>
+    // }
+
+
+
 useEffect(() => {
-
-
- Delay();
-}, [])
+    if(note.hrs!==0 || note.min!==0 || note.sec!==0 )
+    {
+        var s1 = note.title+"sec";
+    var s2 = note.title+"min";
+    var s3 = note.title+"hrs";
+var num1 = +localStorage.getItem(s3);
+sethh(num1);
+var num2 = +localStorage.getItem(s2);
+setmm(num2);
+var num3 = +localStorage.getItem(s1);
+setss(num3);
+    }
+ 
+},[])
 
 
 
@@ -47,11 +72,96 @@ useEffect(() => {
     
 
 
-    const note = props.notes;
-    const context = useContext(noteContext);
-   const {deleteNote}= context ;
-   const updateNote = props.updateNotes;
-    return (
+
+    
+//    useEffect(() => {
+     
+   
+//      return () => {
+       
+       
+//         window.onbeforeunload =()=>
+//         {
+//             setTimeout(() => {
+//                 window.alert("refreshing");        
+//             }, 1000);
+//         //  window.confirm("Confirm refresh");
+//         window.alert("refreshing");
+//         // console.log("refreshing page");
+      
+     
+//         };
+        
+//      }
+//    }, [])
+   
+  
+   
+   if(hh!==0 || mm!==0 || ss!==0){
+    var s1 = note.title+"sec";
+    var s2 = note.title+"min";
+    var s3 = note.title+"hrs";
+    
+  }
+
+useEffect(()=>{
+    let myInterval = setInterval(() => {
+            if (ss > 0) {
+                
+                setss(ss-1);
+                localStorage.setItem(s1,(ss-1).toString());
+            }
+            if (ss === 0) {
+                if (mm === 0) {
+                   if(hh === 0 && mm=== 0 && ss=== 0 )
+                   {
+  
+                    clearInterval(myInterval);
+                  //   alert("Hogya");
+                    // setMinutes(0);
+                    if(note.hrs!==0 || note.min!==0 || note.sec!==0 )
+                    {
+                    setmm(0);
+                    // setSeconds(0);
+                    localStorage.setItem(s2,mm.toString());
+                    setss(0);
+                    localStorage.setItem(s1,ss.toString());
+                    sethh(0);
+                    localStorage.setItem(s3,hh.toString())
+                    // sethours(0);}
+                   }
+                }
+                   else{
+                    // sethours(hh-1);
+                    sethh(hh-1);
+                    localStorage.setItem(s3,(hh-1).toString());
+                    setmm(59);
+                    // setMinutes(59);
+                    localStorage.setItem(s2,mm.toString());
+                    setss(59);
+                    localStorage.setItem(s1,ss.toString());
+                    // setSeconds(59);
+                   }
+                } else {
+                    // setMinutes(mm - 1);
+                    setmm(mm-1);
+                    localStorage.setItem(s2,(mm-1).toString());
+                    setss(59);
+                    localStorage.setItem(s1,ss.toString());
+                }
+            } 
+        }, 1000)
+        return ()=> {
+            clearInterval(myInterval);
+          };
+    });
+
+
+
+   
+   
+   
+   return (
         // <div className="col-md-3 my-4 mx-3 "    data-aos="zoom-in-up" >
             <div className="col-md-3 my-4 mx-3 "     >
             <div className="card my-4  " >
@@ -73,13 +183,24 @@ useEffect(() => {
                   <h6>Delete <i className="fa-solid fa-trash    " onClick={()=>{deleteNote(note._id)}}></i></h6>  
                   </div>
                   
-                  <div className=" card-footer d-flex justify-content-between " >
-                 <h6><Delay></Delay></h6>
-                  </div>
+                  {/* <div className=" card-footer d-flex justify-content-between " >
+                  <Beforeunload onBeforeunload={
+                
+                
+                () => alert('You will lose your data!') }>
+                  <h6><Delay></Delay></h6>
+                    </Beforeunload>
+                
+                  </div> */}
                   
                 
                   
-
+                  <div>
+      { hh===0&&mm === 0 && ss === 0
+          ? null
+          : <h6><button>Time Left:{hh < 10 ? `0${hh}`:hh}:{mm < 10 ? `0${mm}`:mm}:{ss < 10 ?  `0${ss}` : ss}</button></h6> 
+      }
+      </div>
 
 
 

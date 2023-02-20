@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 
 
+
 function App() {
   return (
    
@@ -16,6 +17,7 @@ function App() {
 <Router>
    <div className='my-3'>
    <Navbar />
+   
    </div>
    <Routes>
 

@@ -18,7 +18,15 @@ export default function AddNotes() {
       e.preventDefault();
       
       addNote(note2add.Title,note2add.Description,note2add.Tag,note2add.Hrs,note2add.Min,note2add.Sec);
-     
+    
+   
+   if(note2add.Hrs!==0 || note2add.Min!==0 || note2add.Sec!==0){
+    var s1 = note2add.Title+"sec";
+    var s2 = note2add.Title+"min";
+    var s3 = note2add.Title+"hrs";
+   localStorage.setItem(s1,note2add.Sec.toString());
+   localStorage.setItem(s2,note2add.Min.toString());
+   localStorage.setItem(s3,note2add.Hrs.toString());}
       setnote2add({Title: "", Description: "" , Tag:"default",Hrs:0,Min:0,Sec:0});
       getNotes();
     }
