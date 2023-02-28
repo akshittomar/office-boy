@@ -57,11 +57,11 @@ export default function AddNotes() {
   </div>
 
 
-  <div className="input-group w-25 mb-3">
-  <span className="input-group-text ">Finish Time </span>
-  <input type="text" aria-label="Hrs" name='Hrs'value={note2add.Hrs} onChange={handelOnChange} className="form-control "/>
-  <input type="text" aria-label="Min" name='Min'value={note2add.Min} onChange={handelOnChange} className="form-control "/>
-  <input type="text" aria-label="Sec" name='Sec'value={note2add.Sec} onChange={handelOnChange} className="form-control "/>
+  <div className="input-group  mb-3 position-relative" style={{minWidth:"10%",maxWidth:"20%"}} >
+  <span className="input-group-text " >Finish Time </span>
+  <input type="number" aria-label="Hrs" name='Hrs'value={note2add.Hrs} placeholder="hh" onChange={handelOnChange}  max="24" min="0" className="form-control "/>
+  <input type="number" aria-label="Min" name='Min'value={note2add.Min} placeholder="mm" onChange={handelOnChange}  max="60" min="0" className="form-control "/>
+  <input type="number" aria-label="Sec" name='Sec'value={note2add.Sec} placeholder="ss" onChange={handelOnChange} max="60" min="0" className="form-control "/>
   </div>
   
   <small ><p className='mx-6 my-6'>Enter Time In hh:mm:ss Format </p></small>

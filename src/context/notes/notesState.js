@@ -21,15 +21,7 @@ const notesInitial = [
 
 
   const [notes, setnotes] = useState(notesInitial);
-
-
-
-  const getNotes = async ()=>{
-
-    
-
-    
-
+const getNotes = async ()=>{
 
     const response = await fetch( `${host}/api/notes/fetchallnotes`, {
       method: 'GET',
@@ -41,17 +33,29 @@ const notesInitial = [
       
     });
 
-    
-
-
-
 const json = await response.json();
 console.log("i am running");
 setnotes(json);
+}
 
 
- 
-  }
+const sendemail=async(hrs,min,sec)=>{
+const response = await fetch(`${host}/api/scheduler/schedulesms`,{
+  method:'GET',
+  headers:{
+    'Content-Type':'application/json',
+
+    
+   
+  },
+  body: JSON.stringify({hrs,min,sec})
+});
+const json = await response.json();
+console.log(json);
+}
+
+
+
 
 
 
@@ -113,6 +117,7 @@ setnotes(notes.concat(note));
       headers:{
         'Content-Type':'application/json',
        'authToken' :localStorage.getItem('token'),
+       
       },
       body: JSON.stringify()
     });

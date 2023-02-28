@@ -17,7 +17,7 @@ app.get('/home', (req, res) => {//300 port k papa page pe hello world bhejo
 
 app.use('/api/auth',require('./routes/auth'))
 app.use('/api/notes',require('./routes/notes'))
-
+app.use('/api/scheduler',require('./routes/scheduler'))
 app.listen(port, () => {
   console.log(`NOTES APPLICATION  BACKEND LISTENING ON PORT  ${port}`)
 })
