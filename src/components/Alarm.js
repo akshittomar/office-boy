@@ -100,6 +100,8 @@ setuse(true);
                     localStorage.setItem(s1,ss.toString());
                 }
             } 
+     }else{
+        clearInterval(myInterval);
      }   }, 1000)
         return ()=> {
             clearInterval(myInterval);

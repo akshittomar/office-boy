@@ -158,7 +158,7 @@ setnote({...note, [e.target.name]:e.target.value})
       <div className="row" >  
         {notes.length === 0 && 'NO NOTES TO DISPLAY '}
         {notes.map((notes) => {
-          return <NoteItem key={notes._id+Date.now()} notes={notes} updateNotes={updateNotes}  />;
+          return <NoteItem key={notes._id} notes={notes} updateNotes={updateNotes}  />;
         })}
       </div>  
 

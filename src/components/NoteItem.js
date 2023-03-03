@@ -1,7 +1,7 @@
 import React, { useContext,useEffect,useState } from 'react'
 // import { Beforeunload } from 'react-beforeunload';
 import noteContext from "../context/notes/noteContext";
-import Time from './Time';
+
 // import AOS from 'aos'
 // import 'aos/dist/aos.css'
 
@@ -15,6 +15,7 @@ export default function NoteItem(props) {
 const [hh, sethh] = useState(0);
 const [mm, setmm] = useState(0);
 const [ss, setss] = useState(0);
+const [use,setuse] = useState(false);
 
 
 
@@ -27,19 +28,22 @@ const [ss, setss] = useState(0);
 
 
 useEffect(() => {
-    if(note.hrs!==0 || note.min!==0 || note.sec!==0 )
-    {
+   
         var s1 = note.title+"sec";
     var s2 = note.title+"min";
     var s3 = note.title+"hrs";
+      if( localStorage.getItem(s1)!== null || localStorage.getItem(s2)!== null|| localStorage.getItem(s3)!== null)
+    {
 var num1 = +localStorage.getItem(s3);
 sethh(num1);
 var num2 = +localStorage.getItem(s2);
 setmm(num2);
 var num3 = +localStorage.getItem(s1);
 setss(num3);
+setuse(true);
     }
- 
+  console.log("     s   ========>  "+s1 +s2+s3);
+ console.log(use+"use is thhhis  "+localStorage.getItem(s1) + " "+localStorage.getItem(s2) +" "+localStorage.getItem(s3));
 },[])
 
 
@@ -97,16 +101,17 @@ setss(num3);
    
   
    
-   if(hh!==0 || mm!==0 || ss!==0){
+   
+   
+  
+
+useEffect(()=>{
     var s1 = note.title+"sec";
     var s2 = note.title+"min";
     var s3 = note.title+"hrs";
     
-  }
-
-useEffect(()=>{
     let myInterval = setInterval(() => {
-            if (ss > 0) {
+        if(use=== true){    if (ss > 0) {
                 
                 setss(ss-1);
                 localStorage.setItem(s1,(ss-1).toString());
@@ -116,20 +121,26 @@ useEffect(()=>{
                    if(hh === 0 && mm=== 0 && ss=== 0 )
                    {
   
-                    clearInterval(myInterval);
+                      clearInterval(myInterval);
+                    localStorage.removeItem(s1);
+                    localStorage.removeItem(s2);
+                    localStorage.removeItem(s3);
+                    window.alert("Hogya"+note.title);
+                    
+                    setuse(false);
                   //   alert("Hogya");
                     // setMinutes(0);
-                    if(note.hrs!==0 || note.min!==0 || note.sec!==0 )
-                    {
-                    setmm(0);
-                    // setSeconds(0);
-                    localStorage.setItem(s2,mm.toString());
-                    setss(0);
-                    localStorage.setItem(s1,ss.toString());
-                    sethh(0);
-                    localStorage.setItem(s3,hh.toString())
-                    // sethours(0);}
-                   }
+                //     if(note.hrs!==0 || note.min!==0 || note.sec!==0 )
+                //     {
+                //     setmm(0);
+                //     // setSeconds(0);
+                //     localStorage.setItem(s2,mm.toString());
+                //     setss(0);
+                //     localStorage.setItem(s1,ss.toString());
+                //     sethh(0);
+                //     localStorage.setItem(s3,hh.toString())
+                //     // sethours(0);}
+                //    }
                 }
                    else{
                     // sethours(hh-1);
@@ -150,11 +161,14 @@ useEffect(()=>{
                     localStorage.setItem(s1,ss.toString());
                 }
             } 
-        }, 1000)
+  }
+else{
+    clearInterval(myInterval);
+}  }, 1000)
         return ()=> {
             clearInterval(myInterval);
           };
-    });
+    },[mm,ss,hh]);
 
 
 
@@ -180,7 +194,11 @@ useEffect(()=>{
                     <div className=" card-footer d-flex justify-content-between " >
                         
                             <div className="d-flex justify-content-center">
-                  <h6>Delete <i className="fa-solid fa-trash    " onClick={()=>{deleteNote(note._id)}}></i></h6>  
+                  <h6>Delete <i className="fa-solid fa-trash    " onClick={()=>{ var s1 = note.title+"sec";
+    var s2 = note.title+"min";
+    var s3 = note.title+"hrs";localStorage.removeItem(s1);
+    localStorage.removeItem(s2);
+    localStorage.removeItem(s3);deleteNote(note._id)}}></i></h6>  
                   </div>
                   
                   {/* <div className=" card-footer d-flex justify-content-between " >

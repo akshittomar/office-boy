@@ -38,7 +38,7 @@ export default function AddNotes() {
     <div>
 
 
-<form>
+<form   >
   <div className="mb-3">
     <label htmlFor="Title" className="form-label"  >Title</label>
     <input type="text" className="form-control" id="Title" name="Title" onChange={handelOnChange} value={note2add.Title} minLength={5} required  />
