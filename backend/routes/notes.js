@@ -58,7 +58,7 @@ body('description','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({mi
 ],async (req,res)=> {
     //ROUTE:2 jo user logged in hai voh apne notes add kr skte hai api/notes/addnote
 try{
-    const {title ,description,tag,hrs,min,sec,shareEmail} = req.body ;
+    const {title ,description,tag,shareEmail} = req.body ;
     //thunderclient mai jakr humne body mai diya tha yeh sab kuch to vhi se aagya yeh sab idhar 
 
     const errors = validationResult(req);
@@ -66,7 +66,7 @@ try{
       return res.status(400).json({ errors: errors.array() });
     }
 const note  = new Notes({// "new Notes" karke bhai request k body ka content ek mongoDB model ban gya hai 
-    title , description , tag , user: req.user.id , hrs , min, sec, shareEmail
+    title , description , tag , user: req.user.id ,shareEmail
 })
 const savedNote = await note.save()// lo bhai thunderClient se ab MongoDB database tak ka safar idhar establish hua  note.save() krke 
 console.log("THIS NOTE GOT SAVED "+savedNote)

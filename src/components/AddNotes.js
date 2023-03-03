@@ -17,7 +17,7 @@ export default function AddNotes() {
     const handelClick= (e) =>{
       e.preventDefault();
       
-      addNote(note2add.Title,note2add.Description,note2add.Tag,note2add.Hrs,note2add.Min,note2add.Sec);
+      addNote(note2add.Title,note2add.Description,note2add.Tag);
     
    
    if(note2add.Hrs!==0 || note2add.Min!==0 || note2add.Sec!==0){

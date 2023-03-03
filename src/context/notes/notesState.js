@@ -64,9 +64,9 @@ console.log(json);
 
 
   //ADDING A NOTE 
-  const addNote = async (title,description,tag,hrs,min,sec)=>{
+  const addNote = async (title,description,tag)=>{
 
-    console.log("PARAMETERS OF ADD NOTE"+title+" "+description+" "+tag+" "+hrs+" "+min+" "+sec);
+    console.log("PARAMETERS OF ADD NOTE"+title+" "+description+" "+tag);
 
 
     const response = await fetch( `${host}/api/notes/addnote`, {
@@ -75,10 +75,10 @@ console.log(json);
         'Content-Type':'application/json',
        'authToken' :localStorage.getItem('token'),
       },
-      body: JSON.stringify({title,description,tag,hrs,min,sec})
+      body: JSON.stringify({title,description,tag})
     });
 
-    const json = response.json(title,description,tag,hrs,min,sec);
+    const json = response.json(title,description,tag);
     console.log("ADDED NOTE IS THIS "+json.title);
 
 

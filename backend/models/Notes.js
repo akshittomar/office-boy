@@ -25,19 +25,6 @@ const NotesSchema = new Schema({
         default:Date.now
     },
    
-    hrs:{
-        type:Number,
-        default:0
-
-    },
-    min:{
-        type:Number,
-        default:0
-    },
-    sec:{
-        type:Number,
-        default:0
-    },
    
     shareEmail:{
         type:String,
