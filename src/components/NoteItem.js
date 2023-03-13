@@ -17,7 +17,7 @@ const [mm, setmm] = useState(0);
 const [ss, setss] = useState(0);
 const [use,setuse] = useState(false);
 
-
+const [time, settime] = useState({Hrs:0,Min:0,Sec:0});
 
 
 
@@ -99,10 +99,19 @@ setuse(true);
 //      }
 //    }, [])
    
-  
+const handelClick= (e) =>{
+    e.preventDefault();
+sethh(time.Hrs);
+setmm(time.Min);
+setss(time.Sec);
+setuse(true);
+settime({Hrs:0,Min:0,Sec:0});
+}
    
    
-   
+const handelOnChange= (e) =>{
+    settime({...time, [e.target.name]:e.target.value})
+       }
   
 
 useEffect(()=>{
@@ -194,11 +203,11 @@ else{
                     <div className=" card-footer d-flex justify-content-between " >
                         
                             <div className="d-flex justify-content-center">
-                  <h6>Delete <i className="fa-solid fa-trash    " onClick={()=>{ var s1 = note.title+"sec";
+                  <h6 style={{color:"black",cursor:"pointer"}} onClick={()=>{ var s1 = note.title+"sec";
     var s2 = note.title+"min";
     var s3 = note.title+"hrs";localStorage.removeItem(s1);
     localStorage.removeItem(s2);
-    localStorage.removeItem(s3);deleteNote(note._id)}}></i></h6>  
+    localStorage.removeItem(s3);deleteNote(note._id)}} >Delete <i className="fa-solid fa-trash    " ></i></h6>  
                   </div>
                   
                   {/* <div className=" card-footer d-flex justify-content-between " >
@@ -216,15 +225,36 @@ else{
                   <div>
       { hh===0&&mm === 0 && ss === 0
           ? null
-          : <h6><button>Time Left:{hh < 10 ? `0${hh}`:hh}:{mm < 10 ? `0${mm}`:mm}:{ss < 10 ?  `0${ss}` : ss}</button></h6> 
+          : <h6><button>Time Left:{hh < 10 ? `0${hh}`:hh}:{mm < 10 ? `0${mm}`:mm}:{ss < 10 ?  `0${ss}    ` : ss+"   "}<i className="fa-solid fa-trash" onClick={()=>{ 
+            var s1 = note.title+"sec";
+            var s2 = note.title+"min";
+            var s3 = note.title+"hrs";
+            localStorage.removeItem(s1);
+            localStorage.removeItem(s2);
+            localStorage.removeItem(s3);
+            sethh(0);
+            setmm(0);
+            setss(0);
+          setuse(false);
+            }}></i></button></h6> 
       }
       </div>
+
+<div>
+   <h6>edit here </h6> 
+   <form>
+   <input type="number" aria-label="Hrs" name='Hrs'value={time.Hrs} placeholder={hh} onChange={handelOnChange}  max="24" min="0" className="form-control "/>
+  <input type="number" aria-label="Min" name='Min'value={time.Min} placeholder={mm} onChange={handelOnChange}  max="60" min="0" className="form-control "/>
+  <input type="number" aria-label="Sec" name='Sec'value={time.Sec} placeholder={ss} onChange={handelOnChange} max="60" min="0" className="form-control "/>
+ <small> <button  disabled={time.Hrs===0 && time.Min===0 && time.Sec===0}  type="submit" className="btn btn-primary" onClick={handelClick}><h6>EDIT TIMER</h6></button></small>
+  </form>
+</div>
 
 
 
                   
                   <div   className="d-flex justify-content-center">
-                   <h6>Edit <i className="fa-solid fa-file-pen sm  " onClick={()=>{updateNote(note)}}></i></h6>
+                  <h6 style={{color:"black",cursor:"pointer"}} onClick={()=>{updateNote(note)}}  >Edit <i className="fa-solid fa-file-pen sm  " onClick={()=>{updateNote(note)}}></i></h6>
                    </div>
                   
                    </div>
