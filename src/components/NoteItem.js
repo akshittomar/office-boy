@@ -238,7 +238,7 @@ export default function NoteItem(props) {
                   <li><input type="number" className="dropdown-item" aria-label="Hrs" name='Hrs' value={time.Hrs===0?"hh":time.Hrs} placeholder="hh" onChange={handelOnChange} max="24" min="0" /></li>
                   <li><input type="number" className="dropdown-item" aria-label="Min" name='Min' value={time.Min===0?"mm":time.Min} placeholder="mm" onChange={handelOnChange} max="60" min="0" /></li>
                   <li><input type="number" className="dropdown-item" aria-label="Sec" name='Sec' value={time.Sec===0?"ss":time.Sec} placeholder="ss" onChange={handelOnChange} max="60" min="0" /></li>
-                 <li> <small> <button disabled={time.Hrs === 0 && time.Min === 0 && time.Sec === 0} type="submit" className="btn btn-secondary dropdown-item" onClick={handelClick}><h6>ADD TIMER</h6></button></small></li>
+                 <li> <small> <button style={{color:"#004480",backgroundColor:"#d4dcf1"}} disabled={time.Hrs === 0 && time.Min === 0 && time.Sec === 0} type="submit" className="btn btn-secondary dropdown-item" onClick={handelClick}><h6><small>ADD TIMER</small></h6></button></small></li>
 
                 </ul>
               </div></h6> 
@@ -259,7 +259,7 @@ export default function NoteItem(props) {
                 <li><input type="number" className="dropdown-item" aria-label="Hrs" name='Hrs' value={time.Hrs} placeholder={hh} onChange={handelOnChange} max="24" min="0" /></li>
                 <li><input type="number" className="dropdown-item" aria-label="Min" name='Min' value={time.Min} placeholder={mm} onChange={handelOnChange} max="60" min="0" /></li>
                 <li><input type="number" className="dropdown-item" aria-label="Sec" name='Sec' value={time.Sec} placeholder={ss} onChange={handelOnChange} max="60" min="0" /></li>
-               <li> <small> <button disabled={time.Hrs === 0 && time.Min === 0 && time.Sec === 0} type="submit" className="btn btn-secondary dropdown-item" onClick={handelClick}><h6>EDIT TIMER</h6></button></small></li>
+               <li> <small> <button style={{color:"#004480",backgroundColor:"#d4dcf1"}} disabled={time.Hrs === 0 && time.Min === 0 && time.Sec === 0} type="submit" className="btn btn-secondary dropdown-item" onClick={handelClick}><h6><small>EDIT TIMER</small></h6></button></small></li>
 
               </ul></div></h6>
               }
