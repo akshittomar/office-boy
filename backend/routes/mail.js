@@ -15,7 +15,7 @@ const mailoptions={
                     service:'gmail',
                     auth:{
                         user:'nodejs961@gmail.com',
-                        pass:'ezrmyupskojmobil',
+                        pass:'aikgbbowzxsighqo',
                     }
                 })
                 transporter.sendMail(mailoptions,(error,info)=>{
