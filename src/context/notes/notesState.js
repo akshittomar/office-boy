@@ -18,7 +18,9 @@ const notesInitial = [
 
 
 
-
+const [HH, setHH] = useState()
+const [MM, setMM] = useState()
+const [SS, setSS] = useState()
 
   const [notes, setnotes] = useState(notesInitial);
 const getNotes = async ()=>{

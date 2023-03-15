@@ -30,7 +30,7 @@ export default function Notes() {
   const {getNotes} = context;
   // const [title, settitle] = useState({tit:""});
   const [note, setnote] = useState({id:"",eTitle: "your title here", eDescription: "your description here " , eTag:"default"});
-  
+  const [dummy, setdummy] = useState({Title: ""});
   // useEffect(() => {
   //   if(localStorage.getItem('token')){
   //   getNotes();}
@@ -48,10 +48,11 @@ export default function Notes() {
     // setnote({id:currentNotes._id, eTitle:currentNotes.title,eDescription:currentNotes.description, etag:currentNotes.tag});
     
     // setnote({...note, [note.name]:note.value})
+    setdummy({Title:currentNotes.title});
     setnote({id:currentNotes._id,eTitle:currentNotes.title,eDescription:currentNotes.description,eTag:currentNotes.tag});    
     // settitle({tit:currentNotes.title})   ;
     // console.log("UPDATING TITLE "+title.tit)
-    // setnote(currentNotes);
+    // setnote(currentNotes);99
     console.log("AFTER SETNOTE");
     console.log(note);
     ref.current.click();
@@ -65,12 +66,20 @@ export default function Notes() {
     // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     // setnote({...note, [e.target.name]:e.target.value})
     // setnote({...note, [note.name]:note.value})
+    var s1 = dummy.Title+"sec";
+    var s2 = dummy.Title+"min";
+    var s3 = dummy.Title+"hrs";
+    localStorage.removeItem(s1);
+    localStorage.removeItem(s2);
+    localStorage.removeItem(s3);
     editNote(note.id, note.eTitle, note.eDescription, note.eTag)
+    localStorage.removeItem(s1);
     // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     // setnote({...note, [e.target.name]:e.target.value})
     // setnote({...note, [note.name]:note.value})
     
      getNotes()
+     localStorage.removeItem(s1);
     refClose.current.click();
   }
   const handelOnChange= (e) =>{
