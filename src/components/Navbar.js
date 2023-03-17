@@ -36,8 +36,15 @@ export default function Navbar() {
                             <li className="nav-item">
                             <Link className={`nav-link my-3  mx-3 ${location.pathname==='/about'?"active bg-secondary ":""} `} aria-current="page" to={"/about"}><h4>About  <i className="fa fa-1x fa-id-badge my-2" aria-hidden="true"></i></h4></Link>
                             </li>
+                            
                             <li className="nav-item">
-                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/email'?"active bg-secondary ":""} `} aria-current="page" to={"/email"}><h5>Work-Distributer </h5></Link>
+                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/task'?"active bg-secondary ":""} `} aria-current="page" to={"/task"}><h4>Work-Distributer </h4></Link>
+                            </li>
+                            <li className="nav-item">
+                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/mywork'?"active bg-secondary ":""} `} aria-current="page" to={"/mywork"}><h4>My-Work</h4></Link>
+                            </li>
+                            <li className="nav-item">
+                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/myprofile'?"active bg-secondary ":""} `} aria-current="page" to={"/myprofile"}><h4>Profile</h4></Link>
                             </li>
                            
                         </ul>
