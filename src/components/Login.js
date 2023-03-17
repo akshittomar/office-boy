@@ -1,7 +1,12 @@
 import {React,useState} from 'react'
 import {useNavigate} from 'react-router-dom';
+import { useContext } from 'react';
+import noteContext from "../context/notes/noteContext";
 function Login() {
   let navigate = useNavigate();
+  const context = useContext(noteContext);
+  const {setmail} = context ;
+  
 
   const [userInfo, setuserInfo] = useState({email: "", password: "" });
   
@@ -45,6 +50,7 @@ function Login() {
    if(json.success === true ){
     console.log(json.authToken);
     localStorage.setItem('token' , json.authToken);
+    setmail(email);
     navigate("/");
    }
    else 

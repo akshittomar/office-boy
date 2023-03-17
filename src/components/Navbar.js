@@ -37,7 +37,7 @@ export default function Navbar() {
                             <Link className={`nav-link my-3  mx-3 ${location.pathname==='/about'?"active bg-secondary ":""} `} aria-current="page" to={"/about"}><h4>About  <i className="fa fa-1x fa-id-badge my-2" aria-hidden="true"></i></h4></Link>
                             </li>
                             <li className="nav-item">
-                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/email'?"active bg-secondary ":""} `} aria-current="page" to={"/email"}><h4>Email  </h4></Link>
+                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/email'?"active bg-secondary ":""} `} aria-current="page" to={"/email"}><h5>Work-Distributer </h5></Link>
                             </li>
                            
                         </ul>

@@ -10,6 +10,8 @@ export default function NoteItem(props) {
   const note = props.notes;
   const context = useContext(noteContext);
   const { deleteNote } = context;
+  const{mail}=context;
+  const{mailing}=context;
   const updateNote = props.updateNotes;
 
   const [hh, sethh] = useState(0);
@@ -136,7 +138,7 @@ export default function NoteItem(props) {
               localStorage.removeItem(s2);
               localStorage.removeItem(s3);
               window.alert("Hogya" + note.title);
-
+              mailing("akshitt125@gmail.com",note.title,note.description);
               setuse(false);
               //   alert("Hogya");
               // setMinutes(0);
@@ -234,7 +236,7 @@ export default function NoteItem(props) {
                 <i className="fa fa-plus" aria-hidden="true"></i><i className="fa fa-bell-o" aria-hidden="true"></i>
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  
+                  <a href='/'></a>
                   <li><input type="number" className="dropdown-item" aria-label="Hrs" name='Hrs' value={time.Hrs===0?"hh":time.Hrs} placeholder="hh" onChange={handelOnChange} max="24" min="0" /></li>
                   <li><input type="number" className="dropdown-item" aria-label="Min" name='Min' value={time.Min===0?"mm":time.Min} placeholder="mm" onChange={handelOnChange} max="60" min="0" /></li>
                   <li><input type="number" className="dropdown-item" aria-label="Sec" name='Sec' value={time.Sec===0?"ss":time.Sec} placeholder="ss" onChange={handelOnChange} max="60" min="0" /></li>

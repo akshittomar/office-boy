@@ -16,14 +16,10 @@ const NoteState = (props) =>{
 const notesInitial = [
 ]
 
-
-
-const [HH, setHH] = useState()
-const [MM, setMM] = useState()
-const [SS, setSS] = useState()
+const [mail, setmail] = useState("for exampel@gmail.com");
 
   const [notes, setnotes] = useState(notesInitial);
-const getNotes = async ()=>{
+const getNotes = async (tag)=>{
 
     const response = await fetch( `${host}/api/notes/fetchallnotes`, {
       method: 'GET',
@@ -41,7 +37,7 @@ setnotes(json);
 }
 
 
-const sendemail=async(hrs,min,sec)=>{
+const sendmail=async(hrs,min,sec)=>{
 const response = await fetch(`${host}/api/scheduler/schedulesms`,{
   method:'GET',
   headers:{
@@ -56,7 +52,21 @@ const json = await response.json();
 console.log(json);
 }
 
-
+const mailing=async(mail,subject,description)=>{
+  
+  const response = await fetch(`${host}/api/mail/sendmail`,{
+    method:'PUT',
+    headers:{
+      'Content-Type':'application/json',
+  
+      
+     
+    },
+    body: JSON.stringify({mail,subject,description})
+   
+  });
+  const json = await response.json();
+}
 
 
 
@@ -189,7 +199,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 
     return (
 
-        <var1.Provider value={{a,notes,setnotes,addNote,deleteNote,editNote,getNotes}}>
+        <var1.Provider value={{a,notes,setnotes,addNote,deleteNote,editNote,getNotes,mail,setmail,mailing}}>
             {props.children}
         </var1.Provider>
     )
