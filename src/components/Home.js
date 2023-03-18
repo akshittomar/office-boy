@@ -6,7 +6,8 @@ import {useNavigate} from 'react-router-dom';
 
 
 
-export default function Home() {
+export default function Home(props) {
+  console.log(props.type);
   const context = useContext(noteContext);
 const {getNotes} = context;
 let navigate = useNavigate();
@@ -20,10 +21,10 @@ useEffect(() => {
   },[]);
   return (<>
     <h1 >
-       Add Notes Here  
+      { `${props.type==="MyTodo"?"Add Your Todo Here":""}`}
     </h1>
 
-<AddNotes/>
+<AddNotes type={props.type}/>
 
 </>
   )

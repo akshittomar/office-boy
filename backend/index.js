@@ -19,6 +19,9 @@ app.use('/api/auth',require('./routes/auth'))
 app.use('/api/notes',require('./routes/notes'))
 app.use('/api/scheduler',require('./routes/scheduler'))
 app.use('/api/mail',require('./routes/mail'))
+app.use('/api/sendwork',require('./routes/workDistributer'))
+app.use('/api/mywork',require('./routes/GivenWork'))
+
 app.listen(port, () => {
   console.log(`NOTES APPLICATION  BACKEND LISTENING ON PORT  ${port}`)
 })
