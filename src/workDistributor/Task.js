@@ -11,7 +11,7 @@ export default function Task() {
   const ref = useRef(null);
   const [content, setcontent] = useState('');
   const [post, setpost] = useState("");
-  const [mail, setmail] = useState('');
+  const [mail, setmail] = useState("");
   const refClose = useRef(null);
   // const [employee, setemployee] = useState([]);
   const context = useContext(noteContext);
@@ -244,9 +244,9 @@ onChange={(newContent) =>{}}
 
 
 <div className="input-group mb-3">
-  <label className="input-group-text"  htmlFor="inputGroupSelect01">Employee:</label>
+  <label className="input-group-text"  htmlFor="inputGroupSelect01">Set Role:</label>
   <select className="form-select" id="inputGroupSelect01" onChange={handelOption}    value={post}   >
-    { <option  value={post} disabled={true} placeholder="Choose..."  >{post}</option> }
+    { <option  value={post} disabled={true} placeholder="Choose..."  >{post===""?"Choose...":{post}}</option> }
      
      <option value="Analyst"  >Analyst</option>
     <option value="Senior Analyst"  >Senior Analyst</option>
@@ -264,7 +264,7 @@ onChange={(newContent) =>{}}
 <div className="input-group mb-3">
   <label className="input-group-text "  htmlFor="inputGroupSelect07">Employee:</label>
   <select className="form-select" id="inputGroupSelect07" onChange={handelMail} name="Empmail"  value={work2add.Empmail}   >
- 
+    { <option   disabled={true} value={mail} placeholder="Choose..."  >{mail===""?"Choose...":{mail}}</option>  }
     {
     employee.map((employee) => {
      return <> <option className="form-select  container"  key={employee._id}    value={employee.Empmail} >
