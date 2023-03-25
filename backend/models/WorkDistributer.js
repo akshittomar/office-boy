@@ -8,13 +8,13 @@ const WorkDistributer = new Schema({
     },
     empemail:{
         type:String,
-        unique:false,
+        
     },
-    proname:{
+    title:{
         type:String,
         required:true,
     },
-    prodesc:{
+    description:{
         type:String,
         required:true,
     },

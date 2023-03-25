@@ -56,6 +56,7 @@ const errors = validationResult(req);
       name:req.body.name,//idhar tai kiya humne thunderclient se MongoDB tak ka safar 
       email:req.body.email,
       password:secPass, 
+      epost:req.body.epost,
     })
     const data = { 
       user:{

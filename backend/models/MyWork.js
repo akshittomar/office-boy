@@ -9,11 +9,11 @@ const MyWork = new Schema({
         type:String,
         
     },
-    wname:{
+    title:{
         type:String,
         required:true,
     },
-    wdesc:{
+    description:{
         type:String,
         required:true,
     },

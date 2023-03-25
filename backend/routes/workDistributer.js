@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var fetchuser = require('./middleware/fetchuser');
-
+const User = require('../models/User')
 const Work = require('../models/WorkDistributer');
 const { body, validationResult } = require('express-validator');
 // const { route } = require('./auth');
@@ -40,6 +40,26 @@ catch(error)
 
 
 
+router.put('/fetchallepm',fetchuser,async (req,res)=> {
+   
+
+    try{
+    const {epostFind}=req.body;
+    console.log("requested post is this "+epostFind);
+    const notes = await User.find({epost:epostFind});
+    console.log(notes);
+    res.json(notes);
+    }
+    catch(error)
+    {
+        console.error(error.message);
+        res.status(500).send("INTERNAL SERVER  ERROR ");
+    }
+    })
+
+
+
+
 
 
 
@@ -49,8 +69,8 @@ catch(error)
 
 
 router.post('/addwork',fetchuser,[
-body('proname','ENTER A VALID TITLE NAME ').isLength({min:5}),
-body('prodesc','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({min:5}),
+body('title','ENTER A VALID TITLE NAME ').isLength({min:5}),
+body('description','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({min:5}),
 
 
 
@@ -58,7 +78,7 @@ body('prodesc','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({min:5}
     
   
 try{
-    const {proname,prodesc,epost,erank,tag,empemail} = req.body ;
+    const {title,description,epost,erank,tag,empemail} = req.body ;
   
 
     const errors = validationResult(req);
@@ -67,7 +87,7 @@ try{
       return res.status(400).json({ errors: errors.array() });
     }
 const work = new Work({
-    proname,prodesc,epost,erank,tag,empemail,user: req.user.id
+    title,description,epost,erank,tag,empemail,user: req.user.id
 })
 
 const savedWork = await work.save();
@@ -107,13 +127,13 @@ console.log("THIS USER REQUESTED "+req.params.id);
         
         // let user =await  Notes.findOne({updateID: req.body.email});
        
-        const {id,proname,prodesc,epost,erank,tag,empemail,leaves} = req.body ;
+        const {id,title,description,epost,erank,tag,empemail,leaves} = req.body ;
         
         
         const newTask  = {};
-        if(id){newNote.id = id};
-        if(prodesc){newTask.prodesc = prodesc};
-        if(proname){newTask.proname = proname};
+        if(id){newTask.id = id};
+        if(description){newTask.description = description};
+        if(title){newTask.title = title};
         if(epost){newTask.epost = epost};
         if(erank){newTask.erank = erank};
         if(leaves){newTask.leaves = leaves};
@@ -139,7 +159,7 @@ console.log("THIS USER REQUESTED "+req.params.id);
    
    
 
-        console.log("NEW Work IS THIS"+newTask.proname);
+        console.log("NEW Work IS THIS"+newTask.title);
 
     
     todo = await Work.findByIdAndUpdate(req.params.id,{$set : newTask}, {new :true}) ;

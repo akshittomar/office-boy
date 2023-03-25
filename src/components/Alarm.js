@@ -1,11 +1,12 @@
-import React,{useEffect,useState} from 'react'
-
+import React,{useEffect,useState,useContext} from 'react'
+import noteContext from "../context/notes/noteContext";
 
 
 
 
 
 export default function Alarm(props) {
+// console.log(props.type)
  const note = props.notes;
 const [hh, sethh] = useState(0);
 const [mm, setmm] = useState(0);
@@ -14,8 +15,9 @@ const [use,setuse] = useState(false);
 
 
 
-
-
+const [time, settime] = useState({ Hrs: 0, Min: 0, Sec: 0 });
+const context = useContext(noteContext);
+const{mailing}=context;
 
 useEffect(() => {
     
@@ -39,12 +41,40 @@ setuse(true);
 
 
 
-    var s1 = note.title+"sec";
-    var s2 = note.title+"min";
-    var s3 = note.title+"hrs";
+const handelClick = (e) => {
+    e.preventDefault();
+    if((time.Hrs !== 0 && time.Hrs !== "0" ) || (time.Min !== 0 && time.Min !== "0" ) || (time.Sec !== 0 && time.Sec !== "0" )){
+      console.log(time.Hrs+" "+time.Min+" "+time.Sec);
+    sethh(time.Hrs);
+    setmm(time.Min);
+    setss(time.Sec);
+    setuse(true);}
+    settime({ Hrs: 0, Min: 0, Sec: 0 });
+  }
+
+  const handelOnChange = (e) => {
+    settime({ ...time, [e.target.name]: e.target.value })
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
     
   
   useEffect(()=>{
+    var s1 = note.title+"sec";
+    var s2 = note.title+"min";
+    var s3 = note.title+"hrs";
     let myInterval = setInterval(() => {
          
         if(use === true){
@@ -65,6 +95,7 @@ setuse(true);
                     localStorage.removeItem(s2);
                     localStorage.removeItem(s3);
                     window.alert("Hogya"+note.title);
+                    mailing("akshitt125@gmail.com",note.title,note.description);
                     setuse(false);
                    
                     // setMinutes(0);
@@ -106,7 +137,7 @@ setuse(true);
         return ()=> {
             clearInterval(myInterval);
           };
-    });
+    },[mm,ss,hh]);
 
 
 
@@ -118,7 +149,46 @@ setuse(true);
 
     return (
     <>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    { props.show==="true" &&
+     <div className='container'>
+              {hh === 0 && mm === 0 && ss === 0
+                ?<h6>
+                <div className="dropdown  container">
+                <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id={`${hh === 0 && mm === 0 && ss === 0?"dropdownMenuButton1":""}`}  data-bs-toggle="dropdown" aria-expanded="false">
+                <i className="fa fa-plus" aria-hidden="true"></i><i className="fa fa-bell-o" aria-hidden="true"></i>
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <a href='/'></a>
+                  <li><input type="number" className="dropdown-item" aria-label="Hrs" name='Hrs' value={time.Hrs===0?"hh":time.Hrs} placeholder="hh" onChange={handelOnChange} max="24" min="0" /></li>
+                  <li><input type="number" className="dropdown-item" aria-label="Min" name='Min' value={time.Min===0?"mm":time.Min} placeholder="mm" onChange={handelOnChange} max="60" min="0" /></li>
+                  <li><input type="number" className="dropdown-item" aria-label="Sec" name='Sec' value={time.Sec===0?"ss":time.Sec} placeholder="ss" onChange={handelOnChange} max="60" min="0" /></li>
+                 <li> <small> <button style={{color:"#004480",backgroundColor:"#d4dcf1"}} disabled={time.Hrs === 0 && time.Min === 0 && time.Sec === 0} type="submit" className="btn btn-secondary dropdown-item" onClick={handelClick}><h6><small>ADD TIMER</small></h6></button></small></li>
+
+                </ul>
+              </div></h6> 
+                : <h6>
+                  <div className="dropdown container"><button  className="btn btn-secondary btn-sm dropdown-toggle" type="button" id={`${hh === 0 && mm === 0 && ss === 0?"dropdownMenuButton1":""}`}  data-bs-toggle="dropdown" aria-expanded="false">Time Left:{hh < 10 ? `0${hh}` : hh}:{mm < 10 ? `0${mm}` : mm}:{ss < 10 ? `0${ss+"   "}    ` : ss+"   "}    <i className="fa-solid fa-trash" onClick={() => {
+                  var s1 = note.title + "sec";
+                  var s2 = note.title + "min";
+                  var s3 = note.title + "hrs";
+                  localStorage.removeItem(s1);
+                  localStorage.removeItem(s2);
+                  localStorage.removeItem(s3);
+                  sethh(0);
+                  setmm(0);
+                  setss(0);
+                  setuse(false);
+                }}></i></button> <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  
+                <li><input type="number" className="dropdown-item" aria-label="Hrs" name='Hrs' value={time.Hrs} placeholder={hh} onChange={handelOnChange} max="24" min="0" /></li>
+                <li><input type="number" className="dropdown-item" aria-label="Min" name='Min' value={time.Min} placeholder={mm} onChange={handelOnChange} max="60" min="0" /></li>
+                <li><input type="number" className="dropdown-item" aria-label="Sec" name='Sec' value={time.Sec} placeholder={ss} onChange={handelOnChange} max="60" min="0" /></li>
+               <li> <small> <button style={{color:"#004480",backgroundColor:"#d4dcf1"}} disabled={time.Hrs === 0 && time.Min === 0 && time.Sec === 0} type="submit" className="btn btn-secondary dropdown-item" onClick={handelClick}><h6><small>EDIT TIMER</small></h6></button></small></li>
+
+              </ul></div></h6>
+              }
+            </div>}
     
     </>
   )

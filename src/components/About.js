@@ -13,7 +13,7 @@ export default function About() {
     <div> I AM IN ABOUT COMPONENET OF {a.name} AND HE BELONGS TO {a.class}</div>
     {notes.map((notes) => {
       
-          return <Alarm key={notes._id} notes={notes}   />;
+          return <Alarm key={notes._id} notes={notes}  show="false" />;
         })}
     </>
   )

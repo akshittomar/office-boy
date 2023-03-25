@@ -19,7 +19,11 @@ const UserSchema = new Schema({
         type:Date,
         default:Date.now
     },
-    
+    epost:{
+        type:String,
+        required:true,
+        
+    },
 
   });
 const User =   mongoose.model('USER',UserSchema);

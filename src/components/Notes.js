@@ -28,6 +28,7 @@ export default function Notes() {
   const {editNote} = context;
   // const setnotes = context.setnotes;
   const {getNotes} = context;
+  const {deleteNote} = context;
   // const [title, settitle] = useState({tit:""});
   const [note, setnote] = useState({id:"",eTitle: "your title here", eDescription: "your description here " , eTag:"default"});
   const [dummy, setdummy] = useState({Title: ""});
@@ -168,7 +169,7 @@ setnote({...note, [e.target.name]:e.target.value})
         
         {notes.length===0  && `NO PENDING WORK ` }
         {notes.map((notes) => {
-          return <NoteItem key={notes._id} notes={notes} updateNotes={updateNotes}  />;
+          return <NoteItem key={notes._id} cloured="true" notes={notes} updateNotes={updateNotes} deleteNote={deleteNote} />;
         })}
       </div>  
 
