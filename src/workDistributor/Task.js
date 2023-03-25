@@ -10,8 +10,8 @@ import NoteItem from '../components/NoteItem';
 export default function Task() {
   const ref = useRef(null);
   const [content, setcontent] = useState('');
-  const [post, setpost] = useState("");
-  const [mail, setmail] = useState("");
+  const [post, setpost] = useState("Choose...");
+  const [mail, setmail] = useState("Choose Employee Role First");
   const refClose = useRef(null);
   // const [employee, setemployee] = useState([]);
   const context = useContext(noteContext);
@@ -246,13 +246,13 @@ onChange={(newContent) =>{}}
 <div className="input-group mb-3">
   <label className="input-group-text"  htmlFor="inputGroupSelect01">Set Role:</label>
   <select className="form-select" id="inputGroupSelect01" onChange={handelOption}    value={post}   >
-    { <option  value={post} disabled={true} placeholder="Choose..."  >{post===""?"Choose...":{post}}</option> }
+     <option  value={post} disabled={true} key={1} placeholder="Choose..."  >{post}</option> 
      
-     <option value="Analyst"  >Analyst</option>
-    <option value="Senior Analyst"  >Senior Analyst</option>
-    <option value="React Developer"  >React Developer</option>
-    <option value="DevOps Engineer" >DevOps Engineer</option>
-    <option value="SDE" >SDE</option>
+     <option value="Analyst" key={2} >Analyst</option>
+    <option value="Senior Analyst"  key={3} >Senior Analyst</option>
+    <option value="React Developer" key={4} >React Developer</option>
+    <option value="DevOps Engineer" key={5} >DevOps Engineer</option>
+    <option value="SDE" key={6} >SDE</option>
    
   </select>
 </div>
@@ -264,7 +264,7 @@ onChange={(newContent) =>{}}
 <div className="input-group mb-3">
   <label className="input-group-text "  htmlFor="inputGroupSelect07">Employee:</label>
   <select className="form-select" id="inputGroupSelect07" onChange={handelMail} name="Empmail"  value={work2add.Empmail}   >
-    { <option   disabled={true} value={mail} placeholder="Choose..."  >{mail===""?"Choose...":{mail}}</option>  }
+     <option   disabled={true} value={mail} placeholder="Choose..."  >{mail}</option>  
     {
     employee.map((employee) => {
      return <> <option className="form-select  container"  key={employee._id}    value={employee.Empmail} >
