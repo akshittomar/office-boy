@@ -1,13 +1,13 @@
 import React from 'react'
-
+import { createContext } from "react";
 
 import { useState } from "react";
-import var1 from './notes/ds';
+const distributer = React.createContext();
 const Distribute=(props)=> {
   const host = "http://localhost:5000";
  const workInitial = []
     const [work, setwork] = useState(workInitial);
-
+    const [employee, setemployee] = useState([]);
 
     const getAllWork = async ()=>{
       
@@ -134,7 +134,26 @@ const Distribute=(props)=> {
             }
 
 
+            const getAllEmp = async (epostFind)=>{
+      
 
+              const response = await fetch( `${host}/api/sendwork/fetchallepm`, {
+                method: 'PUT',
+                headers:{
+                  'Content-Type':'application/json',
+                  
+                 'authToken' :localStorage.getItem('token'),
+                },
+                body: JSON.stringify({epostFind})
+              });
+            
+            const json = await response.json();
+            console.log(json);
+            setemployee(json);
+            console.log("i am employee"+employee.length);
+
+            }
+       
 
 
 
@@ -143,11 +162,11 @@ const Distribute=(props)=> {
 
     return (
 
-        <var1.Provider value={{addWork,deleteWork,editWork,getAllWork,work,setwork}}>
+        <distributer.Provider value={{addWork,deleteWork,editWork,employee,setemployee,getAllWork,work,setwork}}>
             {props.children}
-        </var1.Provider>
+        </distributer.Provider>
     )
   
 }
 
-export default Distribute;
+export default distributer;

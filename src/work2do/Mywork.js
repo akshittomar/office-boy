@@ -1,57 +1,79 @@
-import React, { useContext,useEffect ,useState} from 'react'
-import noteContext from "../context/notes/noteContext"
+import React, { useContext, useEffect, useState ,useCallback} from 'react';
+import noteContext from '../context/notes/noteContext';
 import Alarm from '../components/Alarm';
 import NoteItem from '../components/NoteItem';
 export default function Mywork() {
+  const [user, setUser] = useState({ name: '', email: '', epost: '', doj: '' });
+  const initial = [] ;
+  const [todo, setTodo] = useState(initial);
   const context = useContext(noteContext);
   const notes = context.notes;
   
-  //yahan pr uppdate call is send chat I think so 
-  //update call ---> update user database with message sent and update work distributer database as well 
-  //update is send chat 
-  // delete chat --->   not availabel 
+  const [first, setfirst] = useState('');
+  
+  const getUser = useCallback( async () => {
+    const response = await fetch(`http://localhost:5000/api/auth/getuser`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'authToken': localStorage.getItem('token'),
+      },
+    });
+    const json1 = await response.json();
+    
+  const  user =     { name: json1.name, email: json1.email, epost: json1.epost, doj: json1.date };
+  console.log('user is this ' + user.name);
+  setUser(user);
+  return  user;  
+  },[])
+
+  const getTask =  useCallback(async () => {
+    const response = await fetch(`http://localhost:5000/api/sendwork/fetchalltask`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'authToken': localStorage.getItem('token'),
+      },
+      body: JSON.stringify({ taskFind: user.email }),
+    });
+    const json = await response.json();
+    console.log(json);
+    setTodo(json);
+    // return json ;
+  },[])
 
 
-const [todo, settodo] = useState();//set my todo's array 
+
 
   useEffect(() => {
-    
-  // getmywork();//get  all pending work ;
-    
-  }, [] )
-  
+    getUser().then(setUser);
+    setfirst('jj');
+    console.log("is user clear"+user.name);
 
-  const update=()=>{
-    
-  }
-  
-  
+
+   
+setfirst('pp');
+getTask().then(setTodo);
+setfirst('pp');
+  }, [first,getTask,getUser]);
+
   return (
-
-
     <>
+      <h1>MY PENDING PROJECTS:</h1>
 
+      <div>
+        Mywork
+        {notes.map((notes) => {
+          return <Alarm key={notes._id} notes={notes} show="false" />;
+        })}
+      </div>
 
-<h1>MY PENDING PROJECTS:</h1>
-
-{/* {
-  todo.map(todo){
-    <>
-    <NoteItem   title={todo.titel} description={todo.description}  ></NoteItem>
-    <button className='btn btn-primary'>Work Completed</button>
-    <button className='btn btn-primary'>EXTEND MY DEADLINE </button>
-
-</>
-  }
-} */}
-
-
-
-    <div>Mywork{notes.map((notes) => {
-      
-      return <Alarm key={notes._id} notes={notes}  show="false" />;
-      })} </div>
-
-</>
-  )
+      <div className='row'>
+         {todo &&  todo.length === 0 && `NO PENDING PROJECT `}
+        {todo && todo.map((todo) => {
+          return <NoteItem key={todo._id} notes={todo} cloured="false" option="false" />;
+        })} 
+      </div>
+    </>
+  );
 }

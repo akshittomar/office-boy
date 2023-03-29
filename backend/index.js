@@ -10,6 +10,17 @@ connection();
 
 const app = express()
 const port = 5000
+
+
+
+const server = require('http').createServer(app);
+const io = require('socket.io')(server); //socket.io is a http method
+io.on('connectiom',socket=>{
+  socket.on('useer-joined',name=>{
+
+  })
+})
+
 app.use(cors())
 app.use(express.json())
 

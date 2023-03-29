@@ -1,10 +1,12 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
-
+import noteContext from "../context/notes/noteContext";
 function Signup() {
   let navigate = useNavigate();
-
+ const context = useContext(noteContext);
+  const {setmail} = context ;
+  
 const [newUser, setnewUser] = useState({name:"",email:"",password:"",epost:""})
 
 const [post, setpost] = useState("");
@@ -36,7 +38,9 @@ useEffect(() => {
 
     const json = await response.json();
     if(json.success===true){
-     
+     setmail(email);
+     localStorage.setItem('mail', email);
+
     localStorage.setItem('token' , json.authToken);
     navigate("/");
 

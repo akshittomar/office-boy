@@ -41,9 +41,7 @@ catch(error)
 
 
 router.put('/fetchallepm',fetchuser,async (req,res)=> {
-   
-
-    try{
+   try{
     const {epostFind}=req.body;
     console.log("requested post is this "+epostFind);
     const notes = await User.find({epost:epostFind});
@@ -56,6 +54,22 @@ router.put('/fetchallepm',fetchuser,async (req,res)=> {
         res.status(500).send("INTERNAL SERVER  ERROR ");
     }
     })
+router.put('/fetchalltask',fetchuser,async (req,res)=> {
+   try{
+        const {taskFind}=req.body;
+        console.log("requested user email is this "+taskFind);
+        const task = await Work.find({empemail:taskFind});
+        console.log(task);
+        res.json(task);
+        }
+        catch(error)
+        {
+            console.error(error.message);
+            res.status(500).send("INTERNAL SERVER  ERROR ");
+        }
+        })
+
+
 
 
 

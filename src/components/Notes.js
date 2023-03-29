@@ -169,7 +169,7 @@ setnote({...note, [e.target.name]:e.target.value})
         
         {notes.length===0  && `NO PENDING WORK ` }
         {notes.map((notes) => {
-          return <NoteItem key={notes._id} cloured="true" notes={notes} updateNotes={updateNotes} deleteNote={deleteNote} />;
+          return <NoteItem key={notes._id} cloured="true" notes={notes} updateNotes={updateNotes} deleteNote={deleteNote} option="true" />;
         })}
       </div>  
 

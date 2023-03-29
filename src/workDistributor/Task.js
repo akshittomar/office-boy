@@ -11,19 +11,23 @@ export default function Task() {
   const ref = useRef(null);
   const [content, setcontent] = useState('');
   const [post, setpost] = useState("Choose...");
-  const [mail, setmail] = useState("Choose Employee Role First");
+  const [mail, setmail] = useState("Choose...");
   const refClose = useRef(null);
-  // const [employee, setemployee] = useState([]);
+  
   const context = useContext(noteContext);
-  const wcontext = useContext(workContext);
-  const [first, setfirst] = useState('true');
+  
+  
   const work = context.work;
   const notes = context.notes;
+  const user1 = content.user;
   const {addWork} = context;
+  const {getUser} = context ;
   const {getAllWork} = context;
+  const myMail = context.mail;
   const {getAllEmp} = context;
   const {employee} = context;
   const {editWork} = context;
+  
   const host = "http://localhost:5000";
   
   const {deleteWork} = context;
@@ -38,8 +42,9 @@ export default function Task() {
   useEffect(() => {
     getAllWork();
     fetchWorker();
-    setfirst("false");
-    console.log("I AM IN USEFFECT "+post);
+    getUser();
+    
+    console.log("I AM IN USEFFECT "+user1);
     
   }, [change,post,mail])
   
@@ -88,6 +93,41 @@ setcontent('');
   getAllWork();
   setchange(false);
 }
+
+
+
+
+
+
+
+function getRank(post) {
+  
+  var erank = 0 ;
+  switch (post) {
+    case "Analyst":
+      erank=1;
+      break;
+    case "Senior Analyst":
+      erank=2;
+      break;
+      case "DevOps Engineer":
+        erank=4;
+        break;
+        case "React Developer":
+          erank=3;
+          break;
+          case "SDE":
+            erank=5;
+            break;
+    default:
+      break;
+  }
+  return erank;
+}
+
+
+// const myRank = getRank(user.epost);
+
 
 
 
@@ -266,10 +306,10 @@ onChange={(newContent) =>{}}
   <select className="form-select" id="inputGroupSelect07" onChange={handelMail} name="Empmail"  value={work2add.Empmail}   >
      <option   disabled={true} value={mail} placeholder="Choose..."  >{mail}</option>  
     {
-    employee.map((employee) => {
-     return <> <option className="form-select  container"  key={employee._id}    value={employee.Empmail} >
+    employee.map((employ) => {
+     return <> <option className="form-select  container"  key={employ._id}    value={employ.Empmail} >
        
-     Name: {employee.name} , Mail: {employee.email}
+     Name: {employ.name} , Mail: {employ.email}
        </option> </>     
     })}
  </select>
@@ -335,7 +375,7 @@ onChange={(newContent) =>{}}
 <div className='row'>
 {work.length===0  && `NO PENDING PROJECT ` }
         {work.map((work) => {
-          return <NoteItem key={work._id} notes={work} updateNotes={updateModal} deleteNote={deleteWork} cloured="false"  />;
+          return <NoteItem key={work._id} notes={work} updateNotes={updateModal} deleteNote={deleteWork} cloured="false" option="true"  />;
         })}
 </div>
 
@@ -433,17 +473,7 @@ onChange={(newContent) =>{}}
 
 
 
-              {/* <div className="input-group mb-3">
-  <label className="input-group-text"  htmlFor="inputGroupSelect01">Change Employee:</label>
- 
-    {employee.map((employee) => {
-       <select className="form-select"    name="Employee" value={work2add.Empmail} >
-       <option selected     value={employee}  >{work2add.Empmail}</option>
-       <option      value={employee}  >{work2add.Empmail}</option>
-       </select>     
-    })}
- 
-</div> */}
+            
 
 
              

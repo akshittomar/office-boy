@@ -51,6 +51,8 @@ function Login() {
     console.log(json.authToken);
     localStorage.setItem('token' , json.authToken);
     setmail(email);
+    localStorage.setItem('mail', email);
+
     navigate("/");
    }
    else 

@@ -10,10 +10,16 @@ export default function Home(props) {
   console.log(props.type);
   const context = useContext(noteContext);
 const {getNotes} = context;
+const {user}= context ;
+const {getUser} = context ;
 let navigate = useNavigate();
 useEffect(() => {
   if(localStorage.getItem('token')){
-    getNotes();}
+    getNotes();
+    
+    if(user === undefined)
+    getUser();
+  }
     else{
       navigate("/login");
 

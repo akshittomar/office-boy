@@ -1,3 +1,4 @@
+
 import React, {  } from 'react'
 // import { Beforeunload } from 'react-beforeunload';
 
@@ -115,7 +116,7 @@ export default function NoteItem(props) {
         }  
           <br />
 
-
+            {props.option==="true" && 
           <div className=" card-footer d-flex justify-content-between container" >
 
             <div className="d-flex justify-content-center container">
@@ -140,10 +141,10 @@ export default function NoteItem(props) {
 
 
 
-{
+                       {
       
-      <Alarm key={note._id} notes={note} show="true" />
-    }
+                      <Alarm key={note._id} notes={note} show="true" />
+                        }
             
             <div className="d-flex justify-content-center container">
               <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { updateNote(note) }}  >Edit <i className="fa-solid fa-file-pen sm  " onClick={() => { updateNote(note) }}></i></h6>
@@ -151,7 +152,7 @@ export default function NoteItem(props) {
 
           </div>
 
-
+                      }
 
 
 

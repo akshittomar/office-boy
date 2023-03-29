@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import var1 from "./noteContext"
 import { useState } from "react";
 const NoteState = (props) =>{
@@ -9,17 +10,42 @@ const NoteState = (props) =>{
         "class" : "5D"
     }
  
+//this note shoulde get included in MyWork.js ----> if we declare a function inside the component and calls it again in useEffect then react thinks 
+//this function is created again and it again re-renders this component then again useEffect() will run this function call inside it . 
+//this keeps on happening again and again  
+//in scenario series of stdeps are :----->
+/**
+ * 
+ * 1st time function is declared and useeffect calls it 
+ * 2nd time component is rendering this happens when we give dependency array 
+ * //again function is declared again
+ * //and useffect is called for it  
+ * //it keeps on going and going 
+ */
 
 const [employee, setemployee] = useState([]);
-
+const [user, setuser] = useState({name:"",email:"",epost:"",doj:""});
 
 const notesInitial = [
 ]
 
-const [mail, setmail] = useState("for exampel@gmail.com");
+const [mail, setmail] = useState(localStorage.getItem('mail'));
 
-
+const[task,settask] = useState([]);
   const [notes, setnotes] = useState(notesInitial);
+
+
+  useEffect(() => {
+
+
+  
+  }, [])
+  
+
+  // useEffect(() => {
+   
+  // }, [notes])
+
 const getNotes = async ()=>{
 
     const response = await fetch( `${host}/api/notes/fetchallnotes`, {
@@ -33,9 +59,33 @@ const getNotes = async ()=>{
     });
 
 const json = await response.json();
-console.log("i am running");
-setnotes(json);
+
+ setnotes(json);
+ console.log("i am running"+notes.length);
 }
+
+
+
+const getTask = async ()=>{
+  
+  const response = await fetch( `${host}/api/sendwork/fetchalltask`, {
+    method: 'PUT',
+    headers:{
+      'Content-Type':'application/json',
+      
+     'authToken' :localStorage.getItem('token'),
+    },
+    body: JSON.stringify({taskFind:mail})
+  });
+
+const json = await response.json();
+settask(json);
+console.log("task chal rhi bhai "+user.email+" email yeh hai ");
+
+
+}
+
+
 
 
 const sendmail=async(hrs,min,sec)=>{
@@ -71,6 +121,23 @@ const mailing=async(mail,subject,description)=>{
 
 
 
+
+const getUser=async()=>{
+  const response = await fetch(`${host}/api/auth/getuser`,{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'authToken':localStorage.getItem('token')
+    },
+    });
+  // const json1 = await response.json();
+  const json1 = response.json();
+  json1.then((json1)=>{
+  
+    setuser({name:json1.name,email:json1.email,epost:json1.epost,doj:json1.date});
+    console.log("user is this "+user);
+  });
+ }
 
 
 
@@ -353,9 +420,10 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
               });
             
             const json = await response.json();
-            console.log("i am running");
             console.log(json);
             setemployee(json);
+            console.log("i am employee"+employee.length);
+
             }
        
 
@@ -379,7 +447,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 
     return (
 
-        <var1.Provider value={{a,employee,setemployee,notes,getAllEmp,setnotes,addNote,deleteNote,editNote,getNotes,mail,setmail,mailing,addWork,deleteWork,editWork,getAllWork,work,setwork}}>
+        <var1.Provider value={{a,getUser,user,employee,setemployee,getTask,notes,getAllEmp,setnotes,addNote,deleteNote,editNote,getNotes,task,mail,setmail,mailing,addWork,deleteWork,editWork,getAllWork,work,setwork}}>
             {props.children}
         </var1.Provider>
     )

@@ -101,7 +101,7 @@ router.post('/addwork',fetchuser,[
                     
                     // let user =await  Notes.findOne({updateID: req.body.email});
                    
-                    const { title,description,wpost,wrank,tag,wleaves,workemail} = req.body ;
+                    const { title,description,wpost,wrank,tag,wleaves,workemail,id} = req.body ;
                     
                     
                     const newTask  = {};
@@ -136,7 +136,7 @@ router.post('/addwork',fetchuser,[
                     console.log("NEW Work IS THIS"+newTask.title);
             
                 
-                todo = await Work.findByIdAndUpdate(req.params.id,{$set : newTask}, {new :true}) ;
+                todo = await Task.findByIdAndUpdate(req.params.id,{$set : newTask}, {new :true}) ;
                res.json({todo});
                
                console.log("updated notes"+todo);
@@ -188,7 +188,7 @@ router.post('/addwork',fetchuser,[
 
 
 
-
+            
 
 
 
