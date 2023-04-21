@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import var1 from "./noteContext"
 import { useState } from "react";
+
 const NoteState = (props) =>{
 
   const host = "http://localhost:5000";
@@ -9,6 +10,7 @@ const NoteState = (props) =>{
         "name" : "AKSHIT",
         "class" : "5D"
     }
+    
  
 //this note shoulde get included in MyWork.js ----> if we declare a function inside the component and calls it again in useEffect then react thinks 
 //this function is created again and it again re-renders this component then again useEffect() will run this function call inside it . 
@@ -360,10 +362,14 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 
 
 
-      const editWork  = async(id,title,description,tag,epost,erank,empemail)=>{
-        console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
+      const editWork  = async(id,title,description,tag,epost,erank,empemail,chat)=>{
+{/*editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail,modalWork.chat); */}
+
+
+        console.log("PARAMETERS in frontend ARE : "+id+title+description+tag+" "+chat);
             const response = await fetch( `${host}/api/sendwork/update/${id}`, {
               method: 'PUT',
+              
               headers:{
                 'Content-Type':'application/json',
                'authToken' :localStorage.getItem('token'),
@@ -372,7 +378,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
         
              
               
-              body: JSON.stringify({id,title,description,tag,epost,erank,empemail})
+              body: JSON.stringify({id,title,description,tag,epost,erank,empemail,chat})
             });
             const json = response.json(id,title,description,tag);
             console.log("KYA TUM PROMISE HO")

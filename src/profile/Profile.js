@@ -1,11 +1,38 @@
-import React, { useContext ,useState} from 'react'
+import React, { useContext ,useState,useEffect} from 'react'
 import noteContext from "../context/notes/noteContext"
 import Alarm from '../components/Alarm';
-
+import io from 'socket.io-client';
 export default function Profile() {
   const context = useContext(noteContext);
   const notes = context.notes;
   const [image, setimage] = useState();
+  const host = "http://localhost:5000";
+  const socket = io();
+  const getNotes = async ()=>{
+
+    const response = await fetch( `${host}`, {
+      method: 'GET'
+     
+      
+    });
+
+const json = await response.json();
+console.log("/ get hogya "+json);
+socket.on('connec', (data) => {
+  window.alert("socket");
+});
+ 
+} 
+  useEffect(() => { 
+    getNotes();
+    
+    socket.on('connec', (data) => {
+      window.alert("socket");
+    });
+  
+   
+  }, [])
+  
   return (
     <>MY-PROFILR  WILL SHOW UP HERE 
     

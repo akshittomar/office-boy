@@ -3,6 +3,7 @@ import AddNotes from './AddNotes';
 import noteContext from "../context/notes/noteContext";
 import { useContext , useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
+import io from 'socket.io-client'
 
 
 
@@ -24,6 +25,12 @@ useEffect(() => {
       navigate("/login");
 
     }
+    const socket = io("http://localhost:3000");
+    socket.emit('connection',{message:"hello is a socket"});
+    socket.on('getRequest', (data) => {
+      window.alert(data);
+    });
+
   },[]);
   return (<>
     <h1 >

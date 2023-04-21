@@ -33,6 +33,10 @@ const WorkDistributer = new Schema({
     tag:{
         type:String,
         default:"Personal",
+    },
+    chat:{
+        type:String ,
+        default:"",
     }
 
 })
