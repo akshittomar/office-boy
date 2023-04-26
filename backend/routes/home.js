@@ -136,7 +136,7 @@ router.get ('/',async (req,res)=> {
         console.error(error.message);
         res.status(500).send("INTERNAL SERVER ERROR");
     }
-})client 
+})
 
 module.exports = router;
 

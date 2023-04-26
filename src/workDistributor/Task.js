@@ -111,6 +111,7 @@ export default function Task() {
 
 
     setchange(true);
+    // setmail({employee.Empmail.slice(e.target.value.lastIndexOf(" ") + 1)});
     addWork(work2add.Title, content, work2add.Tag, post, work2add.Erank, mail);
     // addWork("sdsdsdsdsc","swdwsdwdwd","wdwsdswdwsdwsdwsd","SDE",5,work2add.Empmail.slice(work2add.Empmail.lastIndexOf(" "+1)));
 
@@ -167,7 +168,7 @@ export default function Task() {
 
 
   const handelMail = (e) => {
-
+      console.log('apun chala bhai');
     setmail(e.target.value.slice(e.target.value.lastIndexOf(" ") + 1));
   }
 
@@ -344,11 +345,23 @@ export default function Task() {
             <option disabled={true} value={mail} placeholder="Choose..."  >{mail}</option>
             { 
               employee.map((employ) => {
-                return <> <option className="form-select  container" key={employ._id} value={employ.Empmail} >
+                // return <> <option className="form-select  container" key={employ._id} value={employ.Empmail} onClick={()=>console.log('namaste ')} >
 
-                  Name: {employ.name} , Mail: {employ.email}
-                </option> </>
-              })}
+                //   Name: {employ.name} , Mail: {employ.email}
+                // </option> </>
+            //     var opt = document.createElement('option');
+            //     opt.innerHTML = "key={employ._id} value={employ.Empmail} onClick={()=>console.log('namaste ')}"
+            //  document.getElementById('inputGroupSelect07').appendChild(opt);
+
+            var opt = document.createElement('option');
+opt.setAttribute('key', employ._id);
+opt.setAttribute('value', employ.Empmail);
+opt.setAttribute('onClick', ()=>console.log('namaste '));
+opt.innerHTML = `Name: ${employ.name}, Mail: ${employ.email}`;
+document.getElementById('inputGroupSelect07').appendChild(opt);
+
+              })
+              }
           </select>
         </div>
 
