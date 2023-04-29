@@ -40,7 +40,7 @@ export default function Task() {
   const [dummy, setdummy] = useState({ Title: "" });
   const [change, setchange] = useState(false);
   const [chat, setchat] = useState("");
-          
+
   const refChat = useRef(null);
 
   const refCloseChat = useRef(null);
@@ -70,7 +70,7 @@ export default function Task() {
     fetchWorker();
     getUser();
 
-    
+
     socket.on('getRequest', (data) => {
       window.alert("socket");
     });
@@ -168,8 +168,9 @@ export default function Task() {
 
 
   const handelMail = (e) => {
-      console.log('apun chala bhai');
+  
     setmail(e.target.value.slice(e.target.value.lastIndexOf(" ") + 1));
+    console.log('apun chala bhai'+e.target.value);
   }
 
 
@@ -213,7 +214,7 @@ export default function Task() {
     localStorage.removeItem(s1);
     localStorage.removeItem(s2);
     localStorage.removeItem(s3);
-    editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail,modalWork.chat);
+    editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail, modalWork.chat);
     localStorage.removeItem(s1);
     // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     // setnote({...note, [e.target.name]:e.target.value})
@@ -236,7 +237,7 @@ export default function Task() {
 
     // setnote({...note, [note.name]:note.value})
     setdummy({ Title: currentNotes.title });
-    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.Upost, Urank: currentNotes.Urank, Umail: currentNotes.Umail ,chat:currentNotes.chat});
+    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.Upost, Urank: currentNotes.Urank, Umail: currentNotes.Umail, chat: currentNotes.chat });
     setmodalDesc(currentNotes.description);
     // settitle({tit:currentNotes.title})   ;
     // console.log("UPDATING TITLE "+title.tit)
@@ -339,30 +340,31 @@ export default function Task() {
 
 
 
-        <div className="input-group mb-3">
+        <div className="input-group mb-3" style={{display:'flex',flexDirection:"column"}} >
           <label className="input-group-text " htmlFor="inputGroupSelect07">Employee:</label>
-          <select className="form-select" id="inputGroupSelect07" onChange={handelMail} name="Empmail" value={work2add.Empmail}   >
-            <option disabled={true} value={mail} placeholder="Choose..."  >{mail}</option>
-            { 
+          {/* <select className="form-select" id="inputGroupSelect07" onChange={(e)=>{handelMail()}} name="Empmail" value={work2add.Empmail}   > */}
+            {/* <option disabled={true} value={mail} placeholder="Choose..."  >{mail}</option> */}
+            {
               employee.map((employ) => {
-                // return <> <option className="form-select  container" key={employ._id} value={employ.Empmail} onClick={()=>console.log('namaste ')} >
+                return  <button className=" btn btn-light mb-1" key={employ._id} value={employ.email}  onClick={(e)=>{e.preventDefault();handelMail(e)}} style={{border:"groove grey 1px"}}  >
 
-                //   Name: {employ.name} , Mail: {employ.email}
-                // </option> </>
-            //     var opt = document.createElement('option');
-            //     opt.innerHTML = "key={employ._id} value={employ.Empmail} onClick={()=>console.log('namaste ')}"
-            //  document.getElementById('inputGroupSelect07').appendChild(opt);
+                   Name: {employ.name} , Mail: {employ.email} 
+                 </button> 
+                //     var opt = document.createElement('option');
+                //     opt.innerHTML = "key={employ._id} value={employ.Empmail} onClick={()=>console.log('namaste ')}"
+                //  document.getElementById('inputGroupSelect07').appendChild(opt);
 
-            var opt = document.createElement('option');
-opt.setAttribute('key', employ._id);
-opt.setAttribute('value', employ.Empmail);
-opt.setAttribute('onClick', ()=>console.log('namaste '));
-opt.innerHTML = `Name: ${employ.name}, Mail: ${employ.email}`;
-document.getElementById('inputGroupSelect07').appendChild(opt);
+                // var opt = document.createElement('option');
+                // opt.setAttribute('key', employ._id);
+                // opt.setAttribute('value', employ.email);
+                // // opt.setAttribute('onClick', ()=>console.log('namaste '+employ.Empmail));
+                //   console.log('select k andar '+employ.email);
+                // opt.innerHTML = `Name: ${employ.name}, Mail: ${employ.email}`;
+                // document.getElementById('inputGroupSelect07').appendChild(opt);
 
               })
-              }
-          </select>
+            }
+          {/* </select> */}
         </div>
 
 
@@ -416,7 +418,7 @@ document.getElementById('inputGroupSelect07').appendChild(opt);
 
 
       <div  >
-        <button type="button" ref={refChat}  className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2"   >
+        <button type="button" ref={refChat} className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2"   >
           Discuss
         </button>
 
