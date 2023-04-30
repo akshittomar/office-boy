@@ -13,14 +13,15 @@ function WorkItem() {
     const { getAllWork } = context;
 
     const [first, setfirst] = useState([]);
-    
+    const [msg, setmsg] = useState('Start Chating');
     const [content, setcontent] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat: "" });
     useEffect(() => {
         setfirst(task);
       // getTask();
-    
+   
+      
      
-    }, [task])
+    }, [task,msg])
 
     const handelChat=(e)=>{
       setcontent({ ...content, [e.target.name]: e.target.value })
@@ -36,10 +37,11 @@ const refCloseChat = useRef(null);
 const updateChat=(note2)=>{
   console.log("notes");
   console.log("title"+note2.description);
+  
   if(note2){refChat.current.click();
   
     setcontent({ id: note2._id, eTitle: note2.title, eDescription: note2.description, eTag: note2.tag, Upost: note2.Upost, Urank: note2.Urank, Umail: note2.Umail ,chat:note2.chat});
-  
+      setmsg(note2.chat);
   }
   else{window.alert("send was clicked ");}
 }
@@ -107,17 +109,18 @@ const sendChat = (e) => {
 
 
 
-                <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true"   >
                   <div className="modal-dialog  ">
-                    <div className="modal-content">
+                    <div className="modal-content"  style={{backgroundImage:`url(${"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/No_Treason%2C_v6.djvu/page2-360px-No_Treason%2C_v6.djvu.jpg"})`}}>
                       <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel2">Chat Here</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div className="modal-body">
                         <form  onSubmit={e => e.preventDefault()} >
+                          {msg}
                       <label htmlFor="chat" className="form-label"  ></label>
-                        <input type='text' name='chat' className="form-control" id='chat' onChange={handelChat} value={content.chat} placeholder='Start Typing....'  minLength={1}></input>
+                        <input type='text' name='chat' className="form-control" id='chat' onChange={handelChat}  placeholder='Start Typing....'  minLength={1}></input>
                         </form>
                       </div>
                       <div className="modal-footer">

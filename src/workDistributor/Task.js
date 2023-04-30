@@ -13,6 +13,7 @@ export default function Task() {
   const [content, setcontent] = useState('');
   const [post, setpost] = useState("Choose...");
   const [mail, setmail] = useState("Choose...");
+  const [msg, setmsg] = useState('')
   const refClose = useRef(null);
 
   const context = useContext(noteContext);
@@ -55,6 +56,7 @@ export default function Task() {
     // settitle({tit:currentNotes.title})   ;
     // console.log("UPDATING TITLE "+title.tit)
     // setnote(currentNotes);99
+    setmsg(currentNotes.chat);
     console.log("AFTER SETCHAT");
     console.log(chat);
     refChat.current.click();
@@ -426,17 +428,18 @@ export default function Task() {
 
         <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
           <div className="modal-dialog  ">
-            <div className="modal-content">
+            <div className="modal-content"  style={{backgroundImage:`url(${"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/No_Treason%2C_v6.djvu/page2-360px-No_Treason%2C_v6.djvu.jpg"})`}}>
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel2">Chat Here</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
                 <form onSubmit={e => e.preventDefault()} >
+                  {msg}
                   <label htmlFor="chat" className="form-label"  ></label>
-                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} value={modalWork.chat} placeholder='Start Typing....' minLength={1} required></input>
+                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange}  placeholder='Start Typing....' minLength={1} required></input>
                 </form>
-                {modalWork.chat}
+                {/* {modalWork.chat} */}
               </div>
               <div className="modal-footer">
                 <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
