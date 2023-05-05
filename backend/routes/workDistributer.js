@@ -179,7 +179,7 @@ console.log("THIS USER REQUESTED "+req.params.id);
         if(leaves){newTask.leaves = leaves};
         if(empemail){newTask.empemail = empemail};
         if(tag){newTask.tag = tag};
-        if(chat){newTask.chat = todo.chat+" "+chat};
+        if(chat){newTask.chat = todo.chat+"\n\n"+chat;console.log('chat is this '+chat);};
         // if(time){newNote.time = time};
         // if(alarmTime){newNote.alarmTime = alarmTime};
         // if(shareEmail){newNote.shareEmail = shareEmail};

@@ -150,7 +150,7 @@ const chatFunc = props.Chat;
               }
 
              { props.option === "true" && <div className=" container">
-                <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { updateNote(note) }}  >Edit <i className="fa-solid fa-file-pen sm  " onClick={() => { updateNote(note) }}></i></h6>
+                <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { updateNote(note);  }}  >Edit <i className="fa-solid fa-file-pen sm  " onClick={() => { updateNote(note) }}></i></h6>
               </div>}
 
               

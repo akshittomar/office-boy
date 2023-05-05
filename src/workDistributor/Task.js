@@ -13,7 +13,7 @@ export default function Task() {
   const [content, setcontent] = useState('');
   const [post, setpost] = useState("Choose...");
   const [mail, setmail] = useState("Choose...");
-  const [msg, setmsg] = useState('')
+  const [msg, setmsg] = useState([])
   const refClose = useRef(null);
 
   const context = useContext(noteContext);
@@ -51,12 +51,13 @@ export default function Task() {
     // setdummy({Title:currentNotes.title});
 
     setdummy({ Title: currentNotes.title });
-    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.Upost, Urank: currentNotes.Urank, Umail: currentNotes.Umail, chat: currentNotes.chat });
+    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.epost, Urank: currentNotes.erank, Umail: currentNotes.empemail, chat: currentNotes.chat });
     setmodalDesc(currentNotes.description);
     // settitle({tit:currentNotes.title})   ;
     // console.log("UPDATING TITLE "+title.tit)
     // setnote(currentNotes);99
-    setmsg(currentNotes.chat);
+    var str = new String(currentNotes.chat);
+    setmsg(str.split("\n\n"));
     console.log("AFTER SETCHAT");
     console.log(chat);
     refChat.current.click();
@@ -170,9 +171,9 @@ export default function Task() {
 
 
   const handelMail = (e) => {
-  
+
     setmail(e.target.value.slice(e.target.value.lastIndexOf(" ") + 1));
-    console.log('apun chala bhai'+e.target.value);
+    console.log('apun chala bhai' + e.target.value);
   }
 
 
@@ -216,7 +217,7 @@ export default function Task() {
     localStorage.removeItem(s1);
     localStorage.removeItem(s2);
     localStorage.removeItem(s3);
-    editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail, modalWork.chat);
+    editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail, modalWork.chat+'sender');
     localStorage.removeItem(s1);
     // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     // setnote({...note, [e.target.name]:e.target.value})
@@ -342,30 +343,30 @@ export default function Task() {
 
 
 
-        <div className="input-group mb-3" style={{display:'flex',flexDirection:"column"}} >
+        <div className="input-group mb-3" style={{ display: 'flex', flexDirection: "column" }} >
           <label className="input-group-text " htmlFor="inputGroupSelect07">Employee:</label>
           {/* <select className="form-select" id="inputGroupSelect07" onChange={(e)=>{handelMail()}} name="Empmail" value={work2add.Empmail}   > */}
-            {/* <option disabled={true} value={mail} placeholder="Choose..."  >{mail}</option> */}
-            {
-              employee.map((employ) => {
-                return  <button className=" btn btn-light mb-1" key={employ._id} value={employ.email}  onClick={(e)=>{e.preventDefault();handelMail(e)}} style={{border:"groove grey 1px"}}  >
+          {/* <option disabled={true} value={mail} placeholder="Choose..."  >{mail}</option> */}
+          {
+            employee.map((employ) => {
+              return <button className=" btn btn-light mb-1" key={employ._id} value={employ.email} onClick={(e) => { e.preventDefault(); handelMail(e) }} style={{ border: "groove grey 1px" }}  >
 
-                   Name: {employ.name} , Mail: {employ.email} 
-                 </button> 
-                //     var opt = document.createElement('option');
-                //     opt.innerHTML = "key={employ._id} value={employ.Empmail} onClick={()=>console.log('namaste ')}"
-                //  document.getElementById('inputGroupSelect07').appendChild(opt);
+                Name: {employ.name} , Mail: {employ.email}
+              </button>
+              //     var opt = document.createElement('option');
+              //     opt.innerHTML = "key={employ._id} value={employ.Empmail} onClick={()=>console.log('namaste ')}"
+              //  document.getElementById('inputGroupSelect07').appendChild(opt);
 
-                // var opt = document.createElement('option');
-                // opt.setAttribute('key', employ._id);
-                // opt.setAttribute('value', employ.email);
-                // // opt.setAttribute('onClick', ()=>console.log('namaste '+employ.Empmail));
-                //   console.log('select k andar '+employ.email);
-                // opt.innerHTML = `Name: ${employ.name}, Mail: ${employ.email}`;
-                // document.getElementById('inputGroupSelect07').appendChild(opt);
+              // var opt = document.createElement('option');
+              // opt.setAttribute('key', employ._id);
+              // opt.setAttribute('value', employ.email);
+              // // opt.setAttribute('onClick', ()=>console.log('namaste '+employ.Empmail));
+              //   console.log('select k andar '+employ.email);
+              // opt.innerHTML = `Name: ${employ.name}, Mail: ${employ.email}`;
+              // document.getElementById('inputGroupSelect07').appendChild(opt);
 
-              })
-            }
+            })
+          }
           {/* </select> */}
         </div>
 
@@ -427,17 +428,41 @@ export default function Task() {
 
 
         <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-          <div className="modal-dialog  ">
-            <div className="modal-content"  style={{backgroundImage:`url(${"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/No_Treason%2C_v6.djvu/page2-360px-No_Treason%2C_v6.djvu.jpg"})`}}>
+          <div className="modal-dialog   modal-xl ">
+            <div className="modal-content" style={{ backgroundColor:'white',        }}        >
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel2">Chat Here</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div className="modal-body">
                 <form onSubmit={e => e.preventDefault()} >
-                  {msg}
-                  <label htmlFor="chat" className="form-label"  ></label>
-                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange}  placeholder='Start Typing....' minLength={1} required></input>
+                  {msg.length===1 &&  <h3 style={{color:'grey'}}>Nothing To Chat For</h3> }
+                  { msg.length!==1 &&   msg.map((chat)=>{
+                    if(chat.length!==0){
+                    var str = new String(chat);
+                    // var compar = new String(localStorage.getItem('mail'));
+                    var compar = new String(modalWork.Umail);
+                    // str+=compar;
+                    if(str.endsWith('sender')){
+                      return<div style={{border:'solid cyan 1px',backgroundColor:'#00b2ff'}}  className='mx-1 my-4' > <p style={{color:'white'}} >{str.substring(0,str.length-6)}</p> </div>
+                      
+                    }
+                    else{ 
+                      return<div style={{border:'solid grey 1px',backgroundColor:'white'}}  className='mx-1 my-4' > <p style={{color:'black'}} >{str.substring(0,str.length-8)}</p> </div>
+                    }
+                  }
+                  })
+                  
+                  
+                  }
+                  {/* {notes.map((notes) => {
+
+                        return <Alarm key={notes._id} notes={notes} show="false" />;
+                    })} */}
+
+                  <label htmlFor="chat" className="form-label"  ></label> 
+                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={3} required ></input>
+                  <button type="button" className="btn btn-secondary my-3" onClick={handelModal }>SEND  <i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                 </form>
                 {/* {modalWork.chat} */}
               </div>

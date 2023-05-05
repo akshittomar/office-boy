@@ -39,7 +39,7 @@ function App() {
       <input
         placeholder="Message..."
         onChange={(event) => {
-          setMessage(event.target.value);
+          setMessage(event.target.value); 
         }}
       />
       <button onClick={sendMessage}> Send Message</button>

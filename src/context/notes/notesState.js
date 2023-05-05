@@ -366,7 +366,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 {/*editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail,modalWork.chat); */}
 
 
-        console.log("PARAMETERS in frontend ARE : "+id+title+description+tag+" "+chat);
+        console.log("PARAMETERS in frontend ARE : "+id+title+description+tag+empemail+" "+chat);
             const response = await fetch( `${host}/api/sendwork/update/${id}`, {
               method: 'PUT',
               
