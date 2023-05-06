@@ -18,7 +18,7 @@ export default function Task() {
 
   const context = useContext(noteContext);
 
-
+const msgRef = useRef(null);
   const work = context.work;
   const notes = context.notes;
   const user1 = content.user;
@@ -51,7 +51,7 @@ export default function Task() {
     // setdummy({Title:currentNotes.title});
 
     setdummy({ Title: currentNotes.title });
-    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.epost, Urank: currentNotes.erank, Umail: currentNotes.empemail, chat: currentNotes.chat });
+    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.epost, Urank: currentNotes.erank, Umail: currentNotes.empemail, chat: '' });
     setmodalDesc(currentNotes.description);
     // settitle({tit:currentNotes.title})   ;
     // console.log("UPDATING TITLE "+title.tit)
@@ -459,17 +459,24 @@ export default function Task() {
 
                         return <Alarm key={notes._id} notes={notes} show="false" />;
                     })} */}
-
+                    <div style={{border:'solid cyan 1px',backgroundColor:'#00b2ff'}}  className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
                   <label htmlFor="chat" className="form-label"  ></label> 
                   <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={3} required ></input>
-                  <button type="button" className="btn btn-secondary my-3" onClick={handelModal }>SEND  <i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                  <button type="button" className="btn btn-secondary my-3" onClick={handelModal }  disabled={modalWork.chat===''}  >SEND  <i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                 </form>
                 {/* {modalWork.chat} */}
               </div>
               <div className="modal-footer">
-                <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary" onClick={handelModal}>Send</button>
-              </div>
+  <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {document.getElementById('myMSG').innerHTML = ''}}>Close</button>
+  <button type="button" className="btn btn-primary" onClick={(e) => {
+    handelModal(e);
+    const newChat = document.createElement('p');
+    newChat.textContent = modalWork.chat;
+    msgRef.current.appendChild(newChat);
+    setmodalWork(prevState => ({ ...prevState, chat: "" }));
+  }} disabled={modalWork.chat === ''}>Send</button>
+</div>
+
             </div>
           </div>
         </div>
