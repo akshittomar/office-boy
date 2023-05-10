@@ -442,7 +442,7 @@ export default function Task() {
         <div className="modal  fade " style={{ maxHeight: '80%', marginTop: '3%' }} data-bs-keyboard="false" data-bs-backdrop="static"
           id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
           <div className="modal-dialog   modal-xl ">
-            <div className="modal-content" style={{ backgroundColor: 'white' , width:'120%' }}        >
+            <div className="modal-content" style={{ backgroundColor: 'white'  }}        >
               <div className="modal-header">
                 <h5 className="modal-title " id="exampleModalLabel2">Chat Here <i class="fa fa-comments" aria-hidden="true"></i></h5>
 
@@ -475,7 +475,7 @@ export default function Task() {
                     })} */}
                   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
                   <label htmlFor="chat" className="form-label"  ></label>
-                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={3} required ></input>
+                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} required ></input>
                   <button type="button" className="btn btn-primary my-2" onClick={(e) => {
                   handelModal(e);
                   const devi = document.createElement('div')
@@ -512,10 +512,10 @@ export default function Task() {
                 </form>
                 {/* {modalWork.chat} */}
               </div>
-             {msg.length > 10 &&  <div className=' position-fixed my-5 ' style={{border:'solid grey 1px'}}  >
-                <a href='#exampleModalLabel2' ><i style={{ color: 'grey', fontSize: '90%' }} className="fa fa-arrow-circle-up" aria-hidden="true"></i></a><br />
+             {msg.length > 10 &&  <div className=' position-fixed my-5 ' style={{border:'solid grey 0px'}}  >
+                <a href='#exampleModalLabel2' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-up" aria-hidden="true"></i></a><br />
 
-                <a href='#chat' ><i style={{ color: 'grey', fontSize: '90%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div> }
+                <a href='#chat' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div> }
               <div className="modal-footer " >
 
                 <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal" onClick={() => { document.getElementById('myMSG').innerHTML = '' }}>Close <i class="fa fa-times" aria-hidden="true"></i></button>

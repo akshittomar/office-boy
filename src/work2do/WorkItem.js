@@ -7,6 +7,8 @@ function WorkItem() {
 
     const context = useContext(noteContext);
     
+
+    const msgRef = useRef(null);
     const {getTask} = context;
     const {task} = context;
     const { editWork } = context;
@@ -14,12 +16,14 @@ function WorkItem() {
 
     const [first, setfirst] = useState([]);
     const [msg, setmsg] = useState([]);
-    const [content, setcontent] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat: "" });
+    const [content, setcontent] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat:"" });
     useEffect(() => {
         setfirst(task);
       // getTask();
    
-      
+      if (msgRef.current) {
+        msgRef.current.scrollTop = msgRef.current.scrollHeight;
+      }
      
     }, [task,msg])
 
@@ -40,7 +44,7 @@ const updateChat=(note2)=>{
   
   if(note2){refChat.current.click();
   
-    setcontent({ id: note2._id, eTitle: note2.title, eDescription: note2.description, eTag: note2.tag, Upost: note2.Upost, Urank: note2.Urank, Umail: note2.Umail ,chat:note2.chat});
+    setcontent({ id: note2._id, eTitle: note2.title, eDescription: note2.description, eTag: note2.tag, Upost: note2.Upost, Urank: note2.Urank, Umail: note2.Umail ,chat:""});
     var str = new String(note2.chat);
     setmsg(str.split("\n\n"));
     
@@ -112,41 +116,90 @@ const sendChat = (e) => {
 
 
 
-                <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true"   >
+                <div className="modal fade" style={{ maxHeight: '80%', marginTop: '3%' }}id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" data-bs-keyboard="false" data-bs-backdrop="static" aria-hidden="true"   >
                   <div className="modal-dialog   modal-xl">
-                    <div className="modal-content"  style={{backgroundImage:`url(${"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/No_Treason%2C_v6.djvu/page2-360px-No_Treason%2C_v6.djvu.jpg"})`}}>
+                    <div className="modal-content"  style={{ backgroundColor: 'white' ,   }}>
                       <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel2">Chat Here</h5>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 className="modal-title" id="exampleModalLabel2">Chat Here <i class="fa fa-comments" aria-hidden="true"></i></h5>
+
+
+
+                        <button type="button" className="btn-secondary btn  mx-3" onClick={() => { document.getElementById('myMSG').innerHTML = '' }} data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+
+
                       </div>
-                      <div className="modal-body">
+                      <div className="modal-body" style={{ overflowY: 'scroll' }} >
                         <form  onSubmit={e => e.preventDefault()} >
-                        {msg.length===1 &&  <h3 style={{color:'grey'}}>Nothing To Chat For</h3> }
+                        {msg.length===1 &&  <h3 style={{color:'grey'}}>Nothing To Show<i class="fa fa-deaf" aria-hidden="true"></i></h3> }
                         {   msg.length!==1 && msg.map((chat)=>{
                            if(chat.length!==0){
                     var str = new String(chat);
                     // var compar = new String(localStorage.getItem('mail'));
                     // var compar = new String(modalWork.Umail);
                     // str+=compar;
+                    // var compar = new String(modalWork.Umail);
                     if(str.endsWith('receiver')){
-                      return<div style={{border:'solid cyan 1px',backgroundColor:'#00b2ff',textAlign:'right'}}  className='mx-1 my-4' > <p style={{color:'white'}} >{str.substring(0,str.length-8)}</p> </div>
+                      return<div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }}  className='mx-0 my-1 px-2 py-0 ' > <p style={{color: 'white',width: '-webkit-fill-available'}} >{str.substring(0,str.length-8)}</p> </div>
                       
                     }
                     else{ 
-                      return<div style={{border:'solid grey 1px',backgroundColor:'white',textAlign:'left'}}  className='mx-1 my-4' > <p style={{color:'black'}} >{str.substring(0,str.length-6)}</p> </div>
+                      return<div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}}  className='mx-0 my-4' > <p style={{color:'black'}} >{str.substring(0,str.length-6)}</p> </div>
                     }
                   }
                   })
                   
                   
-                  }
+                  }   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
                       <label htmlFor="chat" className="form-label"  ></label>
                         <input type='text' name='chat' className="form-control" id='chat' onChange={handelChat}  placeholder='Start Typing....'  minLength={1} required></input>
+
+
+
+                        <button type="button" className="btn btn-primary my-2" onClick={(e) => {
+                  sendChat(e);
+                  const devi = document.createElement('div')
+                  const newChat = document.createElement('p');
+                  newChat.textContent = content.chat;
+                  // devi.textContent = modalWork.chat;
+                  const style = {
+                    color: 'white',
+                    textAlign:'right',
+                    borderRadius:'10px',
+                    border: 'solid #ccc 1px',
+                    backgroundColor: '#00b2ff',
+                    fontFamily:'revert-layer',
+                    marginTop: '2px',
+                    paddingRight:'4px',
+                   clear:'both',
+                   float:'right',
+                   maxWidth:'80%',
+                    // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
+                    // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
+                    
+
+                  };
+                  // Object.assign(newChat.style, style);
+                  Object.assign(devi.style, style);
+                  devi.classList.add('mx-0', 'my-3','px-2');
+                  // msgRef.current.appendChild(newChat);
+                  msgRef.current.appendChild(devi);
+                  devi.appendChild(newChat);
+
+                  setcontent(prevState => ({ ...prevState, chat: "" }));
+                }} disabled={  content.chat === "" } ><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+
+
                         </form>
                       </div>
+                      {msg.length > 10 &&  <div className=' position-fixed my-5 ' style={{border:'solid grey 0px'}}  >
+                <a href='#exampleModalLabel2' ><i style={{ color: 'grey', fontSize: '90%' }} className="fa fa-arrow-circle-up" aria-hidden="true"></i></a><br />
+
+                <a href='#chat' ><i style={{ color: 'grey', fontSize: '90%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div> }
+
+
                       <div className="modal-footer">
-                        <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary" onClick={sendChat} >Send</button>
+                        <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal"   onClick={() => { document.getElementById('myMSG').innerHTML = '' }} >Close <i class="fa fa-times" aria-hidden="true"></i></button>
+                       
                       </div>
                     </div>
                   </div>
