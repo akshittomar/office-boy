@@ -8,6 +8,7 @@ import Chat from '../chat/Chat';
 import io from 'socket.io-client';
 
 
+
 export default function Task() {
   const ref = useRef(null);
   const [content, setcontent] = useState('');
@@ -18,7 +19,7 @@ export default function Task() {
 
   const context = useContext(noteContext);
 
-const msgRef = useRef(null);
+  const msgRef = useRef(null);
   const work = context.work;
   const notes = context.notes;
   const user1 = content.user;
@@ -43,7 +44,7 @@ const msgRef = useRef(null);
   const [chat, setchat] = useState("");
 
   const refChat = useRef(null);
-
+  const navREF = useRef(null);
   const refCloseChat = useRef(null);
   const updateChat = (currentNotes) => {
     console.log(currentNotes);
@@ -74,14 +75,24 @@ const msgRef = useRef(null);
     getUser();
 
 
-    socket.on('getRequest', (data) => {
-      window.alert("socket");
-    });
+    // socket.on('getRequest', (data) => {
+    //   window.alert("socket");
+    // });
 
-    console.log("I AM IN USEFFECT " + user1);
-    return () => {
-      socket.off('getRequest');
-    };
+    // console.log("I AM IN USEFFECT " + user1);
+    // return () => {
+    //   socket.off('getRequest');
+    // };
+
+
+    if (msgRef.current) {
+      msgRef.current.scrollTop = msgRef.current.scrollHeight;
+    }
+
+
+
+
+
 
   }, [change, post, mail])
 
@@ -217,7 +228,7 @@ const msgRef = useRef(null);
     localStorage.removeItem(s1);
     localStorage.removeItem(s2);
     localStorage.removeItem(s3);
-    editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail, modalWork.chat+'sender');
+    editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail, modalWork.chat + 'sender');
     localStorage.removeItem(s1);
     // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     // setnote({...note, [e.target.name]:e.target.value})
@@ -272,6 +283,7 @@ const msgRef = useRef(null);
 
   const handelOnModalChange = (e) => {
     setmodalWork({ ...modalWork, [e.target.name]: e.target.value })
+
 
   }
 
@@ -421,61 +433,95 @@ const msgRef = useRef(null);
 
 
       <div  >
-        <button type="button" ref={refChat} className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2"   >
+        <button type="button" ref={refChat} className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2"  >
           Discuss
         </button>
 
 
 
-        <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div className="modal  fade " style={{ maxHeight: '80%', marginTop: '3%' }} data-bs-keyboard="false" data-bs-backdrop="static"
+          id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
           <div className="modal-dialog   modal-xl ">
-            <div className="modal-content" style={{ backgroundColor:'white',        }}        >
+            <div className="modal-content" style={{ backgroundColor: 'white' , width:'120%' }}        >
               <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel2">Chat Here</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 className="modal-title " id="exampleModalLabel2">Chat Here <i class="fa fa-comments" aria-hidden="true"></i></h5>
+
+                <button type="button" className="btn-secondary btn  mx-3"   onClick={() => { document.getElementById('myMSG').innerHTML = '' }} data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body " style={{ overflowY: 'scroll' }}  >
                 <form onSubmit={e => e.preventDefault()} >
-                  {msg.length===1 &&  <h3 style={{color:'grey'}}>Nothing To Chat For</h3> }
-                  { msg.length!==1 &&   msg.map((chat)=>{
-                    if(chat.length!==0){
-                    var str = new String(chat);
-                    // var compar = new String(localStorage.getItem('mail'));
-                    var compar = new String(modalWork.Umail);
-                    // str+=compar;
-                    if(str.endsWith('sender')){
-                      return<div style={{border:'solid cyan 1px',backgroundColor:'#00b2ff'}}  className='mx-1 my-4' > <p style={{color:'white'}} >{str.substring(0,str.length-6)}</p> </div>
-                      
+                  {msg.length === 1 && <h3 style={{ color: 'grey' }}>Nothing To Show <i class="fa fa-deaf" aria-hidden="true"></i></h3>}
+                  {msg.length !== 1 && msg.map((chat) => {
+                    if (chat.length !== 0) {
+                      var str = new String(chat);
+                      // var compar = new String(localStorage.getItem('mail'));
+                      var compar = new String(modalWork.Umail);
+                      // str+=compar;
+                      if (str.endsWith('sender')) {
+                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }} className='mx-0 my-1 px-2 py-0 ' > <p  className='px-1'style={{ color: 'white',width: '-webkit-fill-available'}} >{str.substring(0, str.length - 6)}</p>  </div>
+
+                      }
+                      else {
+                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}} className='mx-0 my-4 ' > <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
+                      }
                     }
-                    else{ 
-                      return<div style={{border:'solid grey 1px',backgroundColor:'white'}}  className='mx-1 my-4' > <p style={{color:'black'}} >{str.substring(0,str.length-8)}</p> </div>
-                    }
-                  }
                   })
-                  
-                  
+
+
                   }
                   {/* {notes.map((notes) => {
 
                         return <Alarm key={notes._id} notes={notes} show="false" />;
                     })} */}
-                    <div style={{border:'solid cyan 1px',backgroundColor:'#00b2ff'}}  className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
-                  <label htmlFor="chat" className="form-label"  ></label> 
+                  <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
+                  <label htmlFor="chat" className="form-label"  ></label>
                   <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={3} required ></input>
-                  <button type="button" className="btn btn-secondary my-3" onClick={handelModal }  disabled={modalWork.chat===''}  >SEND  <i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                  <button type="button" className="btn btn-primary my-2" onClick={(e) => {
+                  handelModal(e);
+                  const devi = document.createElement('div')
+                  const newChat = document.createElement('p');
+                  newChat.textContent = modalWork.chat;
+                  // devi.textContent = modalWork.chat;
+                  const style = {
+                    color: 'white',
+                    textAlign:'right',
+                    borderRadius:'10px',
+                    border: 'solid #ccc 1px',
+                    backgroundColor: '#00b2ff',
+                    fontFamily:'revert-layer',
+                    marginTop: '2px',
+                    paddingRight:'4px',
+                   clear:'both',
+                   float:'right',
+                   maxWidth:'80%',
+                    // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
+                    // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
+                    
+
+                  };
+                  // Object.assign(newChat.style, style);
+                  Object.assign(devi.style, style);
+                  devi.classList.add('mx-0', 'my-3','px-2');
+                  // msgRef.current.appendChild(newChat);
+                  msgRef.current.appendChild(devi);
+                  devi.appendChild(newChat);
+
+                  setmodalWork(prevState => ({ ...prevState, chat: "" }));
+                }} disabled={modalWork.chat === ''}><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+
                 </form>
                 {/* {modalWork.chat} */}
               </div>
-              <div className="modal-footer">
-  <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => {document.getElementById('myMSG').innerHTML = ''}}>Close</button>
-  <button type="button" className="btn btn-primary" onClick={(e) => {
-    handelModal(e);
-    const newChat = document.createElement('p');
-    newChat.textContent = modalWork.chat;
-    msgRef.current.appendChild(newChat);
-    setmodalWork(prevState => ({ ...prevState, chat: "" }));
-  }} disabled={modalWork.chat === ''}>Send</button>
-</div>
+             {msg.length > 10 &&  <div className=' position-fixed my-5 ' style={{border:'solid grey 1px'}}  >
+                <a href='#exampleModalLabel2' ><i style={{ color: 'grey', fontSize: '90%' }} className="fa fa-arrow-circle-up" aria-hidden="true"></i></a><br />
+
+                <a href='#chat' ><i style={{ color: 'grey', fontSize: '90%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div> }
+              <div className="modal-footer " >
+
+                <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal" onClick={() => { document.getElementById('myMSG').innerHTML = '' }}>Close <i class="fa fa-times" aria-hidden="true"></i></button>
+               
+                
+              </div>
 
             </div>
           </div>

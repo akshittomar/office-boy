@@ -157,9 +157,9 @@ const chatFunc = props.Chat;
               
               
               { props.cloured==="false" && 
-              <>
-              <button className='btn btn-secondary btn-sm' onClick={()=>{console.log("on click is correct2");props.Chat(note)}}>Discuss</button>
-             </>}
+              <div className='container'>
+              <h6 style={{ color: "black", cursor: "pointer" }}  onClick={()=>{console.log("on click is correct2");props.Chat(note)}}><small>Discuss <i className="fa fa-commenting" aria-hidden="true"></i></small></h6>
+             </div>}
 
 {/* we have to make a <input> tag to take text as input with just a simpel button to send chat 
 chat k liye ek state varibel chat,setchat 
