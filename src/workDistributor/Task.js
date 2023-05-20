@@ -534,8 +534,8 @@ var selectedChatCompare ;
                         return <Alarm key={notes._id} notes={notes} show="false" />;
                     })} */}
                   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
-                  <label htmlFor="chat" className="form-label"  ></label>
-                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} value={modalWork.chat} required ></input>
+              <label htmlFor="chat" className="form-label"  ></label>
+               <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} value={modalWork.chat} required ></input>
                   <button type="button" className="btn btn-primary my-2" onClick={(e) => {
                   handelModal(e);
                   const devi = document.createElement('div')
