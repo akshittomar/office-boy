@@ -13,6 +13,7 @@ var selectedChatCompare ;
     const msgRef = useRef(null);
     const {getTask} = context;
     const {task} = context;
+    const {settask} = context;
     const { editWork } = context;
     const { getAllWork } = context;
     const {user}= context;
@@ -30,8 +31,8 @@ var selectedChatCompare ;
 
       // setcontent(newMessage);
 
-      
-
+      // settask(newMessage);
+      getTask();
 
     })
    
@@ -112,7 +113,8 @@ const sendChat = (e) => {
   // localStorage.removeItem(s3);
   editWork(content.id, content.eTitle, content.eDescription, content.eTag, content.Upost, erank, content.Umail,content.chat+'receiver');
   // localStorage.removeItem(s1);
-  getAllWork()
+  getAllWork();
+  getTask();
   
   // socket = io(ENDPOINT);
   socket.emit("newMessage2",content);
@@ -152,7 +154,7 @@ const sendChat = (e) => {
 
 
 
-                        <button type="button" className="btn-secondary btn  mx-3" onClick={() => { document.getElementById('myMSG').innerHTML = '' }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
+                        <button type="button" className="btn-secondary btn  mx-3" onClick={() => { document.getElementById('myMSG').innerHTML = '';getTask(); }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
 
 
                       </div>
@@ -226,7 +228,7 @@ const sendChat = (e) => {
 
 
                       <div className="modal-footer">
-                        <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal"   onClick={() => { document.getElementById('myMSG').innerHTML = '' }} >Close <i className="fa fa-times" aria-hidden="true"></i></button>
+                        <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal"   onClick={() => { document.getElementById('myMSG').innerHTML = '';getTask(); }} >Close <i className="fa fa-times" aria-hidden="true"></i></button>
                        
                       </div>
                     </div>
