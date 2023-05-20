@@ -41,7 +41,7 @@ const[task,settask] = useState([]);
 
 
   
-  }, [])
+  }, [task])
   
 
   // useEffect(() => {
@@ -453,7 +453,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 
     return (
 
-        <var1.Provider value={{a,getUser,user,employee,setemployee,getTask,notes,getAllEmp,setnotes,addNote,deleteNote,editNote,getNotes,task,mail,setmail,mailing,addWork,deleteWork,editWork,getAllWork,work,setwork}}>
+        <var1.Provider value={{a,getUser,settask,user,employee,setemployee,getTask,notes,getAllEmp,setnotes,addNote,deleteNote,editNote,getNotes,task,mail,setmail,mailing,addWork,deleteWork,editWork,getAllWork,work,setwork}}>
             {props.children}
         </var1.Provider>
     )

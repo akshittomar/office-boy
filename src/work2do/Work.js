@@ -25,7 +25,7 @@ console.log(user.name);
     {localStorage.getItem('mail')}
     <div>
         {/* {getTask(user.email)} */}
-        <WorkItem/>
+        <WorkItem user={user} />
     </div>
     </div>
   )

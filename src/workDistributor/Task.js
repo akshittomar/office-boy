@@ -10,17 +10,24 @@ import io from 'socket.io-client';
 
 
 export default function Task() {
+  const ENDPOINT = "http://localhost:5000";
+  var socket =io(ENDPOINT); 
+var selectedChatCompare ;
+
   const ref = useRef(null);
+ 
   const [content, setcontent] = useState('');
   const [post, setpost] = useState("Choose...");
   const [mail, setmail] = useState("Choose...");
   const [msg, setmsg] = useState([])
+  const [socketConnected, setsocketConnected] = useState(false);
   const refClose = useRef(null);
 
   const context = useContext(noteContext);
 
   const msgRef = useRef(null);
   const work = context.work;
+  const {user}= context;
   const notes = context.notes;
   const user1 = content.user;
   const { addWork } = context;
@@ -30,9 +37,9 @@ export default function Task() {
   const { getAllEmp } = context;
   const { employee } = context;
   const { editWork } = context;
-  const socket = io();
+  const {task} = context;
   const host = "http://localhost:5000";
-
+  const {getTask} = context;
   const { deleteWork } = context;
   const editor = useRef(null);
   const [work2add, setwork2add] = useState({ Title: "", Description: "", Tag: "default", Epost: "", Empmail: "", Erank: 0, Hrs: 0, Min: 0, Sec: 0 });
@@ -68,8 +75,19 @@ export default function Task() {
     setchat({ ...modalWork, [e.target.name]: e.target.value })
   }
 
+  useEffect(() => {
+    // socket = io(ENDPOINT);
+  socket.on("messageReceived2",(newMessage)=>{
+    // setmodalWork(newMessage);
+    window.alert("namak haram"+newMessage.chat);
+   
+    
+  })
+
+  })
 
   useEffect(() => {
+   
     getAllWork();
     fetchWorker();
     getUser();
@@ -90,7 +108,9 @@ export default function Task() {
     }
 
 
-
+    // socket = io(ENDPOINT);
+    socket.emit("setup",user);
+    socket.on("connection",()=>{setsocketConnected(true);})
 
 
 
@@ -233,6 +253,14 @@ export default function Task() {
     // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     // setnote({...note, [e.target.name]:e.target.value})
     // setnote({...note, [note.name]:note.value})
+
+    getRank();
+    
+   
+      // socket = io(ENDPOINT);
+  socket.emit("newMessage",modalWork);
+   
+
 
     getAllWork()
     localStorage.removeItem(s1);
@@ -433,7 +461,9 @@ export default function Task() {
 
 
       <div  >
-        <button type="button" ref={refChat} className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2"  >
+        <button type="button" ref={refChat} className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={()=>{
+          // socket = io(ENDPOINT );
+  socket.emit("joinChat",modalWork.id);}}  >
           Discuss
         </button>
 
@@ -444,13 +474,13 @@ export default function Task() {
           <div className="modal-dialog   modal-xl ">
             <div className="modal-content" style={{ backgroundColor: 'white'  }}        >
               <div className="modal-header">
-                <h5 className="modal-title " id="exampleModalLabel2">Chat Here <i class="fa fa-comments" aria-hidden="true"></i></h5>
+                <h5 className="modal-title " id="exampleModalLabel2">Chat Here <i className="fa fa-comments" aria-hidden="true"></i></h5>
 
-                <button type="button" className="btn-secondary btn  mx-3"   onClick={() => { document.getElementById('myMSG').innerHTML = '' }} data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <button type="button" className="btn-secondary btn  mx-3"   onClick={() => { document.getElementById('myMSG').innerHTML = '' }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
               </div>
               <div className="modal-body " style={{ overflowY: 'scroll' }}  >
                 <form onSubmit={e => e.preventDefault()} >
-                  {msg.length === 1 && <h3 style={{ color: 'grey' }}>Nothing To Show <i class="fa fa-deaf" aria-hidden="true"></i></h3>}
+                  {msg.length === 1 && <h3 style={{ color: 'grey' }}>Nothing To Show <i className="fa fa-deaf" aria-hidden="true"></i></h3>}
                   {msg.length !== 1 && msg.map((chat) => {
                     if (chat.length !== 0) {
                       var str = new String(chat);
@@ -518,7 +548,7 @@ export default function Task() {
                 <a href='#chat' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div> }
               <div className="modal-footer " >
 
-                <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal" onClick={() => { document.getElementById('myMSG').innerHTML = '' }}>Close <i class="fa fa-times" aria-hidden="true"></i></button>
+                <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal" onClick={() => { document.getElementById('myMSG').innerHTML = '' }}>Close <i className="fa fa-times" aria-hidden="true"></i></button>
                
                 
               </div>
@@ -720,7 +750,7 @@ export default function Task() {
               <button type="button" className="btn btn-primary"
 
 
-                onClick={handelModal} disabled={modalWork.eTitle.length < 5 || modalWork.eDescription.length < 5}>UPDATE PROJECT </button>
+                onClick={handelModal} >UPDATE PROJECT </button>
             </div>
           </div>
         </div>

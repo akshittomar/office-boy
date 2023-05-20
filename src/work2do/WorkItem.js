@@ -1,25 +1,48 @@
 import React, { useContext,useEffect,useState,useRef} from 'react'
 import noteContext from '../context/notes/noteContext';
 import NoteItem from '../components/NoteItem';
+import io from 'socket.io-client';
+function  WorkItem(props) {
 
-function WorkItem() {
-
-
+const ENDPOINT = "http://localhost:5000";
+var socket = io(ENDPOINT);
+var selectedChatCompare ;
     const context = useContext(noteContext);
     
-
+    const [socketConnected, setsocketConnected] = useState(false);
     const msgRef = useRef(null);
     const {getTask} = context;
     const {task} = context;
     const { editWork } = context;
     const { getAllWork } = context;
+    const {user}= context;
 
     const [first, setfirst] = useState([]);
     const [msg, setmsg] = useState([]);
     const [content, setcontent] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat:"" });
     useEffect(() => {
+      // socket = io(ENDPOINT);
+    socket.on("messageReceived",(newMessage)=>{
+      // setmsg(newMessage);
+      window.alert("putinder bolne lag gaya "+newMessage.chat);
+      // var str = new String(newMessage.chat);
+      // setmsg(str.split("\n\n"));
+
+      // setcontent(newMessage);
+
+      
+
+
+    })
+   
+    })
+    
+    useEffect(() => {
         setfirst(task);
       // getTask();
+      // socket = io(ENDPOINT);
+      socket.emit("setup",user);
+      socket.on("connection",()=>{setsocketConnected(true);})
    
       if (msgRef.current) {
         msgRef.current.scrollTop = msgRef.current.scrollHeight;
@@ -50,12 +73,12 @@ const updateChat=(note2)=>{
     
    
   }
-  else{window.alert("send was clicked ");}
+  // else{window.alert("send was clicked ");}
 }
 
 
 
-const sendChat = (e) => {
+const sendChat = (e) => { 
   e.preventDefault();
   // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
   // setnote({...note, [e.target.name]:e.target.value})
@@ -89,9 +112,12 @@ const sendChat = (e) => {
   // localStorage.removeItem(s3);
   editWork(content.id, content.eTitle, content.eDescription, content.eTag, content.Upost, erank, content.Umail,content.chat+'receiver');
   // localStorage.removeItem(s1);
-  
-
   getAllWork()
+  
+  // socket = io(ENDPOINT);
+  socket.emit("newMessage2",content);
+
+
   
 
 }
@@ -110,7 +136,9 @@ const sendChat = (e) => {
         
       </div>
        <div  >
-                <button type="button" ref={refChat} className="btn btn-secondary d-none " data-bs-toggle="modal" data-bs-target="#exampleModal2"   >
+                <button type="button" ref={refChat} className="btn btn-secondary d-none " data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={()=>{
+                  // socket = io(ENDPOINT );
+  socket.emit("joinChat",content.id);}}  >
                   Discuss
                 </button>
 
@@ -120,17 +148,17 @@ const sendChat = (e) => {
                   <div className="modal-dialog   modal-xl">
                     <div className="modal-content"  style={{ backgroundColor: 'white' ,   }}>
                       <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel2">Chat Here <i class="fa fa-comments" aria-hidden="true"></i></h5>
+                        <h5 className="modal-title" id="exampleModalLabel2">Chat Here <i className="fa fa-comments" aria-hidden="true"></i></h5>
 
 
 
-                        <button type="button" className="btn-secondary btn  mx-3" onClick={() => { document.getElementById('myMSG').innerHTML = '' }} data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button type="button" className="btn-secondary btn  mx-3" onClick={() => { document.getElementById('myMSG').innerHTML = '' }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
 
 
                       </div>
                       <div className="modal-body" style={{ overflowY: 'scroll' }} >
                         <form  onSubmit={e => e.preventDefault()} >
-                        {msg.length===1 &&  <h3 style={{color:'grey'}}>Nothing To Show<i class="fa fa-deaf" aria-hidden="true"></i></h3> }
+                        {msg.length===1 &&  <h3 style={{color:'grey'}}>Nothing To Show<i className="fa fa-deaf" aria-hidden="true"></i></h3> }
                         {   msg.length!==1 && msg.map((chat)=>{
                            if(chat.length!==0){
                     var str = new String(chat);
@@ -198,7 +226,7 @@ const sendChat = (e) => {
 
 
                       <div className="modal-footer">
-                        <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal"   onClick={() => { document.getElementById('myMSG').innerHTML = '' }} >Close <i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal"   onClick={() => { document.getElementById('myMSG').innerHTML = '' }} >Close <i className="fa fa-times" aria-hidden="true"></i></button>
                        
                       </div>
                     </div>
