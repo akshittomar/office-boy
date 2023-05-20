@@ -25,14 +25,46 @@ var selectedChatCompare ;
       // socket = io(ENDPOINT);
     socket.on("messageReceived",(newMessage)=>{
       // setmsg(newMessage);
-      window.alert("putinder bolne lag gaya "+newMessage.chat);
+      // window.alert("putinder bolne lag gaya "+newMessage.chat);
       // var str = new String(newMessage.chat);
       // setmsg(str.split("\n\n"));
 
       // setcontent(newMessage);
 
       // settask(newMessage);
-      getTask();
+
+
+
+      const devi = document.createElement('div')
+      const newChat = document.createElement('p');
+      newChat.textContent = newMessage.chat;
+      // devi.textContent = modalWork.chat;
+      const style = {
+        color: 'black',
+        textAlign:'left',
+        borderRadius:'10px',
+        border: 'solid #ccc 1px',
+        backgroundColor: 'white',
+        fontFamily:'monospace',
+        
+        
+       clear:'both',
+       float:'left',
+       maxWidth:'80%',
+        // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
+        // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
+        
+
+      };
+      // Object.assign(newChat.style, style);
+      Object.assign(devi.style, style);
+      devi.classList.add('mx-0' ,'my-1' ,'py-1', 'px-1');
+      // msgRef.current.appendChild(newChat);
+      msgRef.current.appendChild(devi);
+      devi.appendChild(newChat);
+
+
+    
 
     })
    
@@ -173,20 +205,21 @@ const sendChat = (e) => {
                       
                     }
                     else{ 
-                      return<div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}}  className='mx-0 my-4' > <p style={{color:'black'}} >{str.substring(0,str.length-6)}</p> </div>
+                      return<div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}}  className='mx-0 my-1 py-1 px-1' > <p style={{color:'black'}} >{str.substring(0,str.length-6)}</p> </div>
                     }
                   }
                   })
                   
                   
                   }   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
-                      <label htmlFor="chat" className="form-label"  ></label>
-                        <input type='text' name='chat' className="form-control" id='chat' onChange={handelChat}  placeholder='Start Typing....'  minLength={1} required></input>
+                      <label htmlFor="chat" className="form-label "  ></label>
+                        <input type='text' name='chat' className="form-control " id='chat' onChange={handelChat}  placeholder='Start Typing....'  value={content.chat} minLength={1} required></input>
 
 
 
                         <button type="button" className="btn btn-primary my-2" onClick={(e) => {
                   sendChat(e);
+                  // document.getElementById('chat').innerText = '';
                   const devi = document.createElement('div')
                   const newChat = document.createElement('p');
                   newChat.textContent = content.chat;
@@ -210,7 +243,7 @@ const sendChat = (e) => {
                   };
                   // Object.assign(newChat.style, style);
                   Object.assign(devi.style, style);
-                  devi.classList.add('mx-0', 'my-3','px-2');
+                  devi.classList.add('mx-0' ,'my-1' ,'py-1' ,'px-1');
                   // msgRef.current.appendChild(newChat);
                   msgRef.current.appendChild(devi);
                   devi.appendChild(newChat);

@@ -79,7 +79,37 @@ var selectedChatCompare ;
     // socket = io(ENDPOINT);
   socket.on("messageReceived2",(newMessage)=>{
     // setmodalWork(newMessage);
-    window.alert("namak haram"+newMessage.chat);
+    // window.alert("namak haram"+newMessage.chat);
+
+
+
+    const devi = document.createElement('div')
+    const newChat = document.createElement('p');
+    newChat.textContent = newMessage.chat;
+    // devi.textContent = modalWork.chat;
+    const style = {
+      color: 'black',
+      textAlign:'left',
+      borderRadius:'10px',
+      border: 'solid #ccc 1px',
+      backgroundColor: 'white',
+      fontFamily:'monospace',
+      
+      
+     clear:'both',
+     float:'left',
+     maxWidth:'80%',
+      // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
+      // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
+      
+
+    };
+    // Object.assign(newChat.style, style);
+    Object.assign(devi.style, style);
+    devi.classList.add('mx-0' ,'my-1' ,'py-1', 'px-1');
+    // msgRef.current.appendChild(newChat);
+    msgRef.current.appendChild(devi);
+    devi.appendChild(newChat);
    
     
   })
@@ -476,7 +506,7 @@ var selectedChatCompare ;
               <div className="modal-header">
                 <h5 className="modal-title " id="exampleModalLabel2">Chat Here <i className="fa fa-comments" aria-hidden="true"></i></h5>
 
-                <button type="button" className="btn-secondary btn  mx-3"   onClick={() => { document.getElementById('myMSG').innerHTML = '' }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
+                <button type="button" className="btn-secondary btn  mx-3"   onClick={() => { document.getElementById('myMSG').innerHTML = '';getAllWork(); }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
               </div>
               <div className="modal-body " style={{ overflowY: 'scroll' }}  >
                 <form onSubmit={e => e.preventDefault()} >
@@ -488,11 +518,11 @@ var selectedChatCompare ;
                       var compar = new String(modalWork.Umail);
                       // str+=compar;
                       if (str.endsWith('sender')) {
-                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }} className='mx-0 my-1 px-2 py-0 ' > <p  className='px-1'style={{ color: 'white',width: '-webkit-fill-available'}} >{str.substring(0, str.length - 6)}</p>  </div>
+                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }} className='mx-0 my-1 py-1 px-1 ' > <p  className='px-1'style={{ color: 'white',width: '-webkit-fill-available'}} >{str.substring(0, str.length - 6)}</p>  </div>
 
                       }
                       else {
-                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}} className='mx-0 my-4 ' > <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
+                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}} className='mx-0 my-1 py-1 px-1 ' > <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
                       }
                     }
                   })
@@ -505,7 +535,7 @@ var selectedChatCompare ;
                     })} */}
                   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
                   <label htmlFor="chat" className="form-label"  ></label>
-                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} required ></input>
+                  <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} value={modalWork.chat} required ></input>
                   <button type="button" className="btn btn-primary my-2" onClick={(e) => {
                   handelModal(e);
                   const devi = document.createElement('div')
@@ -531,7 +561,7 @@ var selectedChatCompare ;
                   };
                   // Object.assign(newChat.style, style);
                   Object.assign(devi.style, style);
-                  devi.classList.add('mx-0', 'my-3','px-2');
+                  devi.classList.add('mx-0' ,'my-1' ,'py-1' ,'px-1');
                   // msgRef.current.appendChild(newChat);
                   msgRef.current.appendChild(devi);
                   devi.appendChild(newChat);
@@ -548,7 +578,7 @@ var selectedChatCompare ;
                 <a href='#chat' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div> }
               <div className="modal-footer " >
 
-                <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal" onClick={() => { document.getElementById('myMSG').innerHTML = '' }}>Close <i className="fa fa-times" aria-hidden="true"></i></button>
+                <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal" onClick={() => { document.getElementById('myMSG').innerHTML = '';getAllWork(); }}>Close <i className="fa fa-times" aria-hidden="true"></i></button>
                
                 
               </div>
