@@ -33,9 +33,9 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className={`nav-link my-3 mx-3  ${location.pathname==='/'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/":"/login"}`}  ><h4>Home<i className="fa fa-home fa-1x my-2" aria-hidden="true"></i></h4></Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                             <Link className={`nav-link my-3  mx-3 ${location.pathname==='/about'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/about":"/login"}`} ><h4>About  <i className="fa fa-1x fa-id-badge my-2" aria-hidden="true"></i></h4></Link>
-                            </li>
+                            </li> */}
                             
                             <li className="nav-item">
                             <Link className={`nav-link my-3  mx-3 ${location.pathname==='/task'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/task":"/login"}`}><h4>Work-Distributer </h4></Link>
