@@ -22,7 +22,7 @@ console.log(user.name);
     {user.epost}<br/>
     {user.doj}<br/>
     {mail}<br/>
-    {localStorage.getItem('mail')}
+    {/* {localStorage.getItem('mail')} */}
     <div>
         {/* {getTask(user.email)} */}
         <WorkItem user={user} />

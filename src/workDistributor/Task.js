@@ -6,6 +6,7 @@ import JoditEditor from 'jodit-react';
 import NoteItem from '../components/NoteItem';
 import Chat from '../chat/Chat';
 import io from 'socket.io-client';
+import {useNavigate} from 'react-router-dom';
 
 
 
@@ -24,7 +25,7 @@ var selectedChatCompare ;
   const refClose = useRef(null);
 
   const context = useContext(noteContext);
-
+  let navigate = useNavigate();
   const msgRef = useRef(null);
   const work = context.work;
   const {user}= context;
@@ -76,6 +77,11 @@ var selectedChatCompare ;
   }
 
   useEffect(() => {
+    
+    if(!localStorage.getItem('token')){
+        navigate("/login");
+  
+      }
     // socket = io(ENDPOINT);
   socket.on("messageReceived2",(newMessage)=>{
     // setmodalWork(newMessage);
