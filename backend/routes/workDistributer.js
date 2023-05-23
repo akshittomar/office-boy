@@ -3,7 +3,9 @@ const router = express.Router();
 var fetchuser = require('./middleware/fetchuser');
 const User = require('../models/User')
 const Work = require('../models/WorkDistributer');
+
 const { body, validationResult } = require('express-validator');
+const Accomplish = require('../models/Accomplishments');
 
 // const { route } = require('./auth');
 // ALL IMPORTS ARE DONE
@@ -258,7 +260,15 @@ router.delete('/delete/:id',fetchuser, async(req,res)=>{
     {
         return res.status(401).send("X X X NOT ALLOWED X X X X");
     }
-   todo = await Work.findByIdAndDelete(req.params.id) ;
+    //  let work =await Work.findById(req.params.id);
+    
+    const work = await Work.findById(req.params.id);
+    console.log('work given is '+work);
+    const user =   User.find({email:work.empemail});
+    console.log('user is '+user);
+    const abc  =new Accomplish({title:work.title,user:user.id,email:work.empemail});
+    const saved = abc.save();
+    todo = await Work.findByIdAndDelete(req.params.id) ;
    res.json({"SUCCESS":" DELETED ", todo:todo});
     }
     catch(error){
@@ -268,6 +278,20 @@ router.delete('/delete/:id',fetchuser, async(req,res)=>{
 })
 
 
+router.put('/fetchallacc',async (req,res)=> {
+  try{
+   const {email}=req.body;
+   console.log("requested mail is this "+email);
+   const notes = await Accomplish.find({email:email});
+   console.log(notes);
+   res.json(notes);
+   }
+   catch(error)
+   {
+       console.error(error.message);
+       res.status(500).send("INTERNAL SERVER  ERROR ");
+   }
+   })
 
 
 module.exports = router ;  

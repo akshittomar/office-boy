@@ -86,9 +86,28 @@ console.log("task chal rhi bhai "+user.email+" email yeh hai ");
 
 
 }
+const workInitia = []
+const [accomp, setaccomp] = useState(workInitia);
+const getAccomp = async ()=>{
+  
+  const response = await fetch( `${host}/api/sendwork/fetchallacc`, {
+    method: 'PUT',
+    headers:{
+      'Content-Type':'application/json',
+      
+    //  'authToken' :localStorage.getItem('token'),.
+    },
+    body: JSON.stringify({email:mail})
+  });
+
+const json = await response.json();
+console.log("length iis "+json.length);
+setaccomp(json);
+console.log("accomop chal rhi bhai ");
+console.log(accomp);
 
 
-
+}
 
 const sendmail=async(hrs,min,sec)=>{
 const response = await fetch(`${host}/api/scheduler/schedulesms`,{
@@ -453,7 +472,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 
     return (
 
-        <var1.Provider value={{a,getUser,settask,user,employee,setemployee,getTask,notes,getAllEmp,setnotes,addNote,deleteNote,editNote,getNotes,task,mail,setmail,mailing,addWork,deleteWork,editWork,getAllWork,work,setwork}}>
+        <var1.Provider value={{a,getUser,accomp,setaccomp,getAccomp,settask,user,employee,setemployee,getTask,notes,getAllEmp,setnotes,addNote,deleteNote,editNote,getNotes,task,mail,setmail,mailing,addWork,deleteWork,editWork,getAllWork,work,setwork}}>
             {props.children}
         </var1.Provider>
     )

@@ -22,7 +22,7 @@ export default function Navbar() {
    
     return (
         <div>
-            <nav className="navbar navbar-expand-lg bg-secondary">
+            <nav className="navbar navbar-expand-lg navbar-static bg-secondary">
                 <div className="container-fluid">
                     <Link className={`navbar-brand my-3 ${location.pathname==='/'?"active   ":""} `} to={"/"}><h2>OFFICE-BOY <i className="fa fa-envelope fa-bounce" aria-hidden="true"></i></h2></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,9 @@ export default function Navbar() {
                             </li>
                             <li className="nav-item">
                             <Link className={`nav-link my-3  mx-3 ${location.pathname==='/mywork'?"active bg-secondary ":""} `} aria-current="page" to={"/mywork"}><h4>My-Work</h4></Link>
+                            </li>
+                            <li className="nav-item">
+                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/mykanban'?"active bg-secondary ":""} `} aria-current="page" to={"/mykanban"}><h4>Kanban</h4></Link>
                             </li>
                             <li className="nav-item">
                             <Link className={`nav-link my-3  mx-3 ${location.pathname==='/myprofile'?"active bg-secondary ":""} `} aria-current="page" to={"/myprofile"}><h4>Profile</h4></Link>

@@ -1,10 +1,10 @@
 
-import React, { useEffect,useState ,useRef} from 'react'
+import React, { useState } from 'react'
 // import { Beforeunload } from 'react-beforeunload';
 
 import Alarm from './Alarm';
 
-import Chat from '../chat/Chat';
+// import Chat from '../chat/Chat';
 // import AOS from 'aos'
 // import 'aos/dist/aos.css'
 
@@ -12,7 +12,7 @@ import Chat from '../chat/Chat';
 export default function NoteItem(props) {
 
 
-const [chat, setchat] = useState("");
+// const [chat, setchat] = useState("");
 
 
 
@@ -31,15 +31,7 @@ const chatFunc = props.Chat;
   //     return <><Time  hrs={hh} min={mm} sec={ss} sethh={sethh} setss={setss} setmm={setmm} ></Time></>
   // }
 
-
-
-
-
-
-
-
-
-  // useEffect(() => {
+ // useEffect(() => {
   //     AOS.init({ 
   //     //   animatedClassName: 'aos-animate',
   //       duration: 1000,
@@ -60,14 +52,7 @@ const chatFunc = props.Chat;
   //     }
   //   }, []) 
 
-
-
-
-
-
-
-
-  //    useEffect(() => {
+//    useEffect(() => {
 
 
   //      return () => {
@@ -129,7 +114,7 @@ const chatFunc = props.Chat;
                   var s3 = note.title + "hrs"; localStorage.removeItem(s1);
                   localStorage.removeItem(s2);
                   localStorage.removeItem(s3); deleteNote(note._id)
-                }} >Delete <i className="fa-solid fa-trash    " ></i></h6>
+                }} ><i className="fa-solid fa-trash    " ></i></h6>
               </div>
                 }
               {/* <div className=" card-footer d-flex justify-content-between " >
@@ -150,7 +135,7 @@ const chatFunc = props.Chat;
               }
 
              { props.option === "true" && <div className=" container">
-                <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { updateNote(note);  }}  >Edit <i className="fa-solid fa-file-pen sm  " onClick={() => { updateNote(note) }}></i></h6>
+                <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { updateNote(note);  }}  ><i className="fa-solid fa-file-pen sm  " onClick={() => { updateNote(note) }}></i></h6>
               </div>}
 
               
@@ -158,7 +143,7 @@ const chatFunc = props.Chat;
               
               { props.cloured==="false" && 
               <div className='container'>
-              <h6 style={{ color: "black", cursor: "pointer" }}  onClick={()=>{console.log("on click is correct2");props.Chat(note)}}><small>Discuss <i className="fa fa-commenting" aria-hidden="true"></i></small></h6>
+              <h6 style={{ color: "black", cursor: "pointer" }}  onClick={()=>{console.log("on click is correct2");props.Chat(note)}}><small> <i className="fa fa-commenting" aria-hidden="true"></i></small></h6>
              </div>}
 
 {/* we have to make a <input> tag to take text as input with just a simpel button to send chat 
