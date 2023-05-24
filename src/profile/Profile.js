@@ -6,15 +6,17 @@ export default function Profile() {
   const context = useContext(noteContext);
   const notes = context.notes;
   const {user}= context; const accomp= context.accomp;
-  
+  const {getUser} = context;
+  const {getAccomp} = context;
  
   useEffect(() => { 
     
     
-   
+   getUser();
+   getAccomp();
   
    
-  }, [accomp])
+  }, [])
   
   return (
     <>MY-PROFILR  WILL SHOW UP HERE 

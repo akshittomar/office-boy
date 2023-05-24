@@ -96,15 +96,25 @@ body('description','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({mi
 
 ],async (req,res)=> {
     
-  
+  var error  = "SORRY A PROJECT THIS NAME ALREADY EXISTS ";
+  var success = false;
 try{
     const {title,description,epost,erank,tag,empemail} = req.body ;
-  
+    console.log(req.body.title);
+    let user =await  Work.find({title: req.body.title});
+    if(user.length!==0)
+    {
+      console.log("mar gya mai to" );
+      console.log(user);
+      var success = false;
+      return res.status(400).json({error,success})
+
+    }
 
     const errors = validationResult(req);
     
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ errors: errors.array() ,success});
     }
 const work = new Work({
     title,description,epost,erank,tag,empemail,user: req.user.id
@@ -118,7 +128,7 @@ res.send(savedWork)
 }
 catch(error){
     console.error(error.message);
-    res.status(500).send("INTERNAL SERVER  ERROR ");
+    res.status(500).json({error:error.message,success});
 }
 }) 
 
@@ -201,6 +211,12 @@ console.log("THIS USER REQUESTED "+req.params.id);
     // }
    
    
+    let user =await  Work.findOne({title: newTask.title});
+    if(user)
+    {
+      var success = false ;
+      return res.status(400).json({error:"SORRY A PROJECT THIS NAME ALREADY EXISTS ",success})
+    }
 
         console.log("NEW Work IS THIS"+newTask.title);
         console.log(todo);

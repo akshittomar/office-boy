@@ -1,10 +1,11 @@
 import React, { useContext, useRef, useState, useEffect } from 'react'
 import noteContext from "../context/notes/noteContext";
 import Alarm from '../components/Alarm';
+import { useNavigate } from 'react-router-dom';
 
 
 function Doing() {
-
+  let navigate = useNavigate(); 
     const context = useContext(noteContext);
     const notes = context.notes;
     const work = context.work;
@@ -23,7 +24,7 @@ function Doing() {
           return < > 
           <div></div>
 <div className='mt-3 '>
-<t style={{color:"grey"}}>{index++ +1 } {work.title}</t>
+<t style={{color:"grey"}}>{index++ +1 } {work.title} <i className="fa fa-external-link" onClick={()=>navigate('/task')} aria-hidden="true"></i></t>
 </div>
 
 

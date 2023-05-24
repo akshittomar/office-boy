@@ -334,8 +334,20 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
           body: JSON.stringify({title,description,tag,epost,erank,empemail})
         });
     
-        const json = response.json(title,description,tag,epost,erank,empemail);
-        console.log("ADDED NOTE IS THIS "+json.title);
+        const json = await response.json();
+        console.log("isne bc dimaak khrab krdiya ");
+        console.log(json);
+        if(json.success=== false ){
+         
+     alert(json.error);
+        }
+        else{
+         
+          console.log("ADDED NOTE IS THIS "+json.title);
+          const   wrk = json ;
+          setwork(work.concat(wrk));
+        }
+       
     
     
        
@@ -343,8 +355,6 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
     
     
     
-     const   wrk = json ;
-    setwork(work.concat(wrk));
     
       }
 

@@ -7,7 +7,7 @@ import NoteItem from '../components/NoteItem';
 import Chat from '../chat/Chat';
 import io from 'socket.io-client';
 import {useNavigate} from 'react-router-dom';
-
+import image from './portable-art-drawing-boards-FA-B.jpg';
 
 
 export default function Task() {
@@ -349,7 +349,7 @@ var selectedChatCompare ;
     setmodalWork({ ...modalWork, [e.target.name]: e.target.value })
 
 
-  }
+  } 
 
   let joditChange = (key, newContent) => {
     setwork2add(
@@ -363,6 +363,7 @@ var selectedChatCompare ;
 
   return (
     <>
+    <div style={{backgroundColor:"#eafafb54",borderRadius:"20px"}} ><img className='my-5 mx-5 px-5 ' style={{borderRadius:"20px",border:"solid 1px",borderColor:"#fcd6a0"}}  src={image} alt="" /></div>
 
       {notes.map((notes) => {
 
