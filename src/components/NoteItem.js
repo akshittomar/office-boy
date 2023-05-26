@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 // import { Beforeunload } from 'react-beforeunload';
 
 import Alarm from './Alarm';
@@ -10,8 +10,8 @@ import Alarm from './Alarm';
 
 
 export default function NoteItem(props) {
-
-
+ 
+  
 // const [chat, setchat] = useState("");
 
 
@@ -25,7 +25,11 @@ export default function NoteItem(props) {
 
 const chatFunc = props.Chat;
 
-
+useEffect(() => {
+    
+  
+    
+}, [note])
 
   // const Delay=()=>{
   //     return <><Time  hrs={hh} min={mm} sec={ss} sethh={sethh} setss={setss} setmm={setmm} ></Time></>

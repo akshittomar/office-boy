@@ -138,7 +138,7 @@ const data = {
 const JWT_SECRET = 'AUR LADKE KYA HAL HAI TERE PURA KAM CHAL RHA MAUJ KR '
 const authToken  = jwt.sign(data,JWT_SECRET);//user ki id ko istmal krke ek token bna liya 
 
-console.log(authToken);
+console.log(authToken); 
 success = true ;
 
 res.json({authToken,success});

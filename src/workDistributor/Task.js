@@ -146,7 +146,7 @@ var selectedChatCompare ;
 
     // socket = io(ENDPOINT);
     socket.emit("setup",user);
-    socket.on("connection",()=>{setsocketConnected(true);})
+    socket.on("connection",()=>{setsocketConnected(true);}) 
 
 
 
@@ -715,7 +715,7 @@ var selectedChatCompare ;
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">EDIT PROJECT</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={()=>{getAllWork();}} ></button>
             </div>
             <div className="modal-body">
 
@@ -783,7 +783,7 @@ var selectedChatCompare ;
 
             </div>
             <div className="modal-footer">
-              <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>{getAllWork();}}  >Close</button>
               <button type="button" className="btn btn-primary"
 
 

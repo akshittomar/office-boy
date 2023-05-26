@@ -1,8 +1,8 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
 import NoteItem from './NoteItem';
-
+import NotesUpdate from './NotesUpdate';
 // import AddNotes from './AddNotes';
 // import {useNavigate} from 'react-router-dom';
 
@@ -41,8 +41,25 @@ export default function Notes() {
   //   }
   //  },[]);
 
+// useEffect(() => {
+//   getNotes();
+//   console.log("am i infinite");
+// }, [notes])
 
-  
+useEffect(() => {
+  // setload(false);
+  const fetchData = async () => {
+    await getNotes();
+
+  };
+
+  fetchData();
+
+}, [note]);
+
+useEffect(() => {
+  console.log("am i infinite");
+}, [notes]);
 
   const updateNotes =  (currentNotes) => {// responsibel to update id & eTitle & eDescription iske parameters mai jo currentNotes mille hai voh context API se aa rhe hai Notesitem ne call kiya h is function ko aur "notes" as props bheje gye the Notes.js k dware 
     console.log(currentNotes);
@@ -163,16 +180,19 @@ setnote({...note, [e.target.name]:e.target.value})
 
 
 
-
+ 
 
       <div className="row" >  
         
         {notes.length===0  && `NO PENDING WORK ` }
-        {notes.map((notes) => {
+        { notes.length!==0  && 
+         notes.map((notes) => {
           return <NoteItem key={notes._id} cloured="true" notes={notes} updateNotes={updateNotes} deleteNote={deleteNote} option="true" />;
-        })}
-      </div>  
+        })
+        }
+      </div> 
 
+      {/* <NotesUpdate  notes={notes} updateNotes={updateNotes} deleteNote={deleteNote} option="true" /> */}
       
     </>
   )

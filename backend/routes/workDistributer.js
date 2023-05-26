@@ -106,7 +106,7 @@ try{
     {
       console.log("mar gya mai to" );
       console.log(user);
-      var success = false;
+      // var success = false;
       return res.status(400).json({error,success})
 
     }
@@ -211,12 +211,8 @@ console.log("THIS USER REQUESTED "+req.params.id);
     // }
    
    
-    let user =await  Work.findOne({title: newTask.title});
-    if(user)
-    {
-      var success = false ;
-      return res.status(400).json({error:"SORRY A PROJECT THIS NAME ALREADY EXISTS ",success})
-    }
+    let user =await  Work.find({title: newTask.title});
+   
 
         console.log("NEW Work IS THIS"+newTask.title);
         console.log(todo);
@@ -226,7 +222,7 @@ console.log("THIS USER REQUESTED "+req.params.id);
     
 
 
-   res.json({todo});
+   res.json({todo,success:true});
    
    console.log("updated notes"+todo);
    

@@ -258,7 +258,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
       
       body: JSON.stringify({id,title,description,tag})
     });
-    const json = response.json(id,title,description,tag);
+    const json =await  response.json(id,title,description,tag);
     console.log("KYA TUM PROMISE HO")
     console.log(json);
     

@@ -95,8 +95,11 @@ cors:{
       socket.in(content.id).emit("messageReceived2",content);
   
       })
-
+      socket.off("setup",(userData)=>{
+        console.log("USER DISCONNECTED");
+        socket.leave(userData.email)
+      })
 
 });
 
-module.exports= io ;
+module.exports= io ;  
