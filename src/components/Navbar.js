@@ -24,7 +24,7 @@ export default function Navbar() {
         <div>
             <nav className="navbar navbar-expand-lg navbar-static bg-secondary">
                 <div className="container-fluid">
-                    <Link className={`navbar-brand my-3 ${location.pathname==='/'?"active   ":""} `} to={"/"}><h2>OFFICE-BOY </h2></Link>
+                    <Link className={`navbar-brand my-3 ${location.pathname==='/'?"active   ":""} `} to={`${localStorage.getItem('token')?"/":"/login"}`}><h2>OFFICE-BOY </h2></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>

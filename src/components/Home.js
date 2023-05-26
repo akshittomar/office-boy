@@ -25,19 +25,15 @@ useEffect(() => {
       navigate("/login");
 
     }
-    const socket = io("http://localhost:3000");
-    socket.emit('connection',{message:"hello is a socket"});
-    socket.on('getRequest', (data) => {
-      window.alert(data);
-    });
+  
 
   },[]);
   return (<>
-    <h1 >
+ {  localStorage.getItem('token') &&  <h1 >
       { `${props.type==="MyTodo"?"Add Your Todo Here":""}`}
-    </h1>
+    </h1> }
 
-<AddNotes type={props.type}/>
+{  localStorage.getItem('token') && <AddNotes type={props.type}/>}
 
 </>
   )
