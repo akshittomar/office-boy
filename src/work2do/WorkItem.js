@@ -20,55 +20,97 @@ var selectedChatCompare ;
 
     const [first, setfirst] = useState([]);
     const [msg, setmsg] = useState([]);
+    const prevMessageRef = useRef("");
     const [content, setcontent] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat:"" });
-    useEffect(() => {
-      // socket = io(ENDPOINT);
-    socket.on("messageReceived",(newMessage)=>{
-      // setmsg(newMessage);
-      // window.alert("putinder bolne lag gaya "+newMessage.chat);
-      // var str = new String(newMessage.chat);
-      // setmsg(str.split("\n\n"));
+    // useEffect(() => {
+    //   // socket = io(ENDPOINT);
+    // socket.on("messageReceived",(newMessage)=>{
+    //   // setmsg(newMessage);
+    //   // window.alert("putinder bolne lag gaya "+newMessage.chat);
+    //   // var str = new String(newMessage.chat);
+    //   // setmsg(str.split("\n\n"));
 
-      // setcontent(newMessage);
+    //   // setcontent(newMessage);
 
-      // settask(newMessage);
+    //   // settask(newMessage);
 
 
 
-      const devi = document.createElement('div')
-      const newChat = document.createElement('p');
-      newChat.textContent = newMessage.chat;
-      // devi.textContent = modalWork.chat;
-      const style = {
-        color: 'black',
-        textAlign:'left',
-        borderRadius:'10px',
-        border: 'solid #ccc 1px',
-        backgroundColor: 'white',
-        fontFamily:'monospace',
+    //   const devi = document.createElement('div')
+    //   const newChat = document.createElement('p');
+    //   newChat.textContent = newMessage.chat;
+    //   // devi.textContent = modalWork.chat;
+    //   const style = {
+    //     color: 'black',
+    //     textAlign:'left',
+    //     borderRadius:'10px',
+    //     border: 'solid #ccc 1px',
+    //     backgroundColor: 'white',
+    //     fontFamily:'monospace',
         
         
-       clear:'both',
-       float:'left',
-       maxWidth:'80%',
-        // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
-        // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
+    //    clear:'both',
+    //    float:'left',
+    //    maxWidth:'80%',
+    //     // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
+    //     // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
         
 
-      };
-      // Object.assign(newChat.style, style);
-      Object.assign(devi.style, style);
-      devi.classList.add('mx-0' ,'my-1' ,'py-1', 'px-1');
-      // msgRef.current.appendChild(newChat);
-      msgRef.current.appendChild(devi);
-      devi.appendChild(newChat);
+    //   };
+    //   // Object.assign(newChat.style, style);
+    //   Object.assign(devi.style, style);
+    //   devi.classList.add('mx-0' ,'my-1' ,'py-1', 'px-1');
+    //   // msgRef.current.appendChild(newChat);
+    //   msgRef.current.appendChild(devi);
+    //   devi.appendChild(newChat);
 
 
     
 
-    })
+    // })
    
-    })
+    // })
+
+
+
+
+    useEffect(() => {
+      socket.on("messageReceived", (newMessage) => { 
+
+        console.log(" i just raaannn ");
+        if (newMessage.chat !== prevMessageRef.current) {
+          // Only update UI if the new message is different from the previous one
+          // setmsg(newMessage);
+          // window.alert("putinder bolne lag gaya " + newMessage.chat);
+          // var str = new String(newMessage.chat);
+          // setmsg(str.split("\n\n"));
+          // setcontent(newMessage);
+          // settask(newMessage);
+  
+          const devi = document.createElement("div");
+          const newChat = document.createElement("p");
+          newChat.textContent = newMessage.chat;
+          // devi.textContent = modalWork.chat;
+          const style = {
+            color: "black",
+            textAlign: "left",
+            borderRadius: "10px",
+            border: "solid #ccc 1px",
+            backgroundColor: "white",
+            fontFamily: "monospace",
+            clear: "both",
+            float: "left",
+            maxWidth: "80%",
+          };
+          Object.assign(devi.style, style);
+          devi.classList.add("mx-0", "my-1", "py-1", "px-1");
+          msgRef.current.appendChild(devi);
+          devi.appendChild(newChat);
+  
+          prevMessageRef.current = newMessage.chat;
+        }
+      });
+    });
     
     useEffect(() => {
         setfirst(task);
@@ -172,7 +214,7 @@ const sendChat = (e) => {
        <div  >
                 <button type="button" ref={refChat} className="btn btn-secondary d-none " data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={()=>{
                   // socket = io(ENDPOINT );
-  socket.emit("joinChat",content.id);}}  >
+  socket.emit("joinChat",localStorage.getItem("room"));}}  >
                   Discuss
                 </button>
 
@@ -186,7 +228,11 @@ const sendChat = (e) => {
 
 
 
-                        <button type="button" className="btn-secondary btn  mx-3" onClick={() => { document.getElementById('myMSG').innerHTML = '';getTask(); }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
+                        <button type="button" className="btn-secondary btn  mx-3" onClick={() => { document.getElementById('myMSG').innerHTML = '';getTask(); 
+                         socket.emit("leaveChat",localStorage.getItem("room"));localStorage.removeItem("room"); 
+                         socket.off('messageReceived', console.log("disconnected socket")); 
+                        }} 
+                        data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
 
 
                       </div>
@@ -261,7 +307,10 @@ const sendChat = (e) => {
 
 
                       <div className="modal-footer">
-                        <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal"   onClick={() => { document.getElementById('myMSG').innerHTML = '';getTask(); }} >Close <i className="fa fa-times" aria-hidden="true"></i></button>
+                        <button type="button" ref={refCloseChat} className="btn btn-secondary" data-bs-dismiss="modal"   onClick={() => { document.getElementById('myMSG').innerHTML = '';
+                        getTask(); 
+                        socket.emit("leaveChat",localStorage.getItem("room"));localStorage.removeItem("room"); 
+                        socket.off('messageReceived', console.log("disconnected socket")); }} >Close <i className="fa fa-times" aria-hidden="true"></i></button>
                        
                       </div>
                     </div>

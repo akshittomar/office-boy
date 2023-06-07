@@ -60,7 +60,7 @@ const server = app.listen(port, () => {
 })
 
 const io = require('socket.io')(server,{
-pingTimeout:60000,
+pingTimeout:60000,autoConnect: false, reconnection: false,
 cors:{
   origin:"http://localhost:3000",
 }
@@ -69,7 +69,7 @@ cors:{
 
 
  io.on("connection",(socket)=>{
-  console.log("connected to socket.io");
+  // console.log("connected to socket.io");
 
   socket.on("setup",(userData)=>{
     socket.join(userData.email);
@@ -85,13 +85,16 @@ cors:{
 
   socket.on("newMessage",(content)=>{
     var chat = content.chat;
+    // console.log("yes yes yesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
     socket.in(content.id).emit("messageReceived",content);
-
+    console.log("content id is ");
+        console.log(content.id);
     })
   
 
     socket.on("newMessage2",(content)=>{
       var chat = content.chat;
+      
       socket.in(content.id).emit("messageReceived2",content);
   
       })
@@ -99,6 +102,18 @@ cors:{
         console.log("USER DISCONNECTED");
         socket.leave(userData.email)
       })
+
+
+      socket.on("leaveChat",(room)=>{
+        console.log(`USER DISCONNECTED ${room}`);
+        socket.removeAllListeners();
+        socket.leave(room);
+      })
+
+      // socket.on("joinChat2",(room)=>{
+      //   console.log("USER DISCONNECTED");
+      //   socket.leave(room)
+      // })
 
 });
 

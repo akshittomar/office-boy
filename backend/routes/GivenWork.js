@@ -29,7 +29,7 @@ router.post('/addwork',fetchuser,[
         title,description,wpost,wrank,tag,wleaves,workemail,user:req.user.id
     })
     const savedWork = await todo.save()// lo bhai thunderClient se ab MongoDB database tak ka safar idhar establish hua  note.save() krke 
-    console.log("THIS NOTE GOT SAVED "+savedWork)
+    // console.log("THIS NOTE GOT SAVED "+savedWork)
     res.send(savedWork)
     }
     catch(error){

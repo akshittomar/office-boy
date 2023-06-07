@@ -51,7 +51,7 @@ router.put('/fetchallepm',fetchuser,async (req,res)=> {
     const {epostFind}=req.body;
     console.log("requested post is this "+epostFind);
     const notes = await User.find({epost:epostFind});
-    console.log(notes);
+    // console.log(notes);
     res.json(notes);
     }
     catch(error)
@@ -105,7 +105,7 @@ try{
     if(user.length!==0)
     {
       console.log("mar gya mai to" );
-      console.log(user);
+      // console.log(user);
       // var success = false;
       return res.status(400).json({error,success})
 
@@ -123,7 +123,7 @@ const work = new Work({
 const savedWork = await work.save();
 // lo bhai thunderClient se ab MongoDB database tak ka safar idhar establish hua  note.save() krke 
 console.log("i am reaching");
-console.log("THIS NOTE GOT SAVED "+savedWork)
+// console.log("THIS NOTE GOT SAVED "+savedWork)
 res.send(savedWork)
 }
 catch(error){
@@ -159,7 +159,7 @@ console.log("THIS USER REQUESTED "+req.params.id);
         // let user =await  Notes.findOne({updateID: req.body.email});
        
         const {id,title,description,epost,erank,tag,empemail,leaves,chat} = req.body ;
-        console.log("chat is this "+chat);
+        // console.log("chat is this "+chat);
           
 
     let todo =await Work.findById(req.params.id);//idhar url mai id attatched hai 

@@ -44,7 +44,7 @@ var selectedChatCompare ;
   const { deleteWork } = context;
   const editor = useRef(null);
   const [work2add, setwork2add] = useState({ Title: "", Description: "", Tag: "default", Epost: "", Empmail: "", Erank: 0, Hrs: 0, Min: 0, Sec: 0 });
-
+  const prevMessageRef = useRef("");
 
   const [modalWork, setmodalWork] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat: "" });
   const [dummy, setdummy] = useState({ Title: "" });
@@ -86,7 +86,7 @@ var selectedChatCompare ;
   socket.on("messageReceived2",(newMessage)=>{
     // setmodalWork(newMessage);
     // window.alert("namak haram"+newMessage.chat);
-
+    if (newMessage.chat !== prevMessageRef.current) {
 
 
     const devi = document.createElement('div')
@@ -116,7 +116,14 @@ var selectedChatCompare ;
     // msgRef.current.appendChild(newChat);
     msgRef.current.appendChild(devi);
     devi.appendChild(newChat);
-   
+
+
+    prevMessageRef.current = newMessage.chat;
+  }
+
+    return () => {
+      socket.off('messageReceived2', console.log("disconnected socket"));
+   };
     
   })
 
@@ -148,7 +155,9 @@ var selectedChatCompare ;
     socket.emit("setup",user);
     socket.on("connection",()=>{setsocketConnected(true);}) 
 
-
+    return () => {
+      socket.off("connection",()=>{setsocketConnected(false);})
+   };
 
   }, [change, post, mail])
 
@@ -500,7 +509,7 @@ var selectedChatCompare ;
       <div  >
         <button type="button" ref={refChat} className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={()=>{
           // socket = io(ENDPOINT );
-  socket.emit("joinChat",modalWork.id);}}  >
+  socket.emit("joinChat",localStorage.getItem("room"));}}  >
           Discuss
         </button>
 
@@ -513,7 +522,8 @@ var selectedChatCompare ;
               <div className="modal-header">
                 <h5 className="modal-title " id="exampleModalLabel2">Chat Here <i className="fa fa-comments" aria-hidden="true"></i></h5>
 
-                <button type="button" className="btn-secondary btn  mx-3"   onClick={() => { document.getElementById('myMSG').innerHTML = '';getAllWork(); }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
+                <button type="button" className="btn-secondary btn  mx-3"   onClick={() => { document.getElementById('myMSG').innerHTML = '';getAllWork();
+                socket.emit("leaveChat",localStorage.getItem("room"));localStorage.removeItem("room");    socket.off('messageReceived2', console.log("disconnected socket")); }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
               </div>
               <div className="modal-body " style={{ overflowY: 'scroll' }}  >
                 <form onSubmit={e => e.preventDefault()} >
@@ -585,7 +595,12 @@ var selectedChatCompare ;
                 <a href='#chat' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div> }
               <div className="modal-footer " >
 
-                <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal" onClick={() => { document.getElementById('myMSG').innerHTML = '';getAllWork(); }}>Close <i className="fa fa-times" aria-hidden="true"></i></button>
+                <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal"
+                 onClick={() => { document.getElementById('myMSG').innerHTML = '';
+                 getAllWork();socket.emit("leaveChat",localStorage.getItem("room"));
+                  localStorage.removeItem("room");   
+                 socket.off('messageReceived2', console.log("disconnected socket"));}}
+                 >Close <i className="fa fa-times" aria-hidden="true"></i></button>
                
                 
               </div>
