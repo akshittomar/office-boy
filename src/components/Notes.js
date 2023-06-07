@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
 import NoteItem from './NoteItem';
 import NotesUpdate from './NotesUpdate';
+import MyNoteItem from './MyNoteItem';
 // import AddNotes from './AddNotes';
 // import {useNavigate} from 'react-router-dom';
 
@@ -181,13 +182,24 @@ setnote({...note, [e.target.name]:e.target.value})
 
 
  
-
+{/* 
       <div className="row" >  
         
         {notes.length===0  && `NO PENDING WORK ` }
         { notes.length!==0  && 
          notes.map((notes) => {
           return <NoteItem key={notes._id} cloured="true" notes={notes} updateNotes={updateNotes} deleteNote={deleteNote} option="true" />;
+        })
+        }
+      </div>  */}
+
+
+      <div className="row" >  
+        
+        {notes.length===0  && `NO PENDING WORK ` }
+        { notes.length!==0  && 
+         notes.map((notes) => {
+          return <MyNoteItem key={notes._id}  notes={notes} updateNotes={updateNotes} deleteNote={deleteNote}  />;
         })
         }
       </div> 
