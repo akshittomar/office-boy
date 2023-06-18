@@ -199,7 +199,9 @@ setnote({...note, [e.target.name]:e.target.value})
         {notes.length===0  && `NO PENDING WORK ` }
         { notes.length!==0  && 
          notes.map((notes) => {
-          return <MyNoteItem key={notes._id}  notes={notes} updateNotes={updateNotes} deleteNote={deleteNote}  />;
+          return <div className='my-5 ' style={{marginLeft:'0%'}} >
+            <MyNoteItem key={notes._id}  notes={notes} updateNotes={updateNotes} deleteNote={deleteNote}  />
+          </div> ;
         })
         }
       </div> 

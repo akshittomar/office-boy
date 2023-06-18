@@ -112,7 +112,7 @@ useEffect(() => {
             <div className=" card-footer d-flex  " style={{ maxWidth: "45vp" }} >
               {/* <div className="d-flex justify-content-center container"> */}
               {props.option === "true" && <div className='container'>
-                <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => {
+                <h6 style={{ color: "black", cursor: "pointer"}} onClick={() => {
                   var s1 = note.title + "sec";
                   var s2 = note.title + "min";
                   var s3 = note.title + "hrs"; localStorage.removeItem(s1);

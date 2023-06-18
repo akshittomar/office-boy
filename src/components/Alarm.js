@@ -132,7 +132,7 @@ export default function Alarm(props) {
       {props.show === "true" &&
         <div className='container'>
           {hh === 0 && mm === 0 && ss === 0
-            && <h6>
+            && <h6> Add Timer
               <div className="dropdown  container">
                 <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id={`${hh === 0 && mm === 0 && ss === 0 ? "dropdownMenuButton1" : ""}`} data-bs-toggle="dropdown" aria-expanded="false">
                   <i className="fa fa-plus" aria-hidden="true"></i><i className="fa fa-bell-o" aria-hidden="true"></i>

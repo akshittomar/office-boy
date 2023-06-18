@@ -40,31 +40,31 @@ export default function AddNotes() {
 
 <form   >
   <div className="mb-3">
-    <label htmlFor="Title" className="form-label"  >Title</label>
+    <label htmlFor="Title" className="form-label" style={{fontFamily:"cursive"}}  >Title <i className="fa-solid fa-highlighter"></i></label>
     <input type="text" className="form-control" id="Title" name="Title" onChange={handelOnChange} value={note2add.Title} minLength={5} required  />
    
   </div>
   <div className="mb-3">
-    <label htmlFor="Description" className="form-label"  >Description</label>
+    <label htmlFor="Description" className="form-label"  style={{fontFamily:"cursive"}}  >Description <i className="fa-solid fa-book-open"></i></label>
     <input type="text" className="form-control" id="Description" name="Description"  value={note2add.Description} onChange={handelOnChange} minLength={5}required/>
   </div>
 
 
 
   <div className="mb-3">
-    <label htmlFor="Tag" className="form-label"  >TAG</label>
+    <label htmlFor="Tag" className="form-label"  style={{fontFamily:"cursive"}} >TAG <i className="fa-solid fa-tag"></i></label>
     <input type="text" className="form-control" id="Tag" name="Tag"   onChange={handelOnChange} value={note2add.Tag} minLength={5} required/>
   </div>
 
 
   <div className="input-group  mb-3 position-relative" style={{minWidth:"10%",maxWidth:"20%"}} >
-  <span className="input-group-text " >Finish Time </span>
+  <label className="input-group-text "  style={{fontFamily:"cursive"}} >Finish Time  </label>
   <input type="number" aria-label="Hrs" name='Hrs'value={note2add.Hrs} placeholder="hh" onChange={handelOnChange}  max="24" min="0" className="form-control "/>
   <input type="number" aria-label="Min" name='Min'value={note2add.Min} placeholder="mm" onChange={handelOnChange}  max="60" min="0" className="form-control "/>
   <input type="number" aria-label="Sec" name='Sec'value={note2add.Sec} placeholder="ss" onChange={handelOnChange} max="60" min="0" className="form-control "/>
   </div>
   
-  <small ><p className='mx-6 my-6'>Enter Time In hh:mm:ss Format </p></small>
+  <small ><p className='mx-6 my-6' style={{fontFamily:"monospace"}} >Enter Time In hh:mm:ss Format </p></small>
   
   
  
@@ -78,7 +78,7 @@ export default function AddNotes() {
 
 
  
-  <button  disabled={note2add.Title.length<5 || note2add.Description.length<5}  type="submit" className="btn btn-primary" onClick={handelClick}>ADD A NOTE</button>
+  <button  disabled={note2add.Title.length<5 || note2add.Description.length<5}  type="submit" className="btn btn-primary" onClick={handelClick}>ADD TODO <i className="fa-solid fa-briefcase"></i></button>
 </form>
 <h1>
 <Notes></Notes>

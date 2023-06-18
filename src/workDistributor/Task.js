@@ -530,7 +530,7 @@ var selectedChatCompare ;
                   {msg.length === 1 && <h3 style={{ color: 'grey' }}>Nothing To Show <i className="fa fa-deaf" aria-hidden="true"></i></h3>}
                   {msg.length !== 1 && msg.map((chat) => {
                     if (chat.length !== 0) {
-                      var str = new String(chat);
+                      var str = new String(chat); 
                       // var compar = new String(localStorage.getItem('mail'));
                       var compar = new String(modalWork.Umail);
                       // str+=compar;

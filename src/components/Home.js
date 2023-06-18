@@ -28,13 +28,25 @@ useEffect(() => {
   
 
   },[]);
-  return (<>
- {  localStorage.getItem('token') &&  <h1 >
-      { `${props.type==="MyTodo"?"Add Your Todo Here":""}`}
+
+  const headingStyle = {
+    background: 'radial-gradient(circle, #000000, rgb(88 199 228))',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    color: 'lavender',
+    fontFamily:"serif" 
+    
+    // backgroundColor:"red"
+  };
+
+  return (<div className='shadow-lg p-3 mb-5  rounded' style={{backgroundColor:"rgb(168 207 218 / 32%)",margin:"0px, 0px, 0px ,0px"}} >
+ {  localStorage.getItem('token') &&   <h1 style={headingStyle} >
+      { `${props.type==="MyTodo"?"Add Your Todo Here ":""}`}
+      <i className="fa-solid fa-pen fa-2xs" ></i>
     </h1> }
 
-{  localStorage.getItem('token') && <AddNotes type={props.type}/>}
+{  localStorage.getItem('token') && <AddNotes  type={props.type}/>}
 
-</>
+</div>
   )
 }
