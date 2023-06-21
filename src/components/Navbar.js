@@ -22,32 +22,32 @@ export default function Navbar() {
    
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-static bg-secondary">
+            <nav className="navbar navbar-expand-lg navbar-static bg-transparent">
                 <div className="container-fluid">
-                    <Link className={`navbar-brand my-3 ${location.pathname==='/'?"active   ":""} `} to={`${localStorage.getItem('token')?"/":"/login"}`}><h2>OFFICE-BOY </h2></Link>
+                    <Link className={`navbar-brand my-3 mx-0 ${location.pathname==='/'?"active   ":""} `} to={`${localStorage.getItem('token')?"/":"/login"}`}><h3 style={{fontFamily:"serif"}} >OFFICE-BOY <i className="fa-solid fa-users fa-sm"></i></h3></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div className="collapse navbar-collapse mx-5" id="navbarSupportedContent"  >
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 nav nav-tabs ">
                             <li className="nav-item">
-                                <Link className={`nav-link my-3 mx-3  ${location.pathname==='/'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/":"/login"}`}  ><h4>Home<i className="fa fa-home fa-1x my-2" aria-hidden="true"></i></h4></Link>
+                                <Link className={`nav-link my-3 mx-5  ${location.pathname==='/'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/":"/login"}`}  ><h4>To-Do<i className="fa-solid fa-person-running fa-sm"></i></h4></Link>
                             </li>
                             {/* <li className="nav-item">
-                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/about'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/about":"/login"}`} ><h4>About  <i className="fa fa-1x fa-id-badge my-2" aria-hidden="true"></i></h4></Link>
+                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/about'?"active bg-info ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/about":"/login"}`} ><h4>About  <i className="fa fa-1x fa-id-badge my-2" aria-hidden="true"></i></h4></Link>
                             </li> */}
                             
                             <li className="nav-item">
-                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/task'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/task":"/login"}`}><h4>Work-Distributer </h4></Link>
+                            <Link className={`nav-link my-3  mx-5 ${location.pathname==='/task'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/task":"/login"}`}><h4>CollabNet<i className="fa-solid fa-laptop-file fa-sm"></i></h4></Link>
                             </li>
                             <li className="nav-item">
-                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/mywork'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/mywork":"/login"}`}><h4>My-Work</h4></Link>
+                            <Link className={`nav-link my-3  mx-5 ${location.pathname==='/mywork'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/mywork":"/login"}`}><h4>MyWork<i className="fa-solid fa-truck-fast fa-xs"></i></h4></Link>
                             </li>
                             <li className="nav-item">
-                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/mykanban'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/mykanban":"/login"}`}><h4>Kanban</h4></Link>
+                            <Link className={`nav-link my-3  mx-5 ${location.pathname==='/mykanban'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/mykanban":"/login"}`}><h4>Kanban<i className="fa-solid fa-chart-line fa-sm "></i></h4></Link>
                             </li>
                             <li className="nav-item">
-                            <Link className={`nav-link my-3  mx-3 ${location.pathname==='/myprofile'?"active bg-secondary ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/myprofile":"/login"}`}><h4>Profile</h4></Link>
+                            <Link className={`nav-link my-3  mx-5 ${location.pathname==='/myprofile'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/myprofile":"/login"}`}><h4>Profile<i className="fa-regular fa-id-card fa-sm"></i></h4></Link>
                             </li>
                            
                         </ul>
@@ -58,7 +58,7 @@ export default function Navbar() {
                             <Link className={`btn btn-outline-dark  mx-4 btn-lg`} to="/sign-up" role="button">SIGN-UP</Link>
                             
                            
-                        </form>:<button className='btn btn-outline-dark btn-lg' onClick={handelLogOut}  >LOGOUT</button>}
+                        </form>:<button className='btn btn-outline-dark btn-lg' onClick={handelLogOut}  >LOGOUT <i className="fa-solid fa-right-from-bracket fa-sm"></i></button>}
                     </div>
                 </div>
             </nav>
