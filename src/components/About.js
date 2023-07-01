@@ -15,6 +15,7 @@ export default function About() {
       
           return <Alarm key={notes._id} notes={notes}  show="false" />;
         })}
+        <div>NAMSTE BRO</div>
     </>
   )
 }
