@@ -20,14 +20,14 @@ function Done() {
 
   
 {accomp.map((acc,index) => {
-          return < > 
-          <div></div>
+          return <div > 
+          
 <div className='mt-3 '>
 <t style={{color:"grey"}}>{index++ +1 } {acc.title}</t>
 </div>
 
 
-          </>;
+          </div>;
 
 
         })}

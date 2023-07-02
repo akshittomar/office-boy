@@ -17,7 +17,7 @@ function EmployChat() {
 
  
   return (
-    <>
+    <div>
      <div  >
                 <button type="button" ref={refChat} className="btn btn-secondary  " data-bs-toggle="modal" data-bs-target="#exampleModal2"   >
                   Discuss
@@ -47,7 +47,7 @@ function EmployChat() {
                 </div>
 
               </div>
-    </>
+    </div>
   )
 }
 

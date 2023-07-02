@@ -9,7 +9,7 @@ export default function Alarm(props) {
   const [ss, setss] = useState(0);
   const [use, setuse] = useState(false);
 
-
+  const [useAlarm, setuseAlarm] = useState(true);
 
   const [time, settime] = useState({ Hrs: 0, Min: 0, Sec: 0 });
   const context = useContext(noteContext);
@@ -111,6 +111,7 @@ export default function Alarm(props) {
         }
       } else {
         clearInterval(myInterval);
+
       }
     }, 999)
     return () => {
@@ -127,15 +128,15 @@ export default function Alarm(props) {
 
 
   return (
-    <>
+    <div>
       <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
       {props.show === "true" &&
         <div className='container'>
           {hh === 0 && mm === 0 && ss === 0
             && <h6> Add Timer
-              <div className="dropdown  container">
-                <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" id={`${hh === 0 && mm === 0 && ss === 0 ? "dropdownMenuButton1" : ""}`} data-bs-toggle="dropdown" aria-expanded="false">
-                  <i className="fa fa-plus" aria-hidden="true"></i><i className="fa fa-bell-o" aria-hidden="true"></i>
+              <div className="dropdown  container ">
+                <button className="btn btn-secondary btn-sm dropdown-toggle " type="button" id={`${hh === 0 && mm === 0 && ss === 0 ? "dropdownMenuButton1" : ""}`} data-bs-toggle="dropdown" aria-expanded="false">
+                  <i className="fa fa-plus" aria-hidden="true"></i><i className={use===false&&useAlarm===true?"fa fa-bell-o fa-shake":"fa fa-bell-o"} aria-hidden="true"></i>
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <a href='/'></a>
@@ -170,6 +171,6 @@ export default function Alarm(props) {
           }
         </div>}
 
-    </>
+    </div>
   )
 }

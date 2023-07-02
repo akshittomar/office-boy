@@ -21,14 +21,14 @@ function Doing() {
 
   
 {work.map((work,index) => {
-          return < > 
+          return <div > 
           <div></div>
 <div className='mt-3 '>
 <t style={{color:"grey"}}>{index++ +1 } {work.title} <i className="fa fa-external-link" onClick={()=>navigate('/task')} aria-hidden="true"></i></t>
 </div>
 
 
-          </>;
+          </div>;
 
 
         })}

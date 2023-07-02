@@ -371,7 +371,7 @@ var selectedChatCompare ;
 
 
   return (
-    <>
+    <div>
     <div style={{backgroundColor:"#eafafb54",borderRadius:"20px"}} ><img className='my-5 mx-5 px-5 ' style={{borderRadius:"20px",border:"solid 1px",borderColor:"#fcd6a0"}}  src={image} alt="" /></div>
 
       {notes.map((notes) => {
@@ -655,10 +655,10 @@ var selectedChatCompare ;
       <div className='row card-deck'>
         {work.length === 0 && `NO PENDING PROJECT `}
         {work.map((work) => {
-          return < > <NoteItem key={work._id} notes={work} updateNotes={updateModal} deleteNote={deleteWork} Chat={updateChat} cloured="false" option="true" />
+          return < div> <NoteItem key={work._id} notes={work} updateNotes={updateModal} deleteNote={deleteWork} Chat={updateChat} cloured="false" option="true" />
 
 
-          </>;
+          </div>;
 
 
         })}
@@ -746,7 +746,7 @@ var selectedChatCompare ;
                 </div>
                 <div className="mb-3">
                   <p><h5>Project Description</h5></p>
-                  {/* {<> <label htmlFor="eDescription" className="form-label"  >PROJECT DESCRIPTION</label>
+                  {/* {<div> <label htmlFor="eDescription" className="form-label"  >PROJECT DESCRIPTION</label>
                   <input type="text" className="form-control" id="eDescription" name="eDescription" onChange={handelOnModalChange} value={modalWork.eDescription} minLength={5} required /></> } */}
                   <JoditEditor
                     ref={editor}
@@ -812,7 +812,7 @@ var selectedChatCompare ;
 
 
 
-    </>
+    </div>
   )
 }
 

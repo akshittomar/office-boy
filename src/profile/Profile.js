@@ -19,7 +19,7 @@ export default function Profile() {
   }, [])
   
   return (
-    <>MY-PROFILR  WILL SHOW UP HERE 
+    <div>MY-PROFILR  WILL SHOW UP HERE 
     
     {notes.map((notes) => {
       
@@ -35,18 +35,15 @@ export default function Profile() {
     
 
     {accomp.map((acc,index) => {
-          return < > 
-          <div></div>
+          return 
+        
 <div className='mt-3 '>
 <t style={{color:"grey"}}>{index++ +1 } {acc.title}</t>
-</div>
-
-
-          </>;
+</div>;
 
 
         })}
     
-     </>
+     </div>
   )
 }

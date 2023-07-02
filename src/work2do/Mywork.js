@@ -58,7 +58,7 @@ setfirst('pp');
   }, [first,getTask,getUser]);
 
   return (
-    <>
+    <div>
       <h1>MY PENDING PROJECTS:</h1>
 
       <div>
@@ -74,6 +74,6 @@ setfirst('pp');
           return <NoteItem key={todo._id} notes={todo} cloured="false" option="false" />;
         })} 
       </div>
-    </>
+    </div>
   );
 }

@@ -19,7 +19,7 @@ function MyNoteItem(props) {
     }, [note])
 
     return (
-    <>
+    <div>
 
             {/* <div className="col-md-3 my-4 mx-3 card-deck"   style={{backgroundImage:'url()'}}  > */}
 
@@ -118,7 +118,7 @@ function MyNoteItem(props) {
 
 
 
-            </>
+            </div>
             )
 }
 

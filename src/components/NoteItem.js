@@ -20,8 +20,7 @@ export default function NoteItem(props) {
   const note = props.notes;
 
   const deleteNote = props.deleteNote;
-
-  const updateNote = props.updateNotes;
+const updateNote = props.updateNotes;
 
 const chatFunc = props.Chat;
 
@@ -99,10 +98,10 @@ useEffect(() => {
 
           </div>
           <hr />
-          {props.cloured === "true" ? <h3 className="card-text container overflow-auto" style={{ height: "15vh" }} ><u><strong>Description:</strong></u><br />{note.description}</h3> : <><h3 className="card-text container" ><u><strong>Description:</strong></u><br /><div dangerouslySetInnerHTML={{ __html: note.description }} ></div></h3>
+          {props.cloured === "true" ? <h3 className="card-text container overflow-auto" style={{ height: "15vh" }} ><u><strong>Description:</strong></u><br />{note.description}</h3> : <div><h3 className="card-text container" ><u><strong>Description:</strong></u><br /><div dangerouslySetInnerHTML={{ __html: note.description }} ></div></h3>
 
 
-          </>
+          </div>
 
           }
           <br />

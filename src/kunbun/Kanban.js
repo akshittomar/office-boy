@@ -55,7 +55,7 @@ function Kanban() {
      
   }, [])
   return (
-    <>
+   
       <div style={{ display: 'flex' }} className='mx-5'>
         <div style={{ flex: 3 }}>
           <table className="table table-hover">
@@ -106,7 +106,7 @@ function Kanban() {
           </table>
         </div>
       </div>
-    </>
+
   );
 }
 

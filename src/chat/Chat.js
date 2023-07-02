@@ -3,13 +3,13 @@ import React from 'react'
 import './Style.css'
 function Chat() {
   return (
-    <>
+    <div>
     <div className='body'  >Chat
     mmmmmmmmmmmmmmmmmmmm
     mmmmmmmmmmmmmmmmmmmmmm
     mmmmmmmmmm</div>
     
-    </>)
+    </div>)
 }
 
 export default Chat

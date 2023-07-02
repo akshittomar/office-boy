@@ -19,14 +19,14 @@ function Todo() {
 
   
 {task.map((work,index) => {
-          return < > 
-          <div></div>
+          return <div > 
+          
 <div className='mt-3 '>
 <t style={{color:"grey"}}>{index++ +1 } {work.title}</t>
 </div>
 
 
-          </>;
+          </div>;
 
 
         })}

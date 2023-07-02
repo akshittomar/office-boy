@@ -6,6 +6,7 @@ import NotesUpdate from './NotesUpdate';
 import MyNoteItem from './MyNoteItem';
 // import AddNotes from './AddNotes';
 // import {useNavigate} from 'react-router-dom';
+import Nowork from './Nowork';
 
 import { useRef , useState } from 'react';
 
@@ -107,7 +108,7 @@ setnote({...note, [e.target.name]:e.target.value})
   }
 
   return (
-    <>
+    <div>
 
 {/* //MERE BHAI ERROR YEH HAI KI YEH UPDATE MODAL TOH BHAI EK NOTE COMPONENT SE CHL RHA HAI IT IS NOT CONNECTED TO "NOTES"---> I.E. NOTES COMPONENT OF DATABASE  */}
 
@@ -196,7 +197,8 @@ setnote({...note, [e.target.name]:e.target.value})
 
       <div className="row" >  
         
-        {notes.length===0  && `NO PENDING WORK ` }
+        {/* {notes.length===0  && `NO PENDING WORK ` } */}
+        {notes.length===0  && <Nowork/> }
         { notes.length!==0  && 
          notes.map((notes) => {
           return <div className='my-5 ' style={{marginLeft:'0%'}} >
@@ -208,6 +210,6 @@ setnote({...note, [e.target.name]:e.target.value})
 
       {/* <NotesUpdate  notes={notes} updateNotes={updateNotes} deleteNote={deleteNote} option="true" /> */}
       
-    </>
+    </div>
   )
 }

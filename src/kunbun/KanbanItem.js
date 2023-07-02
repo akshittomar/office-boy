@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // import Doing from './context/Doing';
 function KanabanItem() {
   return (
-    <>
+    <div>
     
     
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,7 +31,7 @@ function KanabanItem() {
 
 
 
-    </>
+    </div>
   )
 }
 

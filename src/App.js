@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import About from './components/About';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
@@ -18,7 +19,7 @@ import Kanban from './kunbun/Kanban';
 function App() {
   return (
    
-<>
+<div>
 
 <NoteState>
 <Router>
@@ -41,7 +42,7 @@ function App() {
    </Router>
    </NoteState>
    
-</>
+</div>
   );
 }
 

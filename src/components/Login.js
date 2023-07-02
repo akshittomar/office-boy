@@ -1,8 +1,9 @@
-import {React,useState} from 'react'
+import React,{useState} from 'react'
 import {useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
-function Login() {
+import loginImage from "./login.jpg"
+export default function Login() {
   let navigate = useNavigate();
   const context = useContext(noteContext);
   const {setmail} = context ;
@@ -73,7 +74,12 @@ function Login() {
 // getNotes();
   }
 
-
+  const loginStyle = {
+    backgroundImage: `url(${loginImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    minHeight: "100vh"
+  };
 
 
 
@@ -132,27 +138,27 @@ setuserInfo({...userInfo, [e.target.name]:e.target.value})
 
 
   return (
-    <>
-    <h3 className='mx-3'>LOGIN HERE</h3>
+    <div style={loginStyle}>
+    <h1 className='mx-3' style={{fontFamily:"monospace"}}>WELCOME BACK <i className="fa-solid fa-door-open"></i></h1>
     <div  className='mx-3'>
     <form  onSubmit={afterSubmit}  >
   <div className="mb-3">
-    <label htmlFor="email" className="form-label">email</label>
-    <input type="email" className="form-control" onChange={handelOnChange} value={userInfo.email} name="email" id="email" />
+    <label htmlFor="email" className="form-label">Email</label>
+    <input type="email" className="form-control" style={{width:"25%",border:"solid black 1px"}} onChange={handelOnChange} value={userInfo.email} name="email" id="email" />
   </div>
   <div className="mb-3">
-    <label htmlFor="password" className="form-label">password</label>
-    <input type="password" className="form-control" value={userInfo.password}  onChange={handelOnChange} name="password" id="password" minLength={5} required/>
+    <label htmlFor="password" className="form-label">Password</label>
+    <input type="password" className="form-control" style={{width:"25%",border:"solid black 1px"}} value={userInfo.password}  onChange={handelOnChange} name="password" id="password" minLength={5} required/>
   </div>
   
   <button type="submit" className="btn btn-primary" disabled={ !userInfo.email || !userInfo.password}>Submit</button>
 </form>
     </div>
-    </>
+    </div>
   )
 }
 
-export default Login
+// export default Login;
 
 
 

@@ -117,7 +117,7 @@ function NotesUpdate(props) {
   const updateNotes = props.updateNotes;
 
   return (
-    <>
+    <div>
       {/* <div className="row">
         {notes.length === 0 ? (
           <p>NO PENDING WORK</p>
@@ -134,7 +134,7 @@ function NotesUpdate(props) {
           ))
         )}
       </div> */}
-    </>
+    </div>
   );
 }
 
