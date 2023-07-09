@@ -91,9 +91,6 @@ router.put('/fetchalltask',fetchuser,async (req,res)=> {
 router.post('/addwork',fetchuser,[
 body('title','ENTER A VALID TITLE NAME ').isLength({min:5}),
 body('description','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({min:5}),
-
-
-
 ],async (req,res)=> {
     
   var error  = "SORRY A PROJECT THIS NAME ALREADY EXISTS ";

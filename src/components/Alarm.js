@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import noteContext from "../context/notes/noteContext";
-
+import Sound from './alarm.mp3';
+import { Howl } from 'howler';
 export default function Alarm(props) {
   // console.log(props.type)
   const note = props.notes;
@@ -9,14 +10,14 @@ export default function Alarm(props) {
   const [ss, setss] = useState(0);
   const [use, setuse] = useState(false);
 
-  const [useAlarm, setuseAlarm] = useState(true);
+  const [useAlarm, setuseAlarm] = useState(false);
 
   const [time, settime] = useState({ Hrs: 0, Min: 0, Sec: 0 });
   const context = useContext(noteContext);
   const { mailing } = context;
 
   useEffect(() => {
-
+    
     var s1 = note.title + "sec";
     var s2 = note.title + "min";
     var s3 = note.title + "hrs";
@@ -31,7 +32,7 @@ export default function Alarm(props) {
     }
     console.log("     s   ========>  " + s1 + s2 + s3);
     console.log(use + "use is thhhis  " + localStorage.getItem(s1) + " " + localStorage.getItem(s2) + " " + localStorage.getItem(s3));
-  }, [])
+  }, [useAlarm,use])
 
 
   const handelClick = (e) => {
@@ -54,6 +55,10 @@ export default function Alarm(props) {
     var s1 = note.title + "sec";
     var s2 = note.title + "min";
     var s3 = note.title + "hrs";
+    const sound = new Howl({
+      src: [Sound],
+      loop:true,
+    });
     let myInterval = setInterval(() => {
 
       if (use === true) {
@@ -67,42 +72,30 @@ export default function Alarm(props) {
         if (ss === 0) {
           if (mm === 0) {
             if (hh === 0 && mm === 0 && ss === 0) {
-
+        
+              sound.play();
               clearInterval(myInterval);
               localStorage.removeItem(s1);
               localStorage.removeItem(s2);
               localStorage.removeItem(s3);
-              window.alert("Hogya" + note.title);
+              window.alert("YOU ARE DONE WITH " + note.title);
+              sound.pause();
+              
               mailing("akshitt125@gmail.com", note.title, note.description);
               setuse(false);
-
-              // setMinutes(0);
-              //     if(note.hrs!==0 || note.min!==0 || note.sec!==0 )
-              //     {
-              //     setmm(0);
-              //     // setSeconds(0);
-              //     localStorage.setItem(s2,mm.toString());
-              //     setss(0);
-              //     localStorage.setItem(s1,ss.toString());
-              //     sethh(0);
-              //     localStorage.setItem(s3,hh.toString())
-              //     // sethours(0);}
-
-              //    }
             }
             else {
-              // sethours(hh-1);
-              sethh(hh - 1);
+               sethh(hh - 1);
               localStorage.setItem(s3, (hh - 1).toString());
               setmm(59);
-              // setMinutes(59);
+              
               localStorage.setItem(s2, mm.toString());
               setss(59);
               localStorage.setItem(s1, ss.toString());
-              // setSeconds(59);
+              
             }
           } else {
-            // setMinutes(mm - 1);
+            
             setmm(mm - 1);
             localStorage.setItem(s2, (mm - 1).toString());
             setss(59);
@@ -136,7 +129,7 @@ export default function Alarm(props) {
             && <h6> Add Timer
               <div className="dropdown  container ">
                 <button className="btn btn-secondary btn-sm dropdown-toggle " type="button" id={`${hh === 0 && mm === 0 && ss === 0 ? "dropdownMenuButton1" : ""}`} data-bs-toggle="dropdown" aria-expanded="false">
-                  <i className="fa fa-plus" aria-hidden="true"></i><i className={use===false&&useAlarm===true?"fa fa-bell-o fa-shake":"fa fa-bell-o"} aria-hidden="true"></i>
+                  <i className="fa fa-plus" aria-hidden="true"></i><i className={useAlarm===true?"fa fa-bell-o fa-shake":"fa fa-bell-o"} aria-hidden="true"></i>
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <a href='/'></a>
@@ -170,7 +163,13 @@ export default function Alarm(props) {
                 </ul></div></h6>
           }
         </div>}
-
+        {/* <div>
+        <audio controls autoplay loop>
+          <source src={Sound} type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+      </div> */}
+      
     </div>
   )
 }

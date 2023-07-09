@@ -431,30 +431,18 @@ var selectedChatCompare ;
 
         <div className="input-group mb-3" style={{ display: 'flex', flexDirection: "column" }} >
           <label className="input-group-text " htmlFor="inputGroupSelect07">Employee:</label>
-          {/* <select className="form-select" id="inputGroupSelect07" onChange={(e)=>{handelMail()}} name="Empmail" value={work2add.Empmail}   > */}
-          {/* <option disabled={true} value={mail} placeholder="Choose..."  >{mail}</option> */}
+       
           {
             employee.map((employ) => {
               return <button className=" btn btn-light mb-1" key={employ._id} value={employ.email} onClick={(e) => { e.preventDefault(); handelMail(e) }} style={{ border: "groove grey 1px" }}  >
 
                 Name: {employ.name} , Mail: {employ.email}
               </button>
-              //     var opt = document.createElement('option');
-              //     opt.innerHTML = "key={employ._id} value={employ.Empmail} onClick={()=>console.log('namaste ')}"
-              //  document.getElementById('inputGroupSelect07').appendChild(opt);
-
-              // var opt = document.createElement('option');
-              // opt.setAttribute('key', employ._id);
-              // opt.setAttribute('value', employ.email);
-              // // opt.setAttribute('onClick', ()=>console.log('namaste '+employ.Empmail));
-              //   console.log('select k andar '+employ.email);
-              // opt.innerHTML = `Name: ${employ.name}, Mail: ${employ.email}`;
-              // document.getElementById('inputGroupSelect07').appendChild(opt);
+            
 
             })
           }
-          {/* </select> */}
-        </div>
+         </div>
 
 
 

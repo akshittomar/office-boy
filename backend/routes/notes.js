@@ -62,7 +62,7 @@ try{
     //thunderclient mai jakr humne body mai diya tha yeh sab kuch to vhi se aagya yeh sab idhar 
 
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+    if (!errors.isEmpty()) { 
       return res.status(400).json({ errors: errors.array() });
     }
 const note  = new Notes({// "new Notes" karke bhai request k body ka content ek mongoDB model ban gya hai 

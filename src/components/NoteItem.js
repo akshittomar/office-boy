@@ -90,7 +90,11 @@ useEffect(() => {
     // <div className="col-md-3 my-4 mx-3 "    data-aos="zoom-in-up" >
     <div className="col-md-3 my-4 mx-3 card-deck"     >
       <div className="card my-4  " style={{ width: "50vp" }}>
-
+      <div className="card-header">
+      
+            {note.epost}
+          
+  </div>
         <div className="card-body  ">
 
           <div className='d-flex  '>
@@ -105,6 +109,7 @@ useEffect(() => {
 
           }
           <br />
+          
 
           {
             // <div className=" card-footer d-flex justify-content-between container" > original it was like this 

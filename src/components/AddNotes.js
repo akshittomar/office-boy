@@ -31,7 +31,7 @@ export default function AddNotes() {
       getNotes();
     }
     const handelOnChange= (e) =>{
- setnote2add({...note2add, [e.target.name]:e.target.value})
+ setnote2add({...note2add, [e.target.name]:e.target.value.toUpperCase()})
     }
    
   return (
