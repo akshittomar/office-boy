@@ -85,7 +85,7 @@ cors:{
 
   socket.on("newMessage",(content)=>{
     var chat = content.chat;
-    // console.log("yes yes yesssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+    
     socket.in(content.id).emit("messageReceived",content);
     console.log("content id is ");
         console.log(content.id);

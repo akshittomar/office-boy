@@ -46,7 +46,7 @@ var selectedChatCompare ;
   const [work2add, setwork2add] = useState({ Title: "", Description: "", Tag: "default", Epost: "", Empmail: "", Erank: 0, Hrs: 0, Min: 0, Sec: 0 });
   const prevMessageRef = useRef("");
 
-  const [modalWork, setmodalWork] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat: "" });
+  const [modalWork, setmodalWork] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat: "" ,Name:"okkkk"});
   const [dummy, setdummy] = useState({ Title: "" });
   const [change, setchange] = useState(false);
   const [chat, setchat] = useState("");
@@ -55,16 +55,19 @@ var selectedChatCompare ;
   const navREF = useRef(null);
   const refCloseChat = useRef(null);
   const updateChat = (currentNotes) => {
+    console.log("this is it ");
     console.log(currentNotes);
 
-    // setdummy({Title:currentNotes.title});
+    // setdummy({Title:currentNotes.title})
+    // window.alert(currentNotes.empname); 
 
     setdummy({ Title: currentNotes.title });
-    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.epost, Urank: currentNotes.erank, Umail: currentNotes.empemail, chat: '' });
+    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.epost, Urank: currentNotes.erank, Umail: currentNotes.empemail, chat: '', Name:currentNotes.empname });
     setmodalDesc(currentNotes.description);
-    // settitle({tit:currentNotes.title})   ;
+     
+    // settitle({tit:currentNotes.title}); 
     // console.log("UPDATING TITLE "+title.tit)
-    // setnote(currentNotes);99
+    // setnote(currentNotes);99 
     var str = new String(currentNotes.chat);
     setmsg(str.split("\n\n"));
     console.log("AFTER SETCHAT");
@@ -89,7 +92,12 @@ var selectedChatCompare ;
     if (newMessage.chat !== prevMessageRef.current) {
 
 
-    const devi = document.createElement('div')
+    const devi = document.createElement('div');
+    const youLabel = document.createElement('span');
+    console.log(modalWork.Name);
+    youLabel.textContent = modalWork.Name;
+    youLabel.style.fontSize = "50%";
+    youLabel.style.marginRight="99%";
     const newChat = document.createElement('p');
     newChat.textContent = newMessage.chat;
     // devi.textContent = modalWork.chat;
@@ -115,6 +123,7 @@ var selectedChatCompare ;
     devi.classList.add('mx-0' ,'my-1' ,'py-1', 'px-1');
     // msgRef.current.appendChild(newChat);
     msgRef.current.appendChild(devi);
+    devi.appendChild(youLabel);
     devi.appendChild(newChat);
 
 
@@ -188,11 +197,14 @@ var selectedChatCompare ;
 
 
 
-
+    
     setchange(true);
-    // setmail({employee.Empmail.slice(e.target.value.lastIndexOf(" ") + 1)});
-    addWork(work2add.Title, content, work2add.Tag, post, work2add.Erank, mail);
-    // addWork("sdsdsdsdsc","swdwsdwdwd","wdwsdswdwsdwsdwsd","SDE",5,work2add.Empmail.slice(work2add.Empmail.lastIndexOf(" "+1)));
+
+    
+const joiningDateString = new String(localStorage.getItem("DOJ"));
+const joiningDate = new Date(joiningDateString);
+ addWork(work2add.Title, content, work2add.Tag, post, work2add.Erank, mail,localStorage.getItem("NAME"),joiningDate,);
+    
 
 
     if (work2add.Hrs !== 0 || work2add.Min !== 0 || work2add.Sec !== 0) {
@@ -434,7 +446,7 @@ var selectedChatCompare ;
        
           {
             employee.map((employ) => {
-              return <button className=" btn btn-light mb-1" key={employ._id} value={employ.email} onClick={(e) => { e.preventDefault(); handelMail(e) }} style={{ border: "groove grey 1px" }}  >
+              return <button className=" btn btn-light mb-1" key={employ._id} value={employ.email} onClick={(e) => { e.preventDefault(); handelMail(e);localStorage.setItem("NAME",employ.name);localStorage.setItem("DOJ",employ.date) }} style={{ border: "groove grey 1px" }}  >
 
                 Name: {employ.name} , Mail: {employ.email}
               </button>
@@ -523,11 +535,17 @@ var selectedChatCompare ;
                       var compar = new String(modalWork.Umail);
                       // str+=compar;
                       if (str.endsWith('sender')) {
-                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }} className='mx-0 my-1 py-1 px-1 ' > <p  className='px-1'style={{ color: 'white',width: '-webkit-fill-available'}} >{str.substring(0, str.length - 6)}</p>  </div>
+                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }}
+                        className='mx-0 my-1 py-1 px-1 ' > <p  className='px-1'style={{ color: 'white',width: '-webkit-fill-available'}} >{str.substring(0, str.length - 6)}
+                        </p>
+                          </div>
 
                       }
                       else {
-                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}} className='mx-0 my-1 py-1 px-1 ' > <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
+                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}} 
+                        className='mx-0 my-1 py-1 px-1 ' > 
+
+                         <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
                       }
                     }
                   })
@@ -541,9 +559,14 @@ var selectedChatCompare ;
                   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
               <label htmlFor="chat" className="form-label"  ></label>
                <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} value={modalWork.chat} required ></input>
-                  <button type="button" className="btn btn-primary my-2" onClick={(e) => {
+                  <button type="button" className="btn btn-primary my-2" onClick={(e) => { 
                   handelModal(e);
                   const devi = document.createElement('div')
+                  const youLabel = document.createElement('span');
+                  youLabel.textContent = "YOU";
+                  youLabel.style.fontSize = "50%";
+                  youLabel.style.marginRight="99%";
+                  
                   const newChat = document.createElement('p');
                   newChat.textContent = modalWork.chat;
                   // devi.textContent = modalWork.chat;
@@ -569,6 +592,7 @@ var selectedChatCompare ;
                   devi.classList.add('mx-0' ,'my-1' ,'py-1' ,'px-1');
                   // msgRef.current.appendChild(newChat);
                   msgRef.current.appendChild(devi);
+                  devi.appendChild(youLabel);
                   devi.appendChild(newChat);
 
                   setmodalWork(prevState => ({ ...prevState, chat: "" }));
@@ -643,10 +667,10 @@ var selectedChatCompare ;
       <div className='row card-deck'>
         {work.length === 0 && `NO PENDING PROJECT `}
         {work.map((work) => {
-          return < div> <NoteItem key={work._id} notes={work} updateNotes={updateModal} deleteNote={deleteWork} Chat={updateChat} cloured="false" option="true" />
+          return < > <NoteItem key={work._id} notes={work} updateNotes={updateModal} deleteNote={deleteWork} Chat={updateChat} cloured="false" option="true" />
 
 
-          </div>;
+          </>;
 
 
         })}

@@ -92,7 +92,7 @@ useEffect(() => {
       <div className="card my-4  " style={{ width: "50vp" }}>
       <div className="card-header">
       
-            {note.epost}
+            {note.epost+" "+note.empname}
           
   </div>
         <div className="card-body  ">

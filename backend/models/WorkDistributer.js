@@ -37,6 +37,12 @@ const WorkDistributer = new Schema({
     chat:{
         type:String ,
         default:"",
+    },
+    empname:{
+        type:String
+    },
+    edoj:{
+        type:Date
     }
 
 })

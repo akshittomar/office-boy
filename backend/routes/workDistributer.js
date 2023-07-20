@@ -96,8 +96,8 @@ body('description','ENTER A VALID DESCRIPTION OF MIN LENGTH OF 5 ').isLength({mi
   var error  = "SORRY A PROJECT THIS NAME ALREADY EXISTS ";
   var success = false;
 try{
-    const {title,description,epost,erank,tag,empemail} = req.body ;
-    console.log(req.body.title);
+    const {title,description,epost,erank,tag,empemail,empname,empdoj} = req.body ;
+    
     let user =await  Work.find({title: req.body.title});
     if(user.length!==0)
     {
@@ -114,7 +114,7 @@ try{
       return res.status(400).json({ errors: errors.array() ,success});
     }
 const work = new Work({
-    title,description,epost,erank,tag,empemail,user: req.user.id
+    title,description,epost,erank,tag,empemail,empname,empdoj,user: req.user.id
 })
 
 const savedWork = await work.save();

@@ -320,9 +320,9 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 
 
 
-      const addWork = async (title,description,tag,epost,erank,empemail)=>{
+      const addWork = async (title,description,tag,epost,erank,empemail,empname,empdoj)=>{
 
-        console.log("PARAMETERS OF ADD WORK "+title+" "+description+" "+tag+" "+epost+" "+erank+" "+empemail);
+        console.log("PARAMETERS OF ADD WORK "+title+" "+description+" "+tag+" "+epost+" "+erank+" "+empemail+" "+empname+" "+empdoj);
     
     
         const response = await fetch( `${host}/api/sendwork/addwork`, {
@@ -331,7 +331,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
             'Content-Type':'application/json',
            'authToken' :localStorage.getItem('token'),
           },
-          body: JSON.stringify({title,description,tag,epost,erank,empemail})
+          body: JSON.stringify({title,description,tag,epost,erank,empemail,empname,empdoj})
         });
     
         const json = await response.json();
