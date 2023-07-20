@@ -60,21 +60,77 @@ router.put('/fetchallepm',fetchuser,async (req,res)=> {
         res.status(500).send("INTERNAL SERVER  ERROR ");
     }
     })
-router.put('/fetchalltask',fetchuser,async (req,res)=> {
-   try{
-        const {taskFind}=req.body;
-        console.log("requested user email is this "+taskFind);
-        const task = await Work.find({empemail:taskFind});
-        console.log(task);
-        res.json(task);
-        }
-        catch(error)
-        {
-            console.error(error.message);
-            res.status(500).send("INTERNAL SERVER  ERROR ");
-        }
-        })
 
+
+
+
+
+// router.put('/fetchalltask',fetchuser,async (req,res)=> {
+//    try{
+//         const {taskFind}=req.body;
+//         console.log("requested user email is this "+taskFind);
+//         const task = await Work.find({empemail:taskFind});
+//         const user = await Work.find({ user: req.user.id }).populate('user', 'name epost');
+//         console.log("********************************************************");
+//         console.log(user);
+
+//         console.log("********************************************************");
+//         // console.log(user);
+//         // res.json(task);
+//         res.json(task.map(work => ({
+//           _id: work._id,
+//           title: work.title,
+//           description: work.description,
+//           // epost: work.epost,
+//           erank: work.erank,
+//           leaves: work.leaves,
+//           tag: work.tag,
+//           chat: work.chat,
+//           empname: work.empname,
+//           edoj: work.edoj,
+//           name: user.name,
+//           epost: user.epost,
+          
+//         })));
+//         }
+//         catch(error)
+//         {
+//             console.error(error.message);
+//             res.status(500).send("INTERNAL SERVER  ERROR ");
+//         }
+//         })
+
+
+
+router.put('/fetchalltask', fetchuser, async (req, res) => {
+  try {
+    const { taskFind } = req.body;
+    console.log("requested user email is this " + taskFind);
+
+    const task = await Work.find({ empemail: taskFind }).populate('user', 'name epost');
+
+    // console.log(task);
+
+    res.json(task.map(work => ({
+      _id: work._id,
+      title: work.title,
+      description: work.description,
+      erank: work.erank,
+      leaves: work.leaves,
+      tag: work.tag,
+      chat: work.chat,
+      empname: work.empname,
+      edoj: work.edoj,
+      post:work.epost,
+        name: work.user.name,
+        epost: work.user.epost
+      
+    })));
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("INTERNAL SERVER ERROR");
+  }
+});
 
 
 

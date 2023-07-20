@@ -1,6 +1,7 @@
 import React, { useContext,useEffect,useState,useRef} from 'react'
 import noteContext from '../context/notes/noteContext';
 import NoteItem from '../components/NoteItem';
+import Workcard from './Workcard';
 import io from 'socket.io-client';
 function  WorkItem(props) {
 
@@ -21,7 +22,7 @@ var selectedChatCompare ;
     const [first, setfirst] = useState([]);
     const [msg, setmsg] = useState([]);
     const prevMessageRef = useRef("");
-    const [content, setcontent] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat:"" });
+    const [content, setcontent] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", chat:"" ,Bname:"",Bpost:""});
     // useEffect(() => {
     //   // socket = io(ENDPOINT);
     // socket.on("messageReceived",(newMessage)=>{
@@ -88,6 +89,11 @@ var selectedChatCompare ;
           // settask(newMessage);
   
           const devi = document.createElement("div");
+          const youLabel = document.createElement('span');
+          
+          youLabel.textContent = localStorage.getItem('BNAME');
+          youLabel.style.fontSize = "50%";
+          youLabel.style.marginRight="99%";
           const newChat = document.createElement("p");
           newChat.textContent = newMessage.chat;
           // devi.textContent = modalWork.chat;
@@ -105,6 +111,7 @@ var selectedChatCompare ;
           Object.assign(devi.style, style);
           devi.classList.add("mx-0", "my-1", "py-1", "px-1");
           msgRef.current.appendChild(devi);
+          devi.appendChild(youLabel);
           devi.appendChild(newChat);
   
           prevMessageRef.current = newMessage.chat;
@@ -142,7 +149,9 @@ const updateChat=(note2)=>{
   
   if(note2){refChat.current.click();
   
-    setcontent({ id: note2._id, eTitle: note2.title, eDescription: note2.description, eTag: note2.tag, Upost: note2.Upost, Urank: note2.Urank, Umail: note2.Umail ,chat:""});
+    setcontent({ id: note2._id, eTitle: note2.title, eDescription: note2.description, eTag: note2.tag, Upost: note2.Upost, Urank: note2.Urank, Umail: note2.Umail ,chat:"",Bname:note2.name,Bpost:note2.epost});
+    
+    localStorage.setItem("BNAME",note2.name);
     var str = new String(note2.chat);
     setmsg(str.split("\n\n"));
     
@@ -187,7 +196,7 @@ const sendChat = (e) => {
   // localStorage.removeItem(s3);
   editWork(content.id, content.eTitle, content.eDescription, content.eTag, content.Upost, erank, content.Umail,content.chat+'receiver');
   // localStorage.removeItem(s1);
-  getAllWork();
+  // getAllWork();
   getTask();
   
   // socket = io(ENDPOINT);
@@ -205,9 +214,9 @@ const sendChat = (e) => {
     <div>
         
         <div className='row'>
-         {first &&  first.length === 0 && `NO PENDING PROJECT `}
+         {first &&  first.length === 0 && `NO PENDING PROJECT ` }
         {first.map((todo) => {
-          return <NoteItem key={todo._id} notes={todo} cloured="false" option="false" Chat={updateChat} />;
+          return <Workcard key={todo._id} notes={todo} cloured="false" option="false" Chat={updateChat} />;
         })} 
         
       </div>
@@ -247,11 +256,16 @@ const sendChat = (e) => {
                     // str+=compar;
                     // var compar = new String(modalWork.Umail);
                     if(str.endsWith('receiver')){
-                      return<div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }}  className='mx-0 my-1 px-2 py-0 ' > <p style={{color: 'white',width: '-webkit-fill-available'}} >{str.substring(0,str.length-8)}</p> </div>
+                      return<div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }} 
+                       className='mx-0 my-1 px-2 py-0 ' > 
+                      <span style={{fontSize:'50%',marginRight:'99%',color:"white"}}>YOU</span>
+                      <p style={{color: 'white',width: '-webkit-fill-available'}} >{str.substring(0,str.length-8)}
+                      </p> </div>
                       
                     }
                     else{ 
-                      return<div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}}  className='mx-0 my-1 py-1 px-1' > <p style={{color:'black'}} >{str.substring(0,str.length-6)}</p> </div>
+                      return<div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}}  className='mx-0 my-1 py-1 px-1' >
+                         <span style={{fontSize:'50%',marginRight:'99%'}}>{content.Bname.toUpperCase()}</span> <p style={{color:'black'}} >{str.substring(0,str.length-6)}</p> </div>
                     }
                   }
                   })
@@ -266,7 +280,12 @@ const sendChat = (e) => {
                         <button type="button" className="btn btn-primary my-2" onClick={(e) => {
                   sendChat(e);
                   // document.getElementById('chat').innerText = '';
-                  const devi = document.createElement('div')
+                  const devi = document.createElement('div');
+                  const youLabel = document.createElement('span');
+                  youLabel.textContent = "YOU";
+                  youLabel.style.fontSize = "50%";
+                  youLabel.style.color="white";
+                  youLabel.style.marginRight="99%";
                   const newChat = document.createElement('p');
                   newChat.textContent = content.chat;
                   // devi.textContent = modalWork.chat;
@@ -292,6 +311,7 @@ const sendChat = (e) => {
                   devi.classList.add('mx-0' ,'my-1' ,'py-1' ,'px-1');
                   // msgRef.current.appendChild(newChat);
                   msgRef.current.appendChild(devi);
+                  devi.appendChild(youLabel);
                   devi.appendChild(newChat);
 
                   setcontent(prevState => ({ ...prevState, chat: "" }));

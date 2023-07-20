@@ -60,7 +60,7 @@ var selectedChatCompare ;
 
     // setdummy({Title:currentNotes.title})
     // window.alert(currentNotes.empname); 
-
+localStorage.setItem("WNAME",currentNotes.empname);
     setdummy({ Title: currentNotes.title });
     setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.epost, Urank: currentNotes.erank, Umail: currentNotes.empemail, chat: '', Name:currentNotes.empname });
     setmodalDesc(currentNotes.description);
@@ -95,7 +95,7 @@ var selectedChatCompare ;
     const devi = document.createElement('div');
     const youLabel = document.createElement('span');
     console.log(modalWork.Name);
-    youLabel.textContent = modalWork.Name;
+    youLabel.textContent = localStorage.getItem("WNAME");
     youLabel.style.fontSize = "50%";
     youLabel.style.marginRight="99%";
     const newChat = document.createElement('p');
@@ -399,7 +399,7 @@ const joiningDate = new Date(joiningDateString);
         <div className="mb-3 ">
 
           <label htmlFor="Title" className="form-label"  >Project Name</label>
-          <input type="text" className="form-control" id="Title" name="Title" onChange={handelOnChange} value={work2add.Title} minLength={5} required />
+          <textarea type="text" className="form-control" id="Title" name="Title" onChange={handelOnChange} value={work2add.Title} minLength={5} required />
 
         </div>
         <div className="mb-3">
@@ -536,7 +536,9 @@ const joiningDate = new Date(joiningDateString);
                       // str+=compar;
                       if (str.endsWith('sender')) {
                         return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }}
-                        className='mx-0 my-1 py-1 px-1 ' > <p  className='px-1'style={{ color: 'white',width: '-webkit-fill-available'}} >{str.substring(0, str.length - 6)}
+                        className='mx-0 my-1 py-1 px-1 ' >
+                           <span style={{fontSize:'50%',marginRight:'99%',color:"white"}}>YOU</span>
+                           <p  className='px-1'style={{ color: 'white',width: '-webkit-fill-available'}} >{str.substring(0, str.length - 6)}
                         </p>
                           </div>
 
@@ -544,7 +546,7 @@ const joiningDate = new Date(joiningDateString);
                       else {
                         return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}} 
                         className='mx-0 my-1 py-1 px-1 ' > 
-
+                         <span style={{fontSize:'50%',marginRight:'99%'}}>{localStorage.getItem("WNAME")}</span>
                          <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
                       }
                     }
@@ -753,7 +755,7 @@ const joiningDate = new Date(joiningDateString);
                 <div className="mb-3">
 
                   <label htmlFor="eTitle" className="form-label"  >PROJECT NAME </label>
-                  <input type="text" className="form-control" id="eTitle" name="eTitle" onChange={handelOnModalChange} value={modalWork.eTitle} minLength={5} required />
+                  <input type="text"  className="form-control" id="eTitle" name="eTitle" onChange={handelOnModalChange} value={modalWork.eTitle} minLength={5} required  />
 
                 </div>
                 <div className="mb-3">
