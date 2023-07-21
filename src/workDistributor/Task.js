@@ -6,17 +6,16 @@ import JoditEditor from 'jodit-react';
 import NoteItem from '../components/NoteItem';
 import Chat from '../chat/Chat';
 import io from 'socket.io-client';
-import {useNavigate} from 'react-router-dom';
-import image from './portable-art-drawing-boards-FA-B.jpg';
-
+import { useNavigate } from 'react-router-dom';
+import image from './imgg.jpg';
 
 export default function Task() {
   const ENDPOINT = "http://localhost:5000";
-  var socket =io(ENDPOINT); 
-var selectedChatCompare ;
+  var socket = io(ENDPOINT);
+  var selectedChatCompare;
 
   const ref = useRef(null);
- 
+
   const [content, setcontent] = useState('');
   const [post, setpost] = useState("Choose...");
   const [mail, setmail] = useState("Choose...");
@@ -28,7 +27,7 @@ var selectedChatCompare ;
   let navigate = useNavigate();
   const msgRef = useRef(null);
   const work = context.work;
-  const {user}= context;
+  const { user } = context;
   const notes = context.notes;
   const user1 = content.user;
   const { addWork } = context;
@@ -38,15 +37,15 @@ var selectedChatCompare ;
   const { getAllEmp } = context;
   const { employee } = context;
   const { editWork } = context;
-  const {task} = context;
+  const { task } = context;
   const host = "http://localhost:5000";
-  const {getTask} = context;
+  const { getTask } = context;
   const { deleteWork } = context;
   const editor = useRef(null);
   const [work2add, setwork2add] = useState({ Title: "", Description: "", Tag: "default", Epost: "", Empmail: "", Erank: 0, Hrs: 0, Min: 0, Sec: 0 });
   const prevMessageRef = useRef("");
 
-  const [modalWork, setmodalWork] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat: "" ,Name:"okkkk"});
+  const [modalWork, setmodalWork] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", Hrs: 0, Min: 0, Sec: 0, chat: "", Name: "okkkk" });
   const [dummy, setdummy] = useState({ Title: "" });
   const [change, setchange] = useState(false);
   const [chat, setchat] = useState("");
@@ -60,11 +59,11 @@ var selectedChatCompare ;
 
     // setdummy({Title:currentNotes.title})
     // window.alert(currentNotes.empname); 
-localStorage.setItem("WNAME",currentNotes.empname);
+    localStorage.setItem("WNAME", currentNotes.empname);
     setdummy({ Title: currentNotes.title });
-    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.epost, Urank: currentNotes.erank, Umail: currentNotes.empemail, chat: '', Name:currentNotes.empname });
+    setmodalWork({ id: currentNotes._id, eTitle: currentNotes.title, eDescription: currentNotes.description, eTag: currentNotes.tag, Upost: currentNotes.epost, Urank: currentNotes.erank, Umail: currentNotes.empemail, chat: '', Name: currentNotes.empname });
     setmodalDesc(currentNotes.description);
-     
+
     // settitle({tit:currentNotes.title}); 
     // console.log("UPDATING TITLE "+title.tit)
     // setnote(currentNotes);99 
@@ -80,66 +79,66 @@ localStorage.setItem("WNAME",currentNotes.empname);
   }
 
   useEffect(() => {
-    
-    if(!localStorage.getItem('token')){
-        navigate("/login");
-  
-      }
+
+    if (!localStorage.getItem('token')) {
+      navigate("/login");
+
+    }
     // socket = io(ENDPOINT);
-  socket.on("messageReceived2",(newMessage)=>{
-    // setmodalWork(newMessage);
-    // window.alert("namak haram"+newMessage.chat);
-    if (newMessage.chat !== prevMessageRef.current) {
+    socket.on("messageReceived2", (newMessage) => {
+      // setmodalWork(newMessage);
+      // window.alert("namak haram"+newMessage.chat);
+      if (newMessage.chat !== prevMessageRef.current) {
 
 
-    const devi = document.createElement('div');
-    const youLabel = document.createElement('span');
-    console.log(modalWork.Name);
-    youLabel.textContent = localStorage.getItem("WNAME");
-    youLabel.style.fontSize = "50%";
-    youLabel.style.marginRight="99%";
-    const newChat = document.createElement('p');
-    newChat.textContent = newMessage.chat;
-    // devi.textContent = modalWork.chat;
-    const style = {
-      color: 'black',
-      textAlign:'left',
-      borderRadius:'10px',
-      border: 'solid #ccc 1px',
-      backgroundColor: 'white',
-      fontFamily:'monospace',
-      
-      
-     clear:'both',
-     float:'left',
-     maxWidth:'80%',
-      // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
-      // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
-      
-
-    };
-    // Object.assign(newChat.style, style);
-    Object.assign(devi.style, style);
-    devi.classList.add('mx-0' ,'my-1' ,'py-1', 'px-1');
-    // msgRef.current.appendChild(newChat);
-    msgRef.current.appendChild(devi);
-    devi.appendChild(youLabel);
-    devi.appendChild(newChat);
+        const devi = document.createElement('div');
+        const youLabel = document.createElement('span');
+        console.log(modalWork.Name);
+        youLabel.textContent = localStorage.getItem("WNAME");
+        youLabel.style.fontSize = "50%";
+        youLabel.style.marginRight = "99%";
+        const newChat = document.createElement('p');
+        newChat.textContent = newMessage.chat;
+        // devi.textContent = modalWork.chat;
+        const style = {
+          color: 'black',
+          textAlign: 'left',
+          borderRadius: '10px',
+          border: 'solid #ccc 1px',
+          backgroundColor: 'white',
+          fontFamily: 'monospace',
 
 
-    prevMessageRef.current = newMessage.chat;
-  }
+          clear: 'both',
+          float: 'left',
+          maxWidth: '80%',
+          // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
+          // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
 
-    return () => {
-      socket.off('messageReceived2', console.log("disconnected socket"));
-   };
-    
-  })
+
+        };
+        // Object.assign(newChat.style, style);
+        Object.assign(devi.style, style);
+        devi.classList.add('mx-0', 'my-1', 'py-1', 'px-1');
+        // msgRef.current.appendChild(newChat);
+        msgRef.current.appendChild(devi);
+        devi.appendChild(youLabel);
+        devi.appendChild(newChat);
+
+
+        prevMessageRef.current = newMessage.chat;
+      }
+
+      return () => {
+        socket.off('messageReceived2', console.log("disconnected socket"));
+      };
+
+    })
 
   })
 
   useEffect(() => {
-   
+
     getAllWork();
     fetchWorker();
     getUser();
@@ -161,12 +160,12 @@ localStorage.setItem("WNAME",currentNotes.empname);
 
 
     // socket = io(ENDPOINT);
-    socket.emit("setup",user);
-    socket.on("connection",()=>{setsocketConnected(true);}) 
+    socket.emit("setup", user);
+    socket.on("connection", () => { setsocketConnected(true); })
 
     return () => {
-      socket.off("connection",()=>{setsocketConnected(false);})
-   };
+      socket.off("connection", () => { setsocketConnected(false); })
+    };
 
   }, [change, post, mail])
 
@@ -197,14 +196,14 @@ localStorage.setItem("WNAME",currentNotes.empname);
 
 
 
-    
+
     setchange(true);
 
-    
-const joiningDateString = new String(localStorage.getItem("DOJ"));
-const joiningDate = new Date(joiningDateString);
- addWork(work2add.Title, content, work2add.Tag, post, work2add.Erank, mail,localStorage.getItem("NAME"),joiningDate,);
-    
+
+    const joiningDateString = new String(localStorage.getItem("DOJ"));
+    const joiningDate = new Date(joiningDateString);
+    addWork(work2add.Title, content, work2add.Tag, post, work2add.Erank, mail, localStorage.getItem("NAME"), joiningDate,);
+
 
 
     if (work2add.Hrs !== 0 || work2add.Min !== 0 || work2add.Sec !== 0) {
@@ -312,11 +311,11 @@ const joiningDate = new Date(joiningDateString);
     // setnote({...note, [note.name]:note.value})
 
     getRank();
-    
-   
-      // socket = io(ENDPOINT);
-  socket.emit("newMessage",modalWork);
-   
+
+
+    // socket = io(ENDPOINT);
+    socket.emit("newMessage", modalWork);
+
 
 
     getAllWork()
@@ -370,7 +369,7 @@ const joiningDate = new Date(joiningDateString);
     setmodalWork({ ...modalWork, [e.target.name]: e.target.value })
 
 
-  } 
+  }
 
   let joditChange = (key, newContent) => {
     setwork2add(
@@ -383,8 +382,9 @@ const joiningDate = new Date(joiningDateString);
 
 
   return (
-    <div>
-    <div style={{backgroundColor:"#eafafb54",borderRadius:"20px"}} ><img className='my-5 mx-5 px-5 ' style={{borderRadius:"20px",border:"solid 1px",borderColor:"#fcd6a0"}}  src={image} alt="" /></div>
+    <div >
+
+      <div style={{ backgroundColor: "white" }}  ><img className='my-0 mx-5 px-5 ' style={{ borderColor: "white", width: "79%" }} src={image} alt="" /></div>
 
       {notes.map((notes) => {
 
@@ -394,16 +394,22 @@ const joiningDate = new Date(joiningDateString);
 
 
 
+      <div style={{ width: "64%", borderBottom: "inset", borderLeftStyle: "inset" }} className='mt-1 mb-3 mx-3'>
+        <h1 style={{ fontFamily: "auto", paddingLeft: "1%" }} className='my-3 mx-2' >START COLABORATING <i className="fa-solid fa-rocket fa-fade"></i></h1>
+      </div>
 
-      <form className='mx-4' >
+      <form className='mx-5 ' style={{
+        width: "80%",
+
+      }} >
         <div className="mb-3 ">
 
-          <label htmlFor="Title" className="form-label"  >Project Name</label>
-          <textarea type="text" className="form-control" id="Title" name="Title" onChange={handelOnChange} value={work2add.Title} minLength={5} required />
+          <label htmlFor="Title" className="form-label"  >Project Name  <i className="fa-solid fa-plug fa-rotate-90" ></i></label>
+          <input type="text" className="form-control" id="Title" name="Title" onChange={handelOnChange} value={work2add.Title} minLength={5} required />
 
         </div>
         <div className="mb-3">
-          <label htmlFor="Description" className="form-label"  >Project Description</label>
+          <label htmlFor="Description" className="form-label "  >Project Description <i className="fa-solid fa-bullhorn"></i></label>
           {/* <input type="text" className="form-control" id="Description" name="Description"  value={work2add.Description} onChange={handelOnChange} minLength={5}required/> */}
           <JoditEditor
             ref={editor}
@@ -424,7 +430,7 @@ const joiningDate = new Date(joiningDateString);
 
 
         <div className="input-group mb-3">
-          <label className="input-group-text" htmlFor="inputGroupSelect01">Set Role:</label>
+          <label className="input-group-text" htmlFor="inputGroupSelect01">Set Role &nbsp; <i className="fa-solid fa-user-graduate"></i></label>
           <select className="form-select" id="inputGroupSelect01" onChange={handelOption} value={post}   >
             <option value={post} disabled={true} key={1} placeholder="Choose..."  >{post}</option>
 
@@ -441,26 +447,27 @@ const joiningDate = new Date(joiningDateString);
 
 
 
-        <div className="input-group mb-3" style={{ display: 'flex', flexDirection: "column" }} >
-          <label className="input-group-text " htmlFor="inputGroupSelect07">Employee:</label>
-       
+        {employee.length > 0 && <div className="input-group mb-3" style={{ display: 'flex', flexDirection: "column" }} >
+          <label className="input-group-text " htmlFor="inputGroupSelect07"><i className="fa-solid fa-id-card"> </i>&nbsp; Employee</label>
+
           {
             employee.map((employ) => {
-              return <button className=" btn btn-light mb-1" key={employ._id} value={employ.email} onClick={(e) => { e.preventDefault(); handelMail(e);localStorage.setItem("NAME",employ.name);localStorage.setItem("DOJ",employ.date) }} style={{ border: "groove grey 1px" }}  >
+              return <button className=" btn btn-light mb-1" key={employ._id} value={employ.email} onClick={(e) => { e.preventDefault(); handelMail(e); localStorage.setItem("NAME", employ.name); localStorage.setItem("DOJ", employ.date) }} style={{ border: "groove grey 1px" }}  >
 
-                Name: {employ.name} , Mail: {employ.email}
+                <i className="fa-regular fa-user"></i> : {employ.name} , <i className="fa-regular fa-envelope"></i> : {employ.email}
               </button>
-            
+
 
             })
           }
-         </div>
+        </div>}
+
+        {post !== "Choose..." && employee.length === 0 && <span className='mx-5 mt-2 mb-5 fa-fade'>NO EMPLOYEE FOUND&nbsp;<i className="fa-solid fa-user-large-slash fa-fade"></i><br></br></span>}
 
 
 
 
-
-        <div className="mb-3">
+        {/* <div className="mb-3">
           <label htmlFor="Tag" className="form-label"  >TAG</label>
           <input type="text" className="form-control" id="Tag" name="Tag" onChange={handelOnChange} value={work2add.Tag} minLength={5} required />
         </div>
@@ -473,8 +480,8 @@ const joiningDate = new Date(joiningDateString);
           <input type="number" aria-label="Sec" name='Sec' value={work2add.Sec} placeholder="ss" onChange={handelOnChange} max="60" min="0" className="form-control " />
         </div>
 
-        <small ><p className='mx-6 my-6'>Enter Time In hh:mm:ss Format </p></small>
-        <button disabled={work2add.Title.length < 5 && content.length < 5} type="submit" className="btn btn-primary" onClick={handelClick}>ADD A PROJECT</button>
+        <small ><p className='mx-6 my-6'>Enter Time In hh:mm:ss Format </p></small> */}
+        <button disabled={work2add.Title.length < 5 || content.length < 5 || post === "Choose..." || employee.length === 0} type="submit" className="btn btn-primary mt-3" onClick={handelClick}>ADD A PROJECT&nbsp;<i className="fa-solid fa-share-nodes fa-spin"></i></button>
       </form>
 
 
@@ -507,9 +514,10 @@ const joiningDate = new Date(joiningDateString);
 
 
       <div  >
-        <button type="button" ref={refChat} className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={()=>{
+        <button type="button" ref={refChat} className="btn btn-secondary d-none  " data-bs-toggle="modal" data-bs-target="#exampleModal2" onClick={() => {
           // socket = io(ENDPOINT );
-  socket.emit("joinChat",localStorage.getItem("room"));}}  >
+          socket.emit("joinChat", localStorage.getItem("room"));
+        }}  >
           Discuss
         </button>
 
@@ -518,36 +526,39 @@ const joiningDate = new Date(joiningDateString);
         <div className="modal  fade " style={{ maxHeight: '80%', marginTop: '3%' }} data-bs-keyboard="false" data-bs-backdrop="static"
           id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
           <div className="modal-dialog   modal-xl ">
-            <div className="modal-content" style={{ backgroundColor: 'white'  }}        >
-              <div className="modal-header">
-                <h5 className="modal-title " id="exampleModalLabel2">Chat Here <i className="fa fa-comments" aria-hidden="true"></i></h5>
+            <div className="modal-content" style={{ backgroundColor: 'white' }}        >
+              <div className="modal-header" >
+                <h5 className="modal-title " id="exampleModalLabel2" >Chat Here <i className="fa fa-comments" aria-hidden="true"></i></h5>
 
-                <button type="button" className="btn-secondary btn  mx-3"   onClick={() => { document.getElementById('myMSG').innerHTML = '';getAllWork();
-                socket.emit("leaveChat",localStorage.getItem("room"));localStorage.removeItem("room");    socket.off('messageReceived2', console.log("disconnected socket")); }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
+                <button type="button" className="btn-secondary btn  mx-3" onClick={() => {
+                  document.getElementById('myMSG').innerHTML = ''; getAllWork();
+                  socket.emit("leaveChat", localStorage.getItem("room")); localStorage.removeItem("room"); socket.off('messageReceived2', console.log("disconnected socket"));
+                }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
               </div>
               <div className="modal-body " style={{ overflowY: 'scroll' }}  >
+                {/* <img className='my-0 mx-5 px-5   position-fixed' style={{borderColor:"white",width:"79%"}}  src={cimage} alt="" /> */}
                 <form onSubmit={e => e.preventDefault()} >
                   {msg.length === 1 && <h3 style={{ color: 'grey' }}>Nothing To Show <i className="fa fa-deaf" aria-hidden="true"></i></h3>}
                   {msg.length !== 1 && msg.map((chat) => {
                     if (chat.length !== 0) {
-                      var str = new String(chat); 
+                      var str = new String(chat);
                       // var compar = new String(localStorage.getItem('mail'));
                       var compar = new String(modalWork.Umail);
                       // str+=compar;
                       if (str.endsWith('sender')) {
-                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }}
-                        className='mx-0 my-1 py-1 px-1 ' >
-                           <span style={{fontSize:'50%',marginRight:'99%',color:"white"}}>YOU</span>
-                           <p  className='px-1'style={{ color: 'white',width: '-webkit-fill-available'}} >{str.substring(0, str.length - 6)}
-                        </p>
-                          </div>
+                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff', fontSize: '100%', fontFamily: 'revert-layer', borderRadius: '10px', textAlign: 'right', float: 'right', clear: 'both', }}
+                          className='mx-0 my-1 py-1 px-1 ' >
+                          <span style={{ fontSize: '50%', marginRight: '99%', color: "white" }}>YOU</span>
+                          <p className='px-1' style={{ color: 'white', width: '-webkit-fill-available' }} >{str.substring(0, str.length - 6)}
+                          </p>
+                        </div>
 
                       }
                       else {
-                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}} 
-                        className='mx-0 my-1 py-1 px-1 ' > 
-                         <span style={{fontSize:'50%',marginRight:'99%'}}>{localStorage.getItem("WNAME")}</span>
-                         <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
+                        return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white', fontFamily: 'monospace', float: 'left', clear: 'both', borderRadius: '10px', maxWidth: '80%' }}
+                          className='mx-0 my-1 py-1 px-1 ' >
+                          <span style={{ fontSize: '50%', marginRight: '99%' }}>{localStorage.getItem("WNAME")}</span>
+                          <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
                       }
                     }
                   })
@@ -559,64 +570,66 @@ const joiningDate = new Date(joiningDateString);
                         return <Alarm key={notes._id} notes={notes} show="false" />;
                     })} */}
                   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
-              <label htmlFor="chat" className="form-label"  ></label>
-               <input type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} value={modalWork.chat} required ></input>
-                  <button type="button" className="btn btn-primary my-2" onClick={(e) => { 
-                  handelModal(e);
-                  const devi = document.createElement('div')
-                  const youLabel = document.createElement('span');
-                  youLabel.textContent = "YOU";
-                  youLabel.style.fontSize = "50%";
-                  youLabel.style.marginRight="99%";
-                  
-                  const newChat = document.createElement('p');
-                  newChat.textContent = modalWork.chat;
-                  // devi.textContent = modalWork.chat;
-                  const style = {
-                    color: 'white',
-                    textAlign:'right',
-                    borderRadius:'10px',
-                    border: 'solid #ccc 1px',
-                    backgroundColor: '#00b2ff',
-                    fontFamily:'revert-layer',
-                    marginTop: '2px',
-                    paddingRight:'4px',
-                   clear:'both',
-                   float:'right',
-                   maxWidth:'80%',
-                    // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
-                    // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
-                    
+                  <label htmlFor="chat" className="form-label"  ></label>
+                  <textarea type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} value={modalWork.chat} required ></textarea>
+                  <button type="button" className="btn btn-primary my-2" onClick={(e) => {
+                    handelModal(e);
+                    const devi = document.createElement('div')
+                    const youLabel = document.createElement('span');
+                    youLabel.textContent = "YOU";
+                    youLabel.style.fontSize = "50%";
+                    youLabel.style.marginRight = "99%";
 
-                  };
-                  // Object.assign(newChat.style, style);
-                  Object.assign(devi.style, style);
-                  devi.classList.add('mx-0' ,'my-1' ,'py-1' ,'px-1');
-                  // msgRef.current.appendChild(newChat);
-                  msgRef.current.appendChild(devi);
-                  devi.appendChild(youLabel);
-                  devi.appendChild(newChat);
+                    const newChat = document.createElement('p');
+                    newChat.textContent = modalWork.chat;
+                    // devi.textContent = modalWork.chat;
+                    const style = {
+                      color: 'white',
+                      textAlign: 'right',
+                      borderRadius: '10px',
+                      border: 'solid #ccc 1px',
+                      backgroundColor: '#00b2ff',
+                      fontFamily: 'revert-layer',
+                      marginTop: '2px',
+                      paddingRight: '4px',
+                      clear: 'both',
+                      float: 'right',
+                      maxWidth: '80%',
+                      // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
+                      // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
 
-                  setmodalWork(prevState => ({ ...prevState, chat: "" }));
-                }} disabled={modalWork.chat === ''}><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+
+                    };
+                    // Object.assign(newChat.style, style);
+                    Object.assign(devi.style, style);
+                    devi.classList.add('mx-0', 'my-1', 'py-1', 'px-1');
+                    // msgRef.current.appendChild(newChat);
+                    msgRef.current.appendChild(devi);
+                    devi.appendChild(youLabel);
+                    devi.appendChild(newChat);
+
+                    setmodalWork(prevState => ({ ...prevState, chat: "" }));
+                  }} disabled={modalWork.chat === ''}><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
 
                 </form>
                 {/* {modalWork.chat} */}
               </div>
-             {msg.length > 10 &&  <div className=' position-fixed my-5 ' style={{border:'solid grey 0px'}}  >
+              {msg.length > 10 && <div className=' position-fixed my-5 ' style={{ border: 'solid grey 0px' }}  >
                 <a href='#exampleModalLabel2' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-up" aria-hidden="true"></i></a><br />
 
-                <a href='#chat' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div> }
+                <a href='#chat' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-down" aria-hidden="true"></i></a> </div>}
               <div className="modal-footer " >
 
                 <button type="button" ref={refCloseChat} className="btn btn-secondary " data-bs-dismiss="modal"
-                 onClick={() => { document.getElementById('myMSG').innerHTML = '';
-                 getAllWork();socket.emit("leaveChat",localStorage.getItem("room"));
-                  localStorage.removeItem("room");   
-                 socket.off('messageReceived2', console.log("disconnected socket"));}}
-                 >Close <i className="fa fa-times" aria-hidden="true"></i></button>
-               
-                
+                  onClick={() => {
+                    document.getElementById('myMSG').innerHTML = '';
+                    getAllWork(); socket.emit("leaveChat", localStorage.getItem("room"));
+                    localStorage.removeItem("room");
+                    socket.off('messageReceived2', console.log("disconnected socket"));
+                  }}
+                >Close <i className="fa fa-times" aria-hidden="true"></i></button>
+
+
               </div>
 
             </div>
@@ -743,8 +756,8 @@ const joiningDate = new Date(joiningDateString);
         <div className="modal-dialog modal-xl">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">EDIT PROJECT</h1>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={()=>{getAllWork();}} ></button>
+              <h1 className="modal-title fs-5 fa-fade" id="exampleModalLabel">EDIT PROJECT <i className="fa-solid fa-file-pen fa-fade"></i></h1>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { getAllWork(); }} ></button>
             </div>
             <div className="modal-body">
 
@@ -754,12 +767,12 @@ const joiningDate = new Date(joiningDateString);
               <form onSubmit={e => e.preventDefault()} >
                 <div className="mb-3">
 
-                  <label htmlFor="eTitle" className="form-label"  >PROJECT NAME </label>
-                  <input type="text"  className="form-control" id="eTitle" name="eTitle" onChange={handelOnModalChange} value={modalWork.eTitle} minLength={5} required  />
+                  <label htmlFor="eTitle" className="form-label" style={{ fontStyle: "oblique" }}  >PROJECT NAME <i className="fa-solid fa-plug fa-rotate-90" ></i></label>
+                  <input type="text" className="form-control" id="eTitle" name="eTitle" onChange={handelOnModalChange} value={modalWork.eTitle} minLength={5} required />
 
                 </div>
                 <div className="mb-3">
-                  <p><h5>Project Description</h5></p>
+                  <p><h6>Project Description<i class="fa-solid fa-bullhorn"></i></h6></p>
                   {/* {<div> <label htmlFor="eDescription" className="form-label"  >PROJECT DESCRIPTION</label>
                   <input type="text" className="form-control" id="eDescription" name="eDescription" onChange={handelOnModalChange} value={modalWork.eDescription} minLength={5} required /></> } */}
                   <JoditEditor
@@ -773,10 +786,7 @@ const joiningDate = new Date(joiningDateString);
 
 
 
-                <div className="mb-3">
-                  <label htmlFor="eTag" className="form-label"  >TAG</label>
-                  <input type="text" className="form-control" id="eTag" name="eTag" onChange={handelOnModalChange} value={modalWork.eTag} minLength={5} required />
-                </div>
+
                 {/* <div className="mb-3">
                 
                 <label htmlFor="Title" className="form-label"  >Title</label>
@@ -812,7 +822,7 @@ const joiningDate = new Date(joiningDateString);
 
             </div>
             <div className="modal-footer">
-              <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={()=>{getAllWork();}}  >Close</button>
+              <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => { getAllWork(); }}  >Close</button>
               <button type="button" className="btn btn-primary"
 
 

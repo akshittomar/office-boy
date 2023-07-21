@@ -7,7 +7,7 @@ import Alarm from './Alarm';
 // import Chat from '../chat/Chat';
 // import AOS from 'aos'
 // import 'aos/dist/aos.css'
-
+import image from '../workDistributor/portable-art-drawing-boards-FA-B.jpg'
 
 export default function NoteItem(props) {
  
@@ -88,26 +88,36 @@ useEffect(() => {
 
   return (
     // <div className="col-md-3 my-4 mx-3 "    data-aos="zoom-in-up" >
-    <div className="col-md-3 my-4 mx-3 card-deck"     >
-      <div className="card my-4  " style={{ width: "50vp" }}>
+    <div className="col-md-3 my-4 mx-3 card-deck "    >
+       
+      <div className="card my-4  " style={{ maxWidth: "50vp" }}>
       <div className="card-header">
       
-            {note.epost+" "+note.empname}
+      <i className="fa-solid fa-business-time"></i>{" "+note.epost+" "} &nbsp;<i className="fa-solid fa-user-tie "></i> "{note.empname}"
           
   </div>
+  <img class="card-img-top" src={image} alt="Card image cap"></img>
         <div className="card-body  ">
 
           <div className='d-flex  '>
-            <h2 className="card-title container overflow-auto" style={{ height: "10vh" }}  ><u><strong>Title:</strong></u><br /><i>{note.title}</i></h2>
+
+            <h6 className="card-title container overflow-auto" style={{ height: "10vh" }}  >
+              <u><strong>Title</strong></u>
+              <i><i className=" fa-lightbulb fa-sm fa-regular"></i>
+              <br />{note.title}</i></h6>
 
           </div>
           <hr />
-          {props.cloured === "true" ? <h3 className="card-text container overflow-auto" style={{ height: "15vh" }} ><u><strong>Description:</strong></u><br />{note.description}</h3> : <div><h3 className="card-text container" ><u><strong>Description:</strong></u><br /><div dangerouslySetInnerHTML={{ __html: note.description }} ></div></h3>
+          <div>
+            <h6   style={{ height: "10vh" }}  className="card-text container overflow-auto" >
+              <u><strong>Description </strong></u>
+              <i className="fa-solid fa-book fa-sm"></i>
+              <br /><div dangerouslySetInnerHTML={{ __html: note.description }} ></div></h6>
 
 
           </div>
 
-          }
+          
           <br />
           
 
@@ -137,11 +147,7 @@ useEffect(() => {
 
 
 
-              {
-
-                              props.option === "true" && <div className='container' > <Alarm key={note._id} notes={note} show="true" /></div>
-              }
-
+              
              { props.option === "true" && <div className=" container">
                 <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { updateNote(note);  }}  ><i className="fa-solid fa-file-pen sm  " onClick={() => { updateNote(note) }}></i></h6>
               </div>}

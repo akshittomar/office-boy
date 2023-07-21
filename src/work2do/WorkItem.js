@@ -273,7 +273,7 @@ const sendChat = (e) => {
                   
                   }   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
                    <label htmlFor="chat" className="form-label "  ></label>
-                        <input type='text' name='chat' className="form-control " id='chat' onChange={handelChat}  placeholder='Start Typing....'  value={content.chat} minLength={1} required></input>
+                        <textarea type='text' name='chat' className="form-control " id='chat' onChange={handelChat}  placeholder='Start Typing....'  value={content.chat} minLength={1} required></textarea>
 
 
 

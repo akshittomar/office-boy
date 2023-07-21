@@ -46,7 +46,7 @@ export default function AddNotes() {
   </div>
   <div className="mb-3">
     <label htmlFor="Description" className="form-label"  style={{fontFamily:"cursive"}}  >Description <i className="fa-solid fa-book-open"></i></label>
-    <input type="text" className="form-control" id="Description" name="Description"  value={note2add.Description} onChange={handelOnChange} minLength={5}required/>
+    <textarea type="text" className="form-control" id="Description" name="Description"  value={note2add.Description} onChange={handelOnChange} minLength={5}required/>
   </div>
 
 
