@@ -8,7 +8,7 @@ import Chat from '../chat/Chat';
 import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import image from './imgg.jpg';
-
+import nimage from "./business-social-media-manager-flat-illustration_540907-16.avif";
 export default function Task() {
   const ENDPOINT = "http://localhost:5000";
   var socket = io(ENDPOINT);
@@ -680,7 +680,14 @@ export default function Task() {
 
 
       <div className='row card-deck'>
-        {work.length === 0 && `NO PENDING PROJECT `}
+        {work.length === 0 && 
+        <div className='mx-5' ><h3 className='fa-fade my-6 mt-5 mx-6' style={{marginLeft:"27%",color:"cadetblue"}} > ADD A PROJECT TO GET STARTED  <i className="fa-solid fa-person-skiing fa-fade"></i></h3>
+
+        <img className='my-0 mx-5 px-5 ' style={{ borderColor: "white", width: "70%" }} src={nimage} alt="" /> </div>
+        }
+        {
+          work.length >0 && <h3 className='my-5 mx-4' style={{fontFamily:"serif"}}>YOUR COLLABORATIONS <i className="fa-regular fa-handshake"></i> </h3>
+        }
         {work.map((work) => {
           return < > <NoteItem key={work._id} notes={work} updateNotes={updateModal} deleteNote={deleteWork} Chat={updateChat} cloured="false" option="true" />
 
