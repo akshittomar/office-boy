@@ -9,6 +9,15 @@ function Workcard(props) {
 
     const chatFunc = props.Chat;
 
+    const headingStyle = {
+        background: 'radial-gradient(circle, #040044, rgb(163 202 212))',
+        // WebkitBackgroundClip: 'text',
+        
+        // color: 'lavender',
+        fontFamily:"serif" 
+        
+        // backgroundColor:"red"
+      }; 
     useEffect(() => {
 
 
@@ -17,21 +26,21 @@ function Workcard(props) {
 
     return (
         <>
-            <div className="col-md-3 my-4 mx-3 card-deck"     >
-                <div className="card my-4  " style={{ width: "50vp" }}>
+            <div className="col-md-3 my-4 mx-3 card" style={headingStyle}    >
+                <div className="card my-4 shadow-lg  bg-body-tertiary rounded " style={{ width: "50vp" }}>
                     <div className="card-header">
 
-                     PROJECT UNDER :   {note.epost + " " + note.name}
+                     <u>PROJECT UNDER:</u>{note.epost} <i className="fa-solid fa-people-arrows"></i>&nbsp;{note.name}
 
                     </div>
                     <div className="card-body  ">
 
                         <div className='d-flex  '>
-                            <h2 className="card-title container overflow-auto" style={{ height: "10vh" }}  ><u><strong>Title:</strong></u><br /><i>{note.title}</i></h2>
+                            <h6 className="card-title container overflow-auto" style={{ height: "10vh" }}  ><u><strong>Title:</strong></u><br /><i>{note.title}</i></h6>
 
                         </div>
-                        <hr />
-                         <div><h3 className="card-text container" ><u><strong>Description:</strong></u><br /><div dangerouslySetInnerHTML={{ __html: note.description }} ></div></h3>
+                      
+                         <div><h6 style={{ height: "10vh" }} className="card-text container overflow-auto" ><u><strong>Work:</strong></u><div dangerouslySetInnerHTML={{ __html: note.description }} ></div></h6>
 
                             </div>
 
