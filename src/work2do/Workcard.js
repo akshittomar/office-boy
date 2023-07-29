@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import Alarm from '../components/Alarm'
+import img from '../work2do/img3.avif';
 function Workcard(props) {
 
     const note = props.notes;
@@ -26,21 +27,23 @@ function Workcard(props) {
 
     return (
         <>
-            <div className="col-md-3 my-4 mx-3 card" style={headingStyle}    >
+        
+            <div className="col-md-3 my-4 mx-4 card" style={headingStyle}    >
                 <div className="card my-4 shadow-lg  bg-body-tertiary rounded " style={{ width: "50vp" }}>
-                    <div className="card-header">
+                    <div className="card-header " style={{fontFamily:"serif"}}>
 
-                     <u>PROJECT UNDER:</u>{note.epost} <i className="fa-solid fa-people-arrows"></i>&nbsp;{note.name}
+                     <u>ASSIGNED BY: <i className="fa-solid fa-briefcase"></i></u> {note.epost}&nbsp;<i className="fa-solid fa-id-card-clip"></i> {note.name}
 
                     </div>
+                    <img class="card-img-top" src={img} style={{backgroundSize:"50%"}} alt="Card image cap"></img>
                     <div className="card-body  ">
 
                         <div className='d-flex  '>
-                            <h6 className="card-title container overflow-auto" style={{ height: "10vh" }}  ><u><strong>Title:</strong></u><br /><i>{note.title}</i></h6>
+                            <h6 className="card-title container overflow-auto" style={{ height: "10vh" }}  ><strong>Topic&nbsp;<i className="fa-solid fa-book-open fa-sm"></i></strong><br /><i>{note.title}</i></h6>
 
                         </div>
                       
-                         <div><h6 style={{ height: "10vh" }} className="card-text container overflow-auto" ><u><strong>Work:</strong></u><div dangerouslySetInnerHTML={{ __html: note.description }} ></div></h6>
+                         <div><h6 style={{ height: "10vh" }} className="card-text container overflow-auto" ><strong>Work <i className="fa-sharp fa-solid fa-briefcase"></i></strong><div dangerouslySetInnerHTML={{ __html: note.description }} ></div></h6>
 
                             </div>
 

@@ -3,6 +3,8 @@ import noteContext from '../context/notes/noteContext';
 import NoteItem from '../components/NoteItem';
 import Workcard from './Workcard';
 import io from 'socket.io-client';
+import NoWork from './NoWork';
+
 function  WorkItem(props) {
 
 const ENDPOINT = "http://localhost:5000";
@@ -72,7 +74,20 @@ var selectedChatCompare ;
    
     // })
 
-
+    useEffect(() => {
+      // Initialize popovers when the component mounts
+      const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+      
+      const popoverList = popoverTriggerList.map((popoverTriggerEl) => {
+        
+        return new window.bootstrap.Popover(popoverTriggerEl);
+      });
+  
+      return () => {
+        // Destroy popovers when the component unmounts
+        popoverList.forEach((popover) => popover.dispose());
+      };
+    });
 
 
     useEffect(() => {
@@ -213,8 +228,10 @@ const sendChat = (e) => {
   return (
     <div>
         
-        <div className='row'>
-         {first &&  first.length === 0 && `NO PENDING PROJECT ` }
+        <div className='row' style={{marginLeft:"10%"}}>
+         {first &&  first.length === 0 &&<NoWork/>}
+         { first.length > 0 && <h4> <span className="badge bg-secondary ">YOUR PROJECTS BELOW<button type="button" className="btn btn-lg btn-secondary" data-bs-toggle="popover" data-bs-title="PROJECTS ASSIGNED TO YOU ARE LISTED BELOW" data-bs-content="You can see your projects along with the name and role of the project assigner , work accordingly by reading Title and Description . You can discuss further with project assigner if you feel like.Thank You!">
+          <i className="fa-sharp fa-xl fa-solid fa-circle-info"></i></button>  </span> </h4>}
         {first.map((todo) => {
           return <Workcard key={todo._id} notes={todo} cloured="false" option="false" Chat={updateChat} />;
         })} 
