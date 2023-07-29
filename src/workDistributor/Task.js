@@ -107,7 +107,7 @@ export default function Task() {
           border: 'solid #ccc 1px',
           backgroundColor: 'white',
           fontFamily: 'monospace',
-          wordBreak:"break-all",
+          
 
           clear: 'both',
           float: 'left',
@@ -116,7 +116,7 @@ export default function Task() {
           // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
 
 
-        };
+        };newChat.style = {wordBreak:"break-all"};
         // Object.assign(newChat.style, style);
         Object.assign(devi.style, style);
         devi.classList.add('mx-0', 'my-1', 'py-1', 'px-1');
@@ -595,12 +595,12 @@ export default function Task() {
                       clear: 'both',
                       float: 'right',
                       maxWidth: '80%',
-                      wordBreak:"break-all",
+                      
                       // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
                       // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
 
 
-                    };
+                    };newChat.style = {wordBreak:"break-all"};
                     // Object.assign(newChat.style, style);
                     Object.assign(devi.style, style);
                     devi.classList.add('mx-0', 'my-1', 'py-1', 'px-1');
