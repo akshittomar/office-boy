@@ -64,9 +64,9 @@ function Kanban() {
 
 
 
-      <div style={{ display: 'flex' }} className='mx-5'>
+      <div style={{ display: 'flex' ,overflow:"scroll" }} className='mx-5'>
 
-        <div style={{ flex: 3 ,width:"30%",border:"solid 1px grey"}}>
+        <div style={{ flex: 4 ,border:"solid 1px grey"}}>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -84,7 +84,7 @@ function Kanban() {
         </div> <br /> <hr></hr>
 
 
-        <div style={{ flex: 3,width:"30%",border:"solid 1px grey" }}>
+        <div style={{ flex: 4,border:"solid 1px grey" }}>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -102,7 +102,7 @@ function Kanban() {
         </div><br /><hr></hr>
 
 
-        <div style={{ flex: 3,width:"70%",border:"solid 1px grey" }}>
+        <div style={{ flex: 4,border:"solid 1px grey" }}>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -121,7 +121,7 @@ function Kanban() {
 
 
 
-        <div style={{ flex: 3,width:"30%",border:"solid 1px grey",borderRight:"solid 1px grey" }}>
+        <div style={{ flex: 4,border:"solid 1px grey",borderRight:"solid 1px grey" }}>
           <table className="table table-hover">
             <thead>
               <tr>
