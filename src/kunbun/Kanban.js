@@ -57,19 +57,19 @@ function Kanban() {
   }, [])
   return (
     <>
-      <div style={{ marginLeft: "5%" }} ><h3 style={{ fontFamily: "cursive" }}>MY KANBAN ITEMS</h3></div>
-      <div style={{ backgroundColor: "white" }}  ><img className='' style={{ borderColor: "white", width: "45%", marginLeft: "21%" }} src={image} alt="" /></div>
+      <div style={{ marginLeft: "5%" }} ><h3 style={{ fontFamily: "cursive" }}>MY KANBAN ITEMS <i className="fa-solid fa-chart-column"></i></h3></div>
+      <div style={{ backgroundColor: "white" }}  ><img className='' style={{ borderColor: "white", width: "45%", marginLeft: "25%" }} src={image} alt="" /></div>
 
 
 
 
       <div style={{ display: 'flex' }} className='mx-5'>
 
-        <div style={{ flex: 3 ,width:"30%"}}>
+        <div style={{ flex: 3 ,width:"30%",border:"solid 1px grey"}}>
           <table className="table table-hover">
             <thead>
               <tr>
-                <th scope="col"><i style={{ color: '#bfca0c' }}>PENDING/DISTRIBUTED</i></th>
+                <th scope="col" style={{ color: '#bfca0c' }}>PENDING/COLLABORATIONS <i className="fa-solid fa-clock"></i></th>
               </tr>
             </thead>
             <tbody>
@@ -80,14 +80,14 @@ function Kanban() {
 
             </tbody>
           </table>
-        </div> <br />
+        </div> <br /> <hr></hr>
 
 
-        <div style={{ flex: 3 }}>
+        <div style={{ flex: 3,width:"30%",border:"solid 1px grey" }}>
           <table className="table table-hover">
             <thead>
               <tr>
-                <th scope="col"><u style={{ color: '#e20404' }} >TO-DO</u></th>
+                <th scope="col" style={{ color: '#e20404' }} >TO-DO <i className="fa-solid fa-bolt"></i></th>
               </tr>
             </thead>
             <tbody>
@@ -98,15 +98,15 @@ function Kanban() {
 
             </tbody>
           </table>
-        </div>
+        </div><br /><hr></hr>
 
 
 
-        <div style={{ flex: 3 }}>
+        <div style={{ flex: 3,width:"30%",border:"solid 1px grey",borderRight:"solid 1px grey" }}>
           <table className="table table-hover">
             <thead>
               <tr>
-                <th scope="col"><strong style={{ color: 'rgb(8 222 54)' }}>COMPELETED</strong></th>
+                <th scope="col" style={{ color: 'rgb(8 222 54)' }}>COMPELETED <i className="fa-sharp fa-solid fa-square-check"></i></th>
               </tr>
             </thead>
             <tbody>
