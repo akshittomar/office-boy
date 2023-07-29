@@ -107,7 +107,7 @@ export default function Task() {
           border: 'solid #ccc 1px',
           backgroundColor: 'white',
           fontFamily: 'monospace',
-
+          wordBreak:"break-all",
 
           clear: 'both',
           float: 'left',
@@ -549,7 +549,7 @@ export default function Task() {
                         return <div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff', fontSize: '100%', fontFamily: 'revert-layer', borderRadius: '10px', textAlign: 'right', float: 'right', clear: 'both', }}
                           className='mx-0 my-1 py-1 px-1 ' >
                           <span style={{ fontSize: '50%', marginRight: '99%', color: "white" }}>YOU</span>
-                          <p className='px-1' style={{ color: 'white', width: '-webkit-fill-available' }} >{str.substring(0, str.length - 6)}
+                          <p className='px-1' style={{ color: 'white', width: '-webkit-fill-available' ,wordBreak:"break-all"}} >{str.substring(0, str.length - 6)}
                           </p>
                         </div>
 
@@ -558,7 +558,7 @@ export default function Task() {
                         return <div style={{ border: 'solid #ccc 1px', backgroundColor: 'white', fontFamily: 'monospace', float: 'left', clear: 'both', borderRadius: '10px', maxWidth: '80%' }}
                           className='mx-0 my-1 py-1 px-1 ' >
                           <span style={{ fontSize: '50%', marginRight: '99%' }}>{localStorage.getItem("WNAME")}</span>
-                          <p style={{ color: 'black' }} >{str.substring(0, str.length - 8)}</p> </div>
+                          <p style={{ color: 'black',wordBreak:"break-all" }} >{str.substring(0, str.length - 8)}</p> </div>
                       }
                     }
                   })
@@ -595,6 +595,7 @@ export default function Task() {
                       clear: 'both',
                       float: 'right',
                       maxWidth: '80%',
+                      wordBreak:"break-all",
                       // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
                       // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
 

@@ -122,6 +122,7 @@ var selectedChatCompare ;
             clear: "both",
             float: "left",
             maxWidth: "80%",
+            wordBreak:"break-all",
           };
           Object.assign(devi.style, style);
           devi.classList.add("mx-0", "my-1", "py-1", "px-1");
@@ -276,13 +277,13 @@ const sendChat = (e) => {
                       return<div style={{ border: 'solid #ccc 1px', backgroundColor: '#00b2ff' ,fontSize:'100%', fontFamily:'revert-layer',borderRadius:'10px',textAlign:'right',float:'right',clear:'both', }} 
                        className='mx-0 my-1 px-2 py-0 ' > 
                       <span style={{fontSize:'50%',marginRight:'99%',color:"white"}}>YOU</span>
-                      <p style={{color: 'white',width: '-webkit-fill-available'}} >{str.substring(0,str.length-8)}
+                      <p style={{color: 'white',width: '-webkit-fill-available',wordBreak:"break-all"}} >{str.substring(0,str.length-8)}
                       </p> </div>
                       
                     }
                     else{ 
                       return<div style={{ border: 'solid #ccc 1px', backgroundColor: 'white',fontFamily:'monospace',float:'left',clear:'both',borderRadius:'10px',maxWidth:'80%'}}  className='mx-0 my-1 py-1 px-1' >
-                         <span style={{fontSize:'50%',marginRight:'99%'}}>{content.Bname.toUpperCase()}</span> <p style={{color:'black'}} >{str.substring(0,str.length-6)}</p> </div>
+                         <span style={{fontSize:'50%',marginRight:'99%'}}>{content.Bname.toUpperCase()}</span> <p style={{color:'black',wordBreak:"break-all"}} >{str.substring(0,str.length-6)}</p> </div>
                     }
                   }
                   })
@@ -318,6 +319,7 @@ const sendChat = (e) => {
                    clear:'both',
                    float:'right',
                    maxWidth:'80%',
+                   wordBreak:"break-all"
                     // filter: drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15));
                     // filter: "drop-shadow(0px 6.29142px 31.4571px rgba(0, 0, 0, 0.15))"
                     
