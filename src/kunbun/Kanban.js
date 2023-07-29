@@ -42,6 +42,7 @@ import Todo from './Todo';
 import Done from './Done';
 import image from './membership.png';
 import image2 from './images.jpg';
+import MyWork from './MyWork';
 function Kanban() {
   const context = useContext(noteContext);
 
@@ -88,6 +89,24 @@ function Kanban() {
             <thead>
               <tr>
                 <th scope="col" style={{ color: '#e20404' }} >TO-DO <i className="fa-solid fa-bolt"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+
+
+              <MyWork />
+
+
+            </tbody>
+          </table>
+        </div><br /><hr></hr>
+
+
+        <div style={{ flex: 3,width:"70%",border:"solid 1px grey" }}>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" style={{ color: 'ThreeDShadow' }} >MY PROJECTS <i className="fa-solid fa-laptop"></i></th>
               </tr>
             </thead>
             <tbody>

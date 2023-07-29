@@ -35,7 +35,7 @@ function Doing() {
 
 {work.length === 0 &&<div style={{ backgroundColor: "white",marginTop:"10%" }}  ><img className='' 
         style={{ borderColor: "white", width: "50%", marginLeft: "20%" }} src={image} alt="" /><br/><h5 style={{fontFamily:"cursive",color:"#7289c4"}} 
-        className='mx-5 my-5' > NO PENDING WORK</h5><br/></div> }
+        className='mx-5 my-5' > NO PENDING COLLABORATIONS</h5><br/></div> }
 
     </>
   )
