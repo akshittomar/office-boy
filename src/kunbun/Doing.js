@@ -16,24 +16,24 @@ function Doing() {
      
     }, [work])
     
-  return (<div style={{border:"solid 1px "}}>
+  return (< >
 
 
   
 {work.map((work,index) => {
-          return <div > 
-          <div></div>
-<div className='mt-3 '>
-<t style={{color:"grey"}}>{index++ +1 } {work.title} <i className="fa fa-external-link" onClick={()=>navigate('/task')} aria-hidden="true"></i></t>
-</div>
+          return <tr style={{width:"10%"}} > 
+          
+
+<td style={{color:"grey",wordBreak:"break-all"}}> {index++ +1 } {work.title} </td>
 
 
-          </div>;
+
+          </tr>;
 
 
         })}
 
-    </div>
+    </>
   )
 }
 
