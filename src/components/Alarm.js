@@ -15,6 +15,7 @@ export default function Alarm(props) {
   const [time, settime] = useState({ Hrs: 0, Min: 0, Sec: 0 });
   const context = useContext(noteContext);
   const { mailing } = context;
+  const ref = context.ref;
 
   useEffect(() => {
     
@@ -80,8 +81,9 @@ export default function Alarm(props) {
               localStorage.removeItem(s3);
               window.alert("YOU ARE DONE WITH " + note.title);
               sound.pause();
-              
-              mailing("akshitt125@gmail.com", note.title, note.description);
+              var str = new String("OFFICE BOY THERE! YOU ARE DONE WITH ");
+              str = str + note.title;
+              if(ref.current === false){mailing(localStorage.getItem('mail'), str, "Todo Description: "+note.description +'\n\n\n Please feel free to connect with developer -Akshit Tomar akshitt125@gmail.com');}
               setuse(false);
             }
             else {

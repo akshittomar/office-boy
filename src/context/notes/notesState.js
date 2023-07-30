@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect,useRef } from "react";
 import var1 from "./noteContext"
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ const NoteState = (props) =>{
         "class" : "5D"
     }
     
- 
+ const ref = useRef(false);
 //this note shoulde get included in MyWork.js ----> if we declare a function inside the component and calls it again in useEffect then react thinks 
 //this function is created again and it again re-renders this component then again useEffect() will run this function call inside it . 
 //this keeps on happening again and again  
@@ -482,7 +482,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 
     return (
 
-        <var1.Provider value={{a,getUser,accomp,setaccomp,getAccomp,settask,user,employee,setemployee,getTask,notes,getAllEmp,setnotes,addNote,deleteNote,editNote,getNotes,task,mail,setmail,mailing,addWork,deleteWork,editWork,getAllWork,work,setwork}}>
+        <var1.Provider value={{a,getUser,accomp,setaccomp,getAccomp,settask,user,employee,ref,setemployee,getTask,notes,getAllEmp,setnotes,addNote,deleteNote,editNote,getNotes,task,mail,setmail,mailing,addWork,deleteWork,editWork,getAllWork,work,setwork}}>
             {props.children}
         </var1.Provider>
     )

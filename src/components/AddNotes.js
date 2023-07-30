@@ -2,14 +2,16 @@ import React from 'react'
 import Notes from "./Notes";
 import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
-import { useState,useEffect } from 'react';
+import { useState,useEffect,useRef } from 'react';
 import {useNavigate} from 'react-router-dom';
 
 
 export default function AddNotes() {
+  
+  
     const context = useContext(noteContext);
     const {addNote} = context ;
-    
+    const ref = context.ref;  
     const {getNotes} = context;
     const [note2add, setnote2add] = useState({Title: "", Description: "" , Tag:"default",Hrs:0,Min:0,Sec:0});
     let navigate = useNavigate();
@@ -65,7 +67,12 @@ export default function AddNotes() {
   </div>
   
   <small ><p className='mx-6 my-6' style={{fontFamily:"monospace"}} >Enter Time In hh:mm:ss Format </p></small>
-  
+  <div className="form-check">
+  <input className="form-check-input" onChange={()=>{ if(ref.current === true)ref.current = false;else ref.current=true;}} onClick={()=>console.log(ref.current)} type="checkbox" value="" id="flexCheckChecked" defaultChecked/>
+  <label className="form-check-label" htmlFor="flexCheckChecked">
+    Notify via email when time runs to zero
+  </label>
+</div>
   
  
   
