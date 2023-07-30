@@ -29,11 +29,11 @@ function App() {
    </div>
    <Routes>
 
-    <Route exact path='/' element={ <div className='my-4 mx-3'><Home type="MyTodo"/></div>}></Route>
+    <Route exact path='/' element={ <div className='my-4 mx-3'><Task type="Task"/></div>}></Route>
    {/* <Route exact path='/about' element={<div className='my-5 mx-4'><About type="About"/></div>} ></Route>  */}
    <Route exact path='/login' element={<Login/>} />
    <Route exact path='/sign-up' element={<Signup/>} />
-   <Route exact path='/task' element={<Task type="Task"/>}></Route>
+   <Route exact path='/task' element={<Home type="MyTodo"/>}></Route>
    <Route exact path='/mywork' element={<Work type="MyWork"  />}></Route>
    <Route exact path='/myprofile' element={<Profile type="Profile"  />}></Route>
    <Route exact path='/mykanban' element={<Kanban type="My-Kanban"  />}></Route>

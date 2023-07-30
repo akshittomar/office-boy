@@ -65,7 +65,7 @@ export default function Profile() {
 
 
 
-<table className="table " style={{marginTop:"15%"}}>
+<table className="table d-none" style={{marginTop:"15%"}}>
   <thead>
     <tr>
       <th scope="col" style={{color:'#890c0c',cursor:"pointer"}} onClick={()=>{navigate("/");}}>MY-TODO HERE <i  class="fa-solid fa-arrow-up-right-from-square"></i></th>

@@ -143,15 +143,15 @@ setuserInfo({...userInfo, [e.target.name]:e.target.value})
     <div  className='mx-3'>
     <form  onSubmit={afterSubmit}  >
   <div className="mb-3">
-    <label htmlFor="email" className="form-label">Email</label>
+    <label htmlFor="email" className="form-label">Email <i className="fa-regular fa-envelope"></i></label>
     <input type="email" className="form-control" style={{width:"25%",border:"solid black 1px"}} onChange={handelOnChange} value={userInfo.email} name="email" id="email" />
   </div>
   <div className="mb-3">
-    <label htmlFor="password" className="form-label">Password</label>
+    <label htmlFor="password" className="form-label">Password <i className="fa-solid fa-key"></i></label>
     <input type="password" className="form-control" style={{width:"25%",border:"solid black 1px"}} value={userInfo.password}  onChange={handelOnChange} name="password" id="password" minLength={5} required/>
   </div>
   
-  <button type="submit" className="btn btn-primary" disabled={ !userInfo.email || !userInfo.password}>Submit</button>
+  <button type="submit" className="btn btn-primary" disabled={ !userInfo.email || !userInfo.password}>Submit <i className="fa-solid fa-door-open"></i></button>
 </form>
     </div>
     </div>
