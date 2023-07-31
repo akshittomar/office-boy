@@ -81,7 +81,7 @@ export default function Task() {
   useEffect(() => {
 
     if (!localStorage.getItem('token')) {
-      navigate("/login");
+      navigate("/sign-up");
 
 
     }
@@ -142,7 +142,7 @@ export default function Task() {
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
-      navigate("/login");
+      navigate("/sign-up");
 
     }
    else{ getAllWork();
@@ -376,7 +376,7 @@ export default function Task() {
   }
   useEffect(() => {
     if (!localStorage.getItem('token')) {
-      navigate("/login");
+      navigate("/sign-up");
 
     }
     else{
@@ -907,7 +907,7 @@ export default function Task() {
 //   if(localStorage.getItem('token')){
 //   getNotes();}
 //   else{
-//     navigate("/login");
+//     navigate("/sign-up");
 
 //   }
 //  },[]);

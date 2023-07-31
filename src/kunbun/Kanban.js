@@ -38,6 +38,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Doing from './Doing';
 import KanabanItem from './KanbanItem';
 import noteContext from "../context/notes/noteContext";
+import {useNavigate} from 'react-router-dom';
 import Todo from './Todo';
 import Done from './Done';
 import image from './membership.png';
@@ -45,15 +46,25 @@ import image2 from './images.jpg';
 import MyWork from './MyWork';
 function Kanban() {
   const context = useContext(noteContext);
-
+  let navigate = useNavigate();
 
   const { getAllWork } = context;
   const { getAccomp } = context;
 
   useEffect(() => {
 
-    getAllWork();
-    getAccomp();
+
+    if(localStorage.getItem('token')){
+      getAllWork();
+      getAccomp();
+      
+     
+    }
+      else{
+        navigate("/sign-up");
+  
+      }
+  
 
   }, [])
   return (

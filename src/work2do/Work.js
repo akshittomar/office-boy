@@ -15,7 +15,7 @@ function Work() {
 
 useEffect(() => {
   if (!localStorage.getItem('token')) {
-    navigate("/login");
+    navigate("/sign-up");
 
   }else{
  getUser();

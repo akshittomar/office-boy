@@ -23,9 +23,16 @@ export default function Profile() {
 
   useEffect(() => {
 
-
-    getUser();
+    if(localStorage.getItem('token')){
+      getUser();
     getAccomp();
+    }
+      else{
+        navigate("/sign-up");
+  
+      }
+
+   
 
 
   }, [])

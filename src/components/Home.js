@@ -22,7 +22,7 @@ useEffect(() => {
     getUser();
   }
     else{
-      navigate("/login");
+      navigate("/sign-up");
 
     }
   

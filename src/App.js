@@ -16,6 +16,7 @@ import Work from './work2do/Work';
 // import KanabanItem from './KanabanItem';
 // import Doing from './context/Doing';
 import Kanban from './kunbun/Kanban';
+import Notfound from './components/Notfound';
 function App() {
   return (
    
@@ -37,6 +38,7 @@ function App() {
    <Route exact path='/mywork' element={<Work type="MyWork"  />}></Route>
    <Route exact path='/myprofile' element={<Profile type="Profile"  />}></Route>
    <Route exact path='/mykanban' element={<Kanban type="My-Kanban"  />}></Route>
+   <Route exact path='*' element={<Notfound/>}></Route>
    {/* <Route exact path='/doing' element={<Doing type="Doing"  />}></Route> */}
    </Routes >
    </Router>
