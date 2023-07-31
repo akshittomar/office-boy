@@ -126,13 +126,13 @@ useEffect(() => {
             <div className=" card-footer d-flex  " style={{ maxWidth: "45vp" }} >
               {/* <div className="d-flex justify-content-center container"> */}
               {props.option === "true" && <div className='container'>
-                <h6 style={{ color: "black", cursor: "pointer"}} onClick={() => {
+                <h6 style={{ color: "black", cursor: "pointer",fontSize:'70%',fontFamily:'serif'}} onClick={() => {
                   var s1 = note.title + "sec";
                   var s2 = note.title + "min";
                   var s3 = note.title + "hrs"; localStorage.removeItem(s1);
                   localStorage.removeItem(s2);
                   localStorage.removeItem(s3); deleteNote(note._id)
-                }} ><i className="fa-solid fa-trash    " ></i></h6>
+                }} ><i className="fa-solid fa-trash    " ></i>REVOKE</h6>
               </div>
                 }
               {/* <div className=" card-footer d-flex justify-content-between " >
@@ -149,7 +149,7 @@ useEffect(() => {
 
               
              { props.option === "true" && <div className=" container">
-                <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { updateNote(note);  }}  ><i className="fa-solid fa-file-pen sm  " onClick={() => { updateNote(note) }}></i></h6>
+                <h6 style={{ color: "black", cursor: "pointer",fontSize:"70%",fontFamily:'serif' }} onClick={() => { updateNote(note);  }}  ><i className="fa-solid fa-file-pen sm  " onClick={() => { updateNote(note) }}></i>UPDATE</h6>
               </div>}
 
               
@@ -157,7 +157,7 @@ useEffect(() => {
               
               { props.cloured==="false" && 
               <div className='container'>
-              <h6 style={{ color: "black", cursor: "pointer" }}  onClick={()=>{console.log("on click is correct2");localStorage.setItem("room",new String(note._id));props.Chat(note)}}><small> <i className="fa fa-commenting" aria-hidden="true"></i></small></h6>
+              <h6 style={{ color: "black", cursor: "pointer",fontSize:'70%',fontFamily:'serif' }}  onClick={()=>{console.log("on click is correct2");localStorage.setItem("room",new String(note._id));props.Chat(note)}}> <i className="fa fa-commenting" aria-hidden="true"></i>CHAT</h6>
              </div>}
 
 {/* we have to make a <input> tag to take text as input with just a simpel button to send chat 

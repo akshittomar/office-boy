@@ -1,9 +1,13 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useContext} from 'react'
 import image from './imgg1.jpg';
 import image2 from './imgg2.jpg';
 import image3 from './img4.jpg';
 import img from '../work2do/img3.avif';
+import Alarm from '../components/Alarm'
+import noteContext from '../context/notes/noteContext';
 function NoWork() {
+  const context = useContext(noteContext);
+  const notes = context.notes;
   const headingStyle = {
     background: 'radial-gradient(circle, #040044, rgb(163 202 212))',
     // WebkitBackgroundClip: 'text',
@@ -30,6 +34,9 @@ function NoWork() {
   
   return (
     <>
+     {notes.map((notes) => {
+          return <Alarm key={notes._id} notes={notes} show="false" />;
+        })}
      <div id="carouselExampleAutoplaying" style={{ marginRight: "3%", marginLeft: "25%" }} className="carousel slide" data-bs-ride="carousel">
 
 <div className="carousel-inner">

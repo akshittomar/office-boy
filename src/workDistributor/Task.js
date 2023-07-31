@@ -379,6 +379,21 @@ export default function Task() {
       }
     )
   }
+  useEffect(() => {
+    // Initialize popovers when the component mounts
+    const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    
+    const popoverList = popoverTriggerList.map((popoverTriggerEl) => {
+      
+      return new window.bootstrap.Popover(popoverTriggerEl);
+    });
+
+    return () => {
+      // Destroy popovers when the component unmounts
+      popoverList.forEach((popover) => popover.dispose());
+    };
+  });
+
 
 
   return (
@@ -395,7 +410,8 @@ export default function Task() {
 
 
       <div style={{ width: "64%", borderBottom: "inset", borderLeftStyle: "inset" }} className='mt-1 mb-3 mx-3'>
-        <h1 style={{ fontFamily: "auto", paddingLeft: "1%" }} className='my-3 mx-2' >START COLABORATING <i className="fa-solid fa-rocket fa-fade"></i></h1>
+        <h1 style={{ fontFamily: "auto", paddingLeft: "1%" }} className='my-3 mx-2' >START COLABORATING {work.length ===0 && <button type="button" className="btn  btn-light" data-bs-toggle="popover" data-bs-title="WELCOME TO THE WORLD OF COLLABORATIONS !" data-bs-content="Assign project by providing a name and description to your project.Select developer role and name to kick-start your Office-Boy journey.Further project discussions will make your life easier. Thank-You!">
+          <i className="fa-sharp fa-xl fa-solid fa-circle-info"></i></button>}{work.length>0 && <i className='fa-solid  fa-fade fa-rocket'></i>} </h1>
       </div>
 
       <form className='mx-5 ' style={{

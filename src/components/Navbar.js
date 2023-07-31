@@ -51,15 +51,17 @@ export default function Navbar() {
                             <Link className={`nav-link my-1  mx-2 ${location.pathname==='/myprofile'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/myprofile":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"not-allowed"}}><h6>Profile <i  style={localStorage.getItem("token")?{}:{cursor:"not-allowed"}}className="fa-regular fa-id-card fa-sm"></i></h6></Link>
                             </li>
                            
+                           
                         </ul> 
+                        <a style={{color:""}} className='btn btn-outline-dark btn-sm ' href='https://www.linkedin.com/in/akshit-tomar-7b6a77220/' role='button'>Contact Us <i className="fa-solid  fa-sm fa-arrow-up-right-from-square"></i></a>
                       
                         {!localStorage.getItem('token')? 
                         <form className="" >
-                      <Link  className='btn btn-outline-dark mx-4 btn-lg' to="/login" role="button">LOGIN <i className="fa-solid fa-arrow-right-to-bracket fa-rotate-180"></i></Link>  
-                            <Link className={`btn btn-outline-dark  mx-4 btn-lg`} to="/sign-up" role="button">SIGN-UP <i className="fa-solid fa-handshake-angle"></i></Link>
+                      <Link  className='btn btn-outline-dark mx-4 btn-sm' to="/login" role="button">LOGIN <i className="fa-solid fa-arrow-right-to-bracket fa-rotate-180"></i></Link>  
+                            <Link className={`btn btn-outline-dark  mx-4 btn-sm`} to="/sign-up" role="button">SIGN-UP <i className="fa-solid fa-handshake-angle"></i></Link>
                             
                            
-                        </form>:<button className='btn btn-outline-dark btn-lg' onClick={handelLogOut}  >LOGOUT <i className="fa-solid fa-right-from-bracket fa-sm"></i></button>}
+                        </form>:<button className='btn btn-outline-dark btn-sm mx-1' onClick={handelLogOut}  >LOGOUT <i className="fa-solid fa-right-from-bracket fa-sm"></i></button>}
                     </div>
                 </div>
             </nav>

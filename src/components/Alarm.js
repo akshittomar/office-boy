@@ -40,6 +40,12 @@ export default function Alarm(props) {
     e.preventDefault();
     if ((time.Hrs !== 0 && time.Hrs !== "0") || (time.Min !== 0 && time.Min !== "0") || (time.Sec !== 0 && time.Sec !== "0")) {
       console.log(time.Hrs + " " + time.Min + " " + time.Sec);
+      var s1 = note.title + "sec";
+      var s2 = note.title + "min";
+      var s3 = note.title + "hrs";
+      localStorage.setItem(s1,time.Sec);
+      localStorage.setItem(s2,time.Min);
+      localStorage.setItem(s3,time.Hrs);
       sethh(time.Hrs);
       setmm(time.Min);
       setss(time.Sec);
@@ -66,9 +72,9 @@ export default function Alarm(props) {
 
 
         if (ss > 0) {
-
+          localStorage.setItem(s1, (ss-1).toString());
           setss(ss - 1);
-          localStorage.setItem(s1, (ss - 1).toString());
+          
         }
         if (ss === 0) {
           if (mm === 0) {
@@ -87,21 +93,22 @@ export default function Alarm(props) {
               setuse(false);
             }
             else {
+              localStorage.setItem(s3, (hh-1).toString());
                sethh(hh - 1);
-              localStorage.setItem(s3, (hh - 1).toString());
+              
               setmm(59);
               
-              localStorage.setItem(s2, mm.toString());
+              localStorage.setItem(s2, '59');
               setss(59);
-              localStorage.setItem(s1, ss.toString());
+              localStorage.setItem(s1, '59');
               
             }
           } else {
-            
+            localStorage.setItem(s2, (mm-1).toString());
             setmm(mm - 1);
-            localStorage.setItem(s2, (mm - 1).toString());
+            
             setss(59);
-            localStorage.setItem(s1, ss.toString());
+            localStorage.setItem(s1, '59');
           }
         }
       } else {
