@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import image from './imgg.jpg';
 import nimage from "./business-social-media-manager-flat-illustration_540907-16.avif";
 export default function Task() {
-  const ENDPOINT = "http://localhost:5000";
+  const ENDPOINT = "https://office-boy-backend.onrender.com";
   var socket = io(ENDPOINT);
   var selectedChatCompare;
 
@@ -38,7 +38,7 @@ export default function Task() {
   const { employee } = context;
   const { editWork } = context;
   const { task } = context;
-  const host = "http://localhost:5000";
+  const host = "https://office-boy-backend.onrender.com";
   const { getTask } = context;
   const { deleteWork } = context;
   const editor = useRef(null);

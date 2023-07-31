@@ -7,7 +7,7 @@ import NoWork from './NoWork';
 
 function  WorkItem(props) {
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = "https://office-boy-backend.onrender.com";
 var socket = io(ENDPOINT);
 var selectedChatCompare ;
     const context = useContext(noteContext);

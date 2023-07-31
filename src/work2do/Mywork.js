@@ -12,7 +12,7 @@ export default function Mywork() {
   const [first, setfirst] = useState('');
   
   const getUser = useCallback( async () => {
-    const response = await fetch(`http://localhost:5000/api/auth/getuser`, {
+    const response = await fetch(`https://office-boy-backend.onrender.com/api/auth/getuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export default function Mywork() {
   },[])
 
   const getTask =  useCallback(async () => {
-    const response = await fetch(`http://localhost:5000/api/sendwork/fetchalltask`, {
+    const response = await fetch(`https://office-boy-backend.onrender.com/api/sendwork/fetchalltask`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

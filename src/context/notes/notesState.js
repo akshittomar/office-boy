@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const NoteState = (props) =>{
 
-  const host = "http://localhost:5000";
+  const host = "https://office-boy-backend.onrender.com";
     const a = {
         "name" : "AKSHIT",
         "class" : "5D"
