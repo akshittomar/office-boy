@@ -83,7 +83,9 @@ export default function Task() {
     if (!localStorage.getItem('token')) {
       navigate("/login");
 
+
     }
+    else{
     // socket = io(ENDPOINT);
     socket.on("messageReceived2", (newMessage) => {
       // setmodalWork(newMessage);
@@ -133,26 +135,19 @@ export default function Task() {
         socket.off('messageReceived2', console.log("disconnected socket"));
       };
 
-    })
+    }) 
+  }
 
   })
 
   useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate("/login");
 
-    getAllWork();
+    }
+   else{ getAllWork();
     fetchWorker();
     getUser();
-
-
-    // socket.on('getRequest', (data) => {
-    //   window.alert("socket");
-    // });
-
-    // console.log("I AM IN USEFFECT " + user1);
-    // return () => {
-    //   socket.off('getRequest');
-    // };
-
 
     if (msgRef.current) {
       msgRef.current.scrollTop = msgRef.current.scrollHeight;
@@ -166,7 +161,7 @@ export default function Task() {
     return () => {
       socket.off("connection", () => { setsocketConnected(false); })
     };
-
+  }
   }, [change, post, mail])
 
 
@@ -380,6 +375,11 @@ export default function Task() {
     )
   }
   useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate("/login");
+
+    }
+    else{
     // Initialize popovers when the component mounts
     const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
     
@@ -392,12 +392,14 @@ export default function Task() {
       // Destroy popovers when the component unmounts
       popoverList.forEach((popover) => popover.dispose());
     };
+  }
   });
 
 
 
   return (
     <div >
+    
 
       <div style={{ backgroundColor: "white" }}  ><img className='my-0 mx-5 px-5 ' style={{ borderColor: "white", width: "79%" }} src={image} alt="" /></div>
 
@@ -426,7 +428,7 @@ export default function Task() {
         </div>
         <div className="mb-3">
           <label htmlFor="Description" className="form-label "  >Project Description <i className="fa-solid fa-bullhorn"></i></label>
-          {/* <input type="text" className="form-control" id="Description" name="Description"  value={work2add.Description} onChange={handelOnChange} minLength={5}required/> */}
+          
           <JoditEditor
             ref={editor}
             value={content}
@@ -437,13 +439,7 @@ export default function Task() {
 
         </div>
 
-        {/* <div className="mb-3 ">
- 
- <label htmlFor="Epost" className="form-label"  >Epost</label>
- <input type="text" className="form-control" id="Epost" name="Epost" onChange={handelOnChange} value={work2add.Title}  required  />
-
-</div> */}
-
+       
 
         <div className="input-group mb-3">
           <label className="input-group-text" htmlFor="inputGroupSelect01">Set Role &nbsp; <i className="fa-solid fa-user-graduate"></i></label>
@@ -483,20 +479,7 @@ export default function Task() {
 
 
 
-        {/* <div className="mb-3">
-          <label htmlFor="Tag" className="form-label"  >TAG</label>
-          <input type="text" className="form-control" id="Tag" name="Tag" onChange={handelOnChange} value={work2add.Tag} minLength={5} required />
-        </div>
-
-
-        <div className="input-group  mb-3 position-relative" style={{ minWidth: "10%", maxWidth: "20%" }} >
-          <span className="input-group-text " >Finish Time </span>
-          <input type="number" aria-label="Hrs" name='Hrs' value={work2add.Hrs} placeholder="hh" onChange={handelOnChange} max="24" min="0" className="form-control " />
-          <input type="number" aria-label="Min" name='Min' value={work2add.Min} placeholder="mm" onChange={handelOnChange} max="60" min="0" className="form-control " />
-          <input type="number" aria-label="Sec" name='Sec' value={work2add.Sec} placeholder="ss" onChange={handelOnChange} max="60" min="0" className="form-control " />
-        </div>
-
-        <small ><p className='mx-6 my-6'>Enter Time In hh:mm:ss Format </p></small> */}
+        
         <button disabled={work2add.Title.length < 5 || content.length < 5 || post === "Choose..." || employee.length === 0} type="submit" className="btn btn-primary mt-3" onClick={handelClick}>ADD A PROJECT&nbsp;<i className="fa-solid fa-share-nodes fa-spin"></i></button>
       </form>
 
@@ -552,7 +535,7 @@ export default function Task() {
                 }} data-bs-dismiss="modal" aria-label="Close"><i className="fa fa-times" aria-hidden="true"></i></button>
               </div>
               <div className="modal-body " style={{ overflowY: 'scroll' }}  >
-                {/* <img className='my-0 mx-5 px-5   position-fixed' style={{borderColor:"white",width:"79%"}}  src={cimage} alt="" /> */}
+                
                 <form onSubmit={e => e.preventDefault()} >
                   {msg.length === 1 && <h3 style={{ color: 'grey' }}>Nothing To Show <i className="fa fa-deaf" aria-hidden="true"></i></h3>}
                   {msg.length !== 1 && msg.map((chat) => {
@@ -581,10 +564,7 @@ export default function Task() {
 
 
                   }
-                  {/* {notes.map((notes) => {
-
-                        return <Alarm key={notes._id} notes={notes} show="false" />;
-                    })} */}
+                 
                   <div className='mx-1 my-4' id='myMSG' ref={msgRef} > </div>
                   <label htmlFor="chat" className="form-label"  ></label>
                   <textarea type='text' name='chat' className="form-control" id='chat' onChange={handelOnModalChange} placeholder='Start Typing....' minLength={1} value={modalWork.chat} required ></textarea>
@@ -629,7 +609,7 @@ export default function Task() {
                   }} disabled={modalWork.chat === ''}><i className="fa fa-paper-plane-o" aria-hidden="true"></i></button>
 
                 </form>
-                {/* {modalWork.chat} */}
+                
               </div>
               {msg.length > 10 && <div className=' position-fixed my-5 ' style={{ border: 'solid grey 0px' }}  >
                 <a href='#exampleModalLabel2' ><i style={{ color: 'grey', fontSize: '80%' }} className="fa fa-arrow-circle-up" aria-hidden="true"></i></a><br />
@@ -716,23 +696,7 @@ export default function Task() {
       </div>
 
 
-      {/* <div className="row">
-  {work.length === 0 && `NO PENDING PROJECT`}
-  {work.map((work) => {
-    return (
-      <div className="col-4">
-        <NoteItem
-          key={work._id}
-          notes={work}
-          updateNotes={updateModal}
-          deleteNote={deleteWork}
-          cloured="false"
-          option="true"
-        />
-      </div>
-    );
-  })}
-</div> */}
+     
 
 
 
@@ -796,9 +760,7 @@ export default function Task() {
 
                 </div>
                 <div className="mb-3">
-                  <p><h6>Project Description<i class="fa-solid fa-bullhorn"></i></h6></p>
-                  {/* {<div> <label htmlFor="eDescription" className="form-label"  >PROJECT DESCRIPTION</label>
-                  <input type="text" className="form-control" id="eDescription" name="eDescription" onChange={handelOnModalChange} value={modalWork.eDescription} minLength={5} required /></> } */}
+                
                   <JoditEditor
                     ref={editor}
                     value={modalDesc}
@@ -811,26 +773,10 @@ export default function Task() {
 
 
 
-                {/* <div className="mb-3">
-                
-                <label htmlFor="Title" className="form-label"  >Title</label>
-               <input type="text" className="form-control"  onChange={handelOnChange} value={title.tit}  minLength={5} required />
-
-                </div>  */}
+             
 
 
-                {/* <div className="input-group mb-3">
-                <label className="input-group-text"  htmlFor="inputGroupSelect01">Employee:</label>
-                <select className="form-select" id="inputGroupSelect01"   onChange={handelOnModalChange} name="Epost" value={modalWork.Upost} >
-                  <option selected   onSelect={handelOnModalChange} name="Upost" value={modalWork.Upost}  >{modalWork.Upost}</option>
-                  <option value="Analyst"  >Analyst</option>
-                  <option value="Senior Analyst" >Senior Analyst</option>
-                  <option value="React Developer" >React Developer</option>
-                  <option value="DevOps Engineer" >DevOps Engineer</option>
-                  <option value="SDE" >SDE</option>
-                  
-                </select>
-              </div> */}
+              
 
 
 
@@ -858,7 +804,7 @@ export default function Task() {
 
 
 
-
+            
 
     </div>
   )

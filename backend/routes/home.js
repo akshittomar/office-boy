@@ -115,21 +115,10 @@ module.exports = router;*/
 
 const express = require('express');
 const router = express.Router();
-const io = require('socket.io')();
-const iio = require('socket.io-client');
 
-const po = iio("http://localhost:5000");
-po.connect();
-const nsp = io.of("http://localhost:5000");
 
 router.get ('/',async (req,res)=> {
     try {
-        nsp.emit('connec', {message:"response from  socket"})
-        
-        
-        po.on('connec', (message) => {
-          console.log("socket"+message);
-        })
         
         res.send({message:"its get request"});
     } catch(error) {

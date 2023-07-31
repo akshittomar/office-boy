@@ -4,17 +4,23 @@ import WorkItem from './WorkItem';
 import image from './imgg1.jpg';
 import image2 from './imgg2.jpg';
 import image3 from './img4.jpg';
+import { useNavigate } from 'react-router-dom';
 function Work() {
     const context = useContext(noteContext);
     const {getUser} = context;
     const {user}= context;
     const {getTask} = context;
     const {mail} = context;
+    let navigate = useNavigate();
 
 useEffect(() => {
+  if (!localStorage.getItem('token')) {
+    navigate("/login");
+
+  }else{
  getUser();
 console.log(user.name);
-  getTask();
+  getTask();}
 }, [])
 
 

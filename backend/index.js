@@ -1,5 +1,6 @@
 const connection = require('./db');
 const express = require('express')
+require('dotenv').config();
 var cors = require('cors')
 const fetchuser = require('./routes/middleware/fetchuser')
 
@@ -24,7 +25,7 @@ const port = 5000
 // const io = require('socket.io')(server);
 
 
-
+const FRONTEND_SOCKET = process.env.FRONTEND_SOCKET;
 
 
 app.use(cors())
@@ -62,7 +63,7 @@ const server = app.listen(port, () => {
 const io = require('socket.io')(server,{
 pingTimeout:60000,autoConnect: false, reconnection: false,
 cors:{
-  origin:"http://localhost:3000",
+  origin:`${FRONTEND_SOCKET}`,
 }
 
 });

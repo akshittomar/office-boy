@@ -57,8 +57,8 @@ export default function Navbar() {
                       
                         {!localStorage.getItem('token')? 
                         <form className="" >
-                      <Link  className='btn btn-outline-dark mx-4 btn-sm' to="/login" role="button">LOGIN <i className="fa-solid fa-arrow-right-to-bracket fa-rotate-180"></i></Link>  
-                            <Link className={`btn btn-outline-dark  mx-4 btn-sm`} to="/sign-up" role="button">SIGN-UP <i className="fa-solid fa-handshake-angle"></i></Link>
+                      <Link  className='btn btn-outline-dark mx-1 btn-sm' to="/login" role="button">LOGIN <i className="fa-solid fa-arrow-right-to-bracket fa-rotate-180"></i></Link>  
+                            <Link className={`btn btn-outline-dark  mx-1 btn-sm`} to="/sign-up" role="button">SIGN-UP <i className="fa-solid fa-handshake-angle"></i></Link>
                             
                            
                         </form>:<button className='btn btn-outline-dark btn-sm mx-1' onClick={handelLogOut}  >LOGOUT <i className="fa-solid fa-right-from-bracket fa-sm"></i></button>}

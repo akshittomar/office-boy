@@ -61,7 +61,7 @@ export default function Login() {
 
     
     console.log(json.error);
-    alert(json.error+"    "+json.success);
+    alert(json.error);
     
     navigate("/login");
     
