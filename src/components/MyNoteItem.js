@@ -83,10 +83,10 @@ function MyNoteItem(props) {
                                         </svg>
                                     </div>
                                     <div className="solu_title">
-                                        <h3>{note.title}</h3>
+                                        <h3 style={{wordBreak:"break-all"}}>{note.title}</h3>
                                     </div>
                                     <div className="solu_description" style={{overflow:"auto"}}>
-                                        <p>
+                                        <p style={{wordBreak:"break-all"}}>
                                             {note.description}
                                         </p>
                                         <button type="button" className="read_more_btn mx-5" style={{ color: "black", cursor: "pointer" }} onClick={() => {

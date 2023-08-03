@@ -4,11 +4,12 @@ import image from "./done.jpg";
 function MyWork() {
      const context = useContext(noteContext);
      const notes = context.notes ;
+     const getNotes = context.getNotes ;
      useEffect(() => {
       
-    
+    getNotes();
      
-     }, [notes])
+     }, [])
   return (
     <>
     {

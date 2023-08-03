@@ -4,7 +4,10 @@ import { useLocation   } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 export default function Navbar() {
+    
+    
     let navigate = useNavigate();  
     const handelLogOut=()=>{
         localStorage.removeItem('token');
@@ -24,7 +27,7 @@ export default function Navbar() {
         <div >
             <nav className="navbar navbar-expand-lg navbar-static bg-transparent">
                 <div className="container-fluid">
-                    <Link className={`navbar-brand my-1 mx-0 ${location.pathname==='/'?"active   ":""} `} to={`${localStorage.getItem('token')?"/":"/sign-up"}`}><h5 style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"not-allowed"}} >OFFICE-BOY <i  style={localStorage.getItem("token")?{}:{cursor:"not-allowed"}}className="fa-solid fa-users fa-sm"></i></h5></Link>
+                    <Link className={`navbar-brand my-1 mx-0 ${location.pathname==='/'?"active   ":""} `} onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} to={`${localStorage.getItem('token')?"/":"/sign-up"}`}><h5 style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"help"}} >OFFICE-BOY <i  style={localStorage.getItem("token")?{}:{cursor:"help"}}className="fa-solid fa-users fa-sm" onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}}></i></h5></Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -36,19 +39,19 @@ export default function Navbar() {
                             </li> */}
                             
                             <li className="nav-item">
-                            <Link className={`nav-link my-1  mx-2 ${location.pathname==='/'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"not-allowed"}}><h6>CollabNet&nbsp;<i  style={localStorage.getItem("token")?{}:{cursor:"not-allowed"}}  className="fa-solid fa-laptop-file fa-sm"></i></h6></Link>
+                            <Link className={`nav-link my-1  mx-2 ${location.pathname==='/'?"active bg-transparent ":""} `} onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} aria-current="page" to={`${localStorage.getItem('token')?"/":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"help"}}><h6>CollabNet&nbsp;<i onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} style={localStorage.getItem("token")?{}:{cursor:"help"}}  className="fa-solid fa-laptop-file fa-sm"></i></h6></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className={`nav-link my-1 mx-2  ${location.pathname==='/task'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/task":"/sign-up"}`}  style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"not-allowed"}} ><h6>To-Do <i style={localStorage.getItem("token")?{}:{cursor:"not-allowed"}} className="fa-solid fa-person-running fa-sm"></i></h6></Link>
+                                <Link className={`nav-link my-1 mx-2  ${location.pathname==='/task'?"active bg-transparent ":""} `} onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} aria-current="page" to={`${localStorage.getItem('token')?"/task":"/sign-up"}`}  style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"help"}} ><h6>To-Do <i onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} style={localStorage.getItem("token")?{}:{cursor:"help"}} className="fa-solid fa-person-running fa-sm"></i></h6></Link>
                             </li>
                             <li className="nav-item">
-                            <Link className={`nav-link my-1  mx-2 ${location.pathname==='/mywork'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/mywork":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"not-allowed"}}><h6>MyWork <i style={localStorage.getItem("token")?{}:{cursor:"not-allowed"}} className="fa-solid fa-truck-fast fa-xs"></i></h6></Link>
+                            <Link className={`nav-link my-1  mx-2 ${location.pathname==='/mywork'?"active bg-transparent ":""} `} onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} aria-current="page" to={`${localStorage.getItem('token')?"/mywork":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"help"}}><h6>MyWork <i style={localStorage.getItem("token")?{}:{cursor:"help"}} className="fa-solid fa-truck-fast fa-xs" onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}}></i></h6></Link>
                             </li>
                             <li className="nav-item">
-                            <Link className={`nav-link my-1  mx-2 ${location.pathname==='/mykanban'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/mykanban":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"not-allowed"}}><h6>Kanban <i style={localStorage.getItem("token")?{}:{cursor:"not-allowed"}} className="fa-solid fa-chart-line fa-sm "></i></h6></Link>
+                            <Link className={`nav-link my-1  mx-2 ${location.pathname==='/mykanban'?"active bg-transparent ":""} `} onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} aria-current="page" to={`${localStorage.getItem('token')?"/mykanban":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"help"}}><h6>Kanban <i style={localStorage.getItem("token")?{}:{cursor:"help"}} className="fa-solid fa-chart-line fa-sm " onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}}></i></h6></Link>
                             </li>
                             <li className="nav-item">
-                            <Link className={`nav-link my-1  mx-2 ${location.pathname==='/myprofile'?"active bg-transparent ":""} `} aria-current="page" to={`${localStorage.getItem('token')?"/myprofile":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"not-allowed"}}><h6>Profile <i  style={localStorage.getItem("token")?{}:{cursor:"not-allowed"}}className="fa-regular fa-id-card fa-sm"></i></h6></Link>
+                            <Link className={`nav-link my-1  mx-2 ${location.pathname==='/myprofile'?"active bg-transparent ":""} `} onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} aria-current="page" to={`${localStorage.getItem('token')?"/myprofile":"/sign-up"}`} style={localStorage.getItem("token")?{fontFamily:"serif"}:{cursor:"help"}}><h6>Profile <i onClick={()=>{if(!localStorage.getItem('token'))alert('PLEASE LOGIN/SIGN-UP TO CONTINUE')}} style={localStorage.getItem("token")?{}:{cursor:"help"}}className="fa-regular fa-id-card fa-sm"></i></h6></Link>
                             </li>
                            
                            
