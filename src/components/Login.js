@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
 import loginImage from "./login.jpg"
+import Spinner from '../Spinner.gif';
 export default function Login() {
   let navigate = useNavigate();
   const context = useContext(noteContext);
@@ -10,7 +11,7 @@ export default function Login() {
   
 
   const [userInfo, setuserInfo] = useState({email: "", password: "" });
-  
+  const [loading, setLoading] = useState(false);
   // useEffect(() => {
     
   //   // setuserInfo(userInfo.email,userInfo.password);
@@ -26,7 +27,7 @@ export default function Login() {
 
     console.log("PARAMETERS OF USER EMAIL"+email+" "+password);
 
-
+      setLoading(true);
     const response = await fetch( `https://office-boy-backend.onrender.com/api/auth/login`, {
       method: 'POST',
       headers:{
@@ -37,6 +38,7 @@ export default function Login() {
     });
 
     const json = await response.json();
+    setLoading(false);
     console.log("AFTER RESPONSE FETCHING "+json);
     console.log("AUTH TOKEN IS THIS "+json.authToken);
     // console.log("ADDED USER  IS THIS "+json.email);
@@ -152,6 +154,7 @@ setuserInfo({...userInfo, [e.target.name]:e.target.value})
   </div>
   
   <button type="submit" className="btn btn-primary" disabled={ !userInfo.email || !userInfo.password}>Submit <i className="fa-solid fa-door-open"></i></button>
+  {loading===true && <><img src={Spinner} style={{width:"5%"}} alt=''></img><br/><span className='fa-fade' style={{fontFamily:"fantasy"}}>PROCESSING REQUEST.....</span></>}
 </form>
     </div>
     </div>

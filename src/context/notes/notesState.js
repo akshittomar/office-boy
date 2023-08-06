@@ -12,6 +12,7 @@ const NoteState = (props) =>{
     }
     
  const ref = useRef(false);
+ const load = useRef("");
 //this note shoulde get included in MyWork.js ----> if we declare a function inside the component and calls it again in useEffect then react thinks 
 //this function is created again and it again re-renders this component then again useEffect() will run this function call inside it . 
 //this keeps on happening again and again  
@@ -152,7 +153,7 @@ const getUser=async()=>{
     },
     });
   // const json1 = await response.json();
-  const json1 = response.json();
+  const json1 =  response.json();
   json1.then((json1)=>{
   
     setuser({name:json1.name,email:json1.email,epost:json1.epost,doj:json1.date});
@@ -179,7 +180,7 @@ const getUser=async()=>{
       body: JSON.stringify({title,description,tag})
     });
 
-    const json = response.json(title,description,tag);
+    const json = await response.json(title,description,tag);
     console.log("ADDED NOTE IS THIS "+json.title);
 
 
@@ -222,7 +223,7 @@ setnotes(notes.concat(note));
       },
       body: JSON.stringify()
     });
-    const json = response.json();
+    const json = await response.json();
     console.log("BECHARA DELETED HUA KA RESPONSE JSON ")
     console.log(json);
     
@@ -232,7 +233,7 @@ setnotes(notes.concat(note));
 
 
 console.log("DELETING A NOTE WITH ID "+id)
-const newNotes = notes.filter((note)=>{ return note._id!==id})
+const newNotes =  notes.filter((note)=>{ return note._id!==id})
 setnotes(newNotes);
 
   }
@@ -371,7 +372,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
           },
           body: JSON.stringify()
         });
-        const json = response.json();
+        const json =await response.json();
         console.log("BECHARA DELETED HUA KA RESPONSE JSON ")
         console.log(json);
         
@@ -409,7 +410,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
               
               body: JSON.stringify({id,title,description,tag,epost,erank,empemail,chat})
             });
-            const json = response.json(id,title,description,tag);
+            const json =await response.json(id,title,description,tag);
             console.log("KYA TUM PROMISE HO")
             console.log(json);
             

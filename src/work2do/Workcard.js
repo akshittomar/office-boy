@@ -1,16 +1,16 @@
-import React, { useEffect,useContext } from 'react'
-import Alarm from '../components/Alarm'
+import React, { useEffect } from 'react'
+
 import img from '../work2do/img3.avif';
-import noteContext from '../context/notes/noteContext';
+
 function Workcard(props) {
-    const context = useContext(noteContext);
-    const notes = context.notes;
+    
+    
     const note = props.notes;
 
-    const deleteNote = props.deleteNote;
-    const updateNote = props.updateNotes;
+    
+    
 
-    const chatFunc = props.Chat;
+    
 
     const headingStyle = {
         background: 'radial-gradient(circle, #040044, rgb(163 202 212))',
@@ -29,9 +29,9 @@ function Workcard(props) {
 
     return (
         <>
-         {notes.map((notes) => {
+         {/* {notes.map((notes) => {
           return <Alarm key={notes._id} notes={notes} show="false" />;
-        })}
+        })} */}
         
             <div className="col-md-3 my-4 mx-4 card" style={headingStyle}    >
                 <div className="card my-4 shadow-lg  bg-body-tertiary rounded " style={{ width: "50vp" }}>

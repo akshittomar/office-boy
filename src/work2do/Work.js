@@ -1,16 +1,16 @@
 import React, { useContext,useEffect} from 'react'
 import noteContext from '../context/notes/noteContext';
 import WorkItem from './WorkItem';
-import image from './imgg1.jpg';
-import image2 from './imgg2.jpg';
-import image3 from './img4.jpg';
+import Alarm from '../components/Alarm'
+
+
 import { useNavigate } from 'react-router-dom';
 function Work() {
     const context = useContext(noteContext);
     const {getUser} = context;
     const {user}= context;
     const {getTask} = context;
-    const {mail} = context;
+    const notes = context.notes;
     let navigate = useNavigate();
 
 useEffect(() => {
@@ -27,7 +27,9 @@ console.log(user.name);
   return (
     <>
    
-
+   { localStorage.getItem('token') && notes.map((notes) => {
+          return <Alarm key={notes._id} notes={notes} show="false" />;
+        })} 
 
 
 

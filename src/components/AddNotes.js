@@ -4,22 +4,24 @@ import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
 import { useState,useEffect,useRef } from 'react';
 import {useNavigate} from 'react-router-dom';
+import Spinner from '../Spinner.gif';
 
 
 export default function AddNotes() {
   
   
     const context = useContext(noteContext);
+    const [loading, setLoading] = useState(false);
     const {addNote} = context ;
     const ref = context.ref;  
     const {getNotes} = context;
     const [note2add, setnote2add] = useState({Title: "", Description: "" , Tag:"default",Hrs:0,Min:0,Sec:0});
     let navigate = useNavigate();
     
-    const handelClick= (e) =>{
+    const handelClick= async (e) =>{
       e.preventDefault();
-      
-      addNote(note2add.Title,note2add.Description,note2add.Tag);
+      setLoading(true);
+    await  addNote(note2add.Title,note2add.Description,note2add.Tag);
     
    
    if(note2add.Hrs!==0 || note2add.Min!==0 || note2add.Sec!==0){
@@ -30,7 +32,9 @@ export default function AddNotes() {
    localStorage.setItem(s2,note2add.Min.toString());
    localStorage.setItem(s3,note2add.Hrs.toString());}
       setnote2add({Title: "", Description: "" , Tag:"default",Hrs:0,Min:0,Sec:0});
-      getNotes();
+   await   getNotes();
+
+   setLoading(false);
     }
     const handelOnChange= (e) =>{
  setnote2add({...note2add, [e.target.name]:e.target.value.toUpperCase()})
@@ -85,8 +89,9 @@ export default function AddNotes() {
 
 
  
-  <button  disabled={note2add.Title.length<5 || note2add.Description.length<5}  type="submit" className="btn btn-primary" onClick={handelClick}>ADD TODO <i className="fa-solid fa-briefcase"></i></button>
+  <button  disabled={note2add.Title.length<5 || note2add.Description.length<5}  type="submit" className="btn btn-primary" onClick={handelClick}>ADD TODO <i className="fa-solid fa-briefcase"></i></button> {loading===true && <><img src={Spinner} style={{width:"5%"}} alt=''></img><br/><span className='fa-fade' style={{fontFamily:"fantasy"}}>PROCESSING REQUEST.....</span></>}
 </form>
+
 <h1>
 <Notes></Notes>
 </h1>

@@ -1,29 +1,30 @@
 import React, { useContext,useEffect,useState,useRef} from 'react'
 import noteContext from '../context/notes/noteContext';
-import NoteItem from '../components/NoteItem';
+import Spinner from '../Wedges.gif';
 import Workcard from './Workcard';
 import io from 'socket.io-client';
 import NoWork from './NoWork';
 
-function  WorkItem(props) {
+function  WorkItem() {
 
 const ENDPOINT = "https://office-boy-backend.onrender.com";
 var socket = io(ENDPOINT);
-var selectedChatCompare ;
+
     const context = useContext(noteContext);
     
     const [socketConnected, setsocketConnected] = useState(false);
     const msgRef = useRef(null);
     const {getTask} = context;
     const {task} = context;
-    const {settask} = context;
+    
     const { editWork } = context;
-    const { getAllWork } = context;
+    
     const {user}= context;
 
     const [first, setfirst] = useState([]);
     const [msg, setmsg] = useState([]);
     const prevMessageRef = useRef("");
+    const [loading, setLoading] = useState(false);
     const [content, setcontent] = useState({ id: "", eTitle: "your title here", eDescription: "your description here ", eTag: "default", Upost: "Choose...", Urank: 0, Umail: "", chat:"" ,Bname:"",Bpost:""});
     // useEffect(() => {
     //   // socket = io(ENDPOINT);
@@ -137,6 +138,15 @@ var selectedChatCompare ;
     });
     
     useEffect(() => {
+      const fetchData = async () =>{
+        setLoading(true);  
+        await getTask();
+        setLoading(false);     }
+
+        fetchData();
+    }, [])
+    
+    useEffect(() => {
         setfirst(task);
       // getTask();
       // socket = io(ENDPOINT);
@@ -229,12 +239,15 @@ const sendChat = (e) => {
 
   return (
     <div>
-        
-        <div className='row' style={{marginLeft:"10%"}}>
-         {first &&  first.length === 0 &&<NoWork/>}
-         { first.length > 0 && <h4> <span className="badge bg-secondary ">YOUR PROJECTS BELOW<button type="button" className="btn btn-lg btn-secondary" data-bs-toggle="popover" data-bs-title="PROJECTS ASSIGNED TO YOU ARE LISTED BELOW" data-bs-content="You can see your projects along with the name and role of the project assigner , work accordingly by reading Title and Description . You can discuss further with project assigner if you feel like.Thank You!">
+         {loading === true && <><div className='fa-fade'> FETCHING WORKSPACE....</div><img style={{width:"15%"}} src={Spinner} alt=''></img></>}
+         
+         {first && loading===false && first.length === 0 &&<NoWork/>}
+         { first.length > 0&& loading===false && <h4> <span className="badge bg-secondary ">YOUR PROJECTS BELOW<button type="button" className="btn btn-lg btn-secondary" data-bs-toggle="popover" data-bs-title="PROJECTS ASSIGNED TO YOU ARE LISTED BELOW" data-bs-content="You can see your projects along with the name and role of the project assigner , work accordingly by reading Title and Description . You can discuss further with project assigner if you feel like.Thank You!">
           <i className="fa-sharp fa-xl fa-solid fa-circle-info"></i></button>  </span> </h4>}
-        {first.map((todo) => {
+        <div className='row card-deck' style={{marginLeft:"10%"}}>
+         
+       
+        {loading=== false&&first.map((todo) => {
           return <Workcard key={todo._id} notes={todo} cloured="false" option="false" Chat={updateChat} />;
         })} 
         

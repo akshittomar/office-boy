@@ -3,7 +3,7 @@ import AddNotes from './AddNotes';
 import noteContext from "../context/notes/noteContext";
 import { useContext , useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
-import io from 'socket.io-client'
+
 
 
 

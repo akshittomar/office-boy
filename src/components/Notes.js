@@ -1,8 +1,9 @@
 import React ,{useEffect}from 'react';
+import Spinner from '../Spinner.gif';
 import { useContext } from 'react';
 import noteContext from "../context/notes/noteContext";
-import NoteItem from './NoteItem';
-import NotesUpdate from './NotesUpdate';
+
+
 import MyNoteItem from './MyNoteItem';
 // import AddNotes from './AddNotes';
 // import {useNavigate} from 'react-router-dom';
@@ -16,7 +17,7 @@ import { useRef , useState } from 'react';
 export default function Notes() {
 
 
-
+const [load, setload] = useState(true)
 
 
   
@@ -49,10 +50,11 @@ export default function Notes() {
 // }, [notes])
 
 useEffect(() => {
-  // setload(false);
+  
   const fetchData = async () => {
+    
     await getNotes();
-
+    setload(false);
   };
 
   fetchData();
@@ -61,7 +63,8 @@ useEffect(() => {
 
 useEffect(() => {
   console.log("am i infinite");
-}, [notes]);
+  getNotes();
+}, [load]);
 
   const updateNotes =  (currentNotes) => {// responsibel to update id & eTitle & eDescription iske parameters mai jo currentNotes mille hai voh context API se aa rhe hai Notesitem ne call kiya h is function ko aur "notes" as props bheje gye the Notes.js k dware 
     console.log(currentNotes);
@@ -81,7 +84,7 @@ useEffect(() => {
 
 
 
-  const handelClick= (e) =>{
+  const handelClick= async (e) =>{
     e.preventDefault(); 
     // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     // setnote({...note, [e.target.name]:e.target.value})
@@ -97,10 +100,12 @@ useEffect(() => {
     // setnote(note._id,note.eTitle,note.eDescription,note.eTag);
     // setnote({...note, [e.target.name]:e.target.value})
     // setnote({...note, [note.name]:note.value})
-    
-     getNotes()
-     localStorage.removeItem(s1);
+    localStorage.removeItem(s1);
     refClose.current.click();
+    setload(true);
+     await getNotes()
+     setload(false);
+     
   }
   const handelOnChange= (e) =>{
 setnote({...note, [e.target.name]:e.target.value})
@@ -198,8 +203,9 @@ setnote({...note, [e.target.name]:e.target.value})
       <div className="row" >  
         
         {/* {notes.length===0  && `NO PENDING WORK ` } */}
-        {notes.length===0  && <Nowork/> }
-        { notes.length!==0  && 
+        {load===true && <><img src={Spinner} className='my-5 mx-5 bg-transparent' style={{width:"20%"}} alt='LOADING...'></img></>}
+        {notes.length===0  && load===false && <Nowork/> }
+        { notes.length!==0  && load===false &&
          notes.map((notes) => {
           return <div className='my-5 ' style={{marginLeft:'0%'}} >
             <MyNoteItem key={notes._id}  notes={notes} updateNotes={updateNotes} deleteNote={deleteNote}  />

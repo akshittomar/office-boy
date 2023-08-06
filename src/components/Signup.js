@@ -3,6 +3,7 @@ import { useState,useEffect,useContext } from 'react';
 import {useNavigate} from 'react-router-dom';
 import noteContext from "../context/notes/noteContext";
 import signImage from './signup.jpg';
+import Spinner from '../Spinner.gif';
 // import Text from './Text';
 function Signup() {
   let navigate = useNavigate();
@@ -10,7 +11,7 @@ function Signup() {
   const {setmail} = context ;
   
 const [newUser, setnewUser] = useState({name:"",email:"",password:"",epost:""})
-
+const [loading, setLoading] = useState(false);
 const [post, setpost] = useState("");
 
 const handelOption=(e)=>{
@@ -28,7 +29,7 @@ useEffect(() => {
 
     console.log("PARAMETERS OF USER EMAIL"+name+" "+email+" "+password+" "+epost);
 
-
+    setLoading(true);
     const response = await fetch( `https://office-boy-backend.onrender.com/api/auth/createuser`, {
       method: 'POST',
       headers:{
@@ -39,6 +40,7 @@ useEffect(() => {
     });
 
     const json = await response.json();
+    setLoading(false);
     if(json.success===true){
      setmail(email);
      localStorage.setItem('mail', email);
@@ -52,7 +54,7 @@ useEffect(() => {
     else
     {
       console.log(json.error);
-    alert(json.error+"    "+json.success);
+    alert("SORRY A USER WITH THIS EMAIL ALREADY EXSISTS");
     
     // navigate("/sign-up");
     }
@@ -144,7 +146,7 @@ const headingStyle = {
     <label htmlFor="cpassword" className="form-label">Confirm Password</label>
     <input type="password" className="form-control" id="cpassword" onChange={handelOnChange}  value={newUser.password}  name="cpassword"/>
   </div> */}
-  <button type="submit" className="btn btn-dark" disabled={ !newUser.email || !newUser.password || !newUser.name}>Submit <i class="fa-solid fa-power-off"></i></button>
+  <button type="submit" className="btn btn-dark" disabled={ !newUser.email || !newUser.password || !newUser.name}>Submit <i class="fa-solid fa-power-off"></i></button> {loading===true && <><img src={Spinner} style={{width:"5%"}} alt=''></img><br/><span className='fa-fade' style={{fontFamily:"fantasy"}}>PROCESSING REQUEST.....</span></>}
 </form>
     </div>
     </div>

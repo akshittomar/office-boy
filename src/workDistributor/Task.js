@@ -1,18 +1,20 @@
 import React, { useContext, useRef, useState, useEffect } from 'react'
 import noteContext from "../context/notes/noteContext"
-import workContext from "../context/notes/ds"
+
 import Alarm from '../components/Alarm';
 import JoditEditor from 'jodit-react';
 import NoteItem from '../components/NoteItem';
-import Chat from '../chat/Chat';
+
 import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import image from './imgg.jpg';
 import nimage from "./business-social-media-manager-flat-illustration_540907-16.avif";
+import Spinner from '../Bars.gif'
+import Magnify from '../Magnify.gif'
 export default function Task() {
   const ENDPOINT = "https://office-boy-backend.onrender.com";
   var socket = io(ENDPOINT);
-  var selectedChatCompare;
+  
 
   const ref = useRef(null);
 
@@ -49,7 +51,9 @@ export default function Task() {
   const [dummy, setdummy] = useState({ Title: "" });
   const [change, setchange] = useState(false);
   const [chat, setchat] = useState("");
-
+  const [empLoad, setempLoad] = useState(false);
+  const [loadadd, setloadadd] = useState(false);
+  const [workload, setworkload] = useState(false);
   const refChat = useRef(null);
   const navREF = useRef(null);
   const refCloseChat = useRef(null);
@@ -139,13 +143,32 @@ export default function Task() {
   }
 
   })
+const fetchData= async()=>{
+  setworkload(true);
+await  getAllWork();
+  setworkload(false);
+}
+
+  useEffect(() => {
+
+    if (!localStorage.getItem('token')) {
+      navigate("/sign-up");
+
+
+    }
+    else{
+      fetchData();
+    }
+  },[])
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate("/sign-up");
 
     }
-   else{ getAllWork();
+   else{ 
+    
+    getAllWork();
     fetchWorker();
     getUser();
 
@@ -165,7 +188,7 @@ export default function Task() {
   }, [change, post, mail])
 
 
-  const handelClick = (e) => {
+  const handelClick = async (e) => {
     e.preventDefault();
     var erank = 0;
     switch (post) {
@@ -211,9 +234,12 @@ export default function Task() {
     }
     setcontent('');
     setwork2add({ Title: "", Description: "", Tag: "default", Epost: "", Erank: 0, Empmail: "", Hrs: 0, Min: 0, Sec: 0 });
-    getAllWork();
+    
     setchange(false);
-  }
+    setloadadd(true);
+   await getAllWork();
+    setloadadd(false);
+  } 
 
 
 
@@ -340,13 +366,14 @@ export default function Task() {
     ref.current.click();
   }
 
-  const fetchWorker = () => {
+  const fetchWorker = async() => {
 
 
     const empPost = post;
+    setempLoad(true);
 
-    getAllEmp(empPost);
-
+   await getAllEmp(empPost);
+    setempLoad(false);
 
 
   }
@@ -355,7 +382,8 @@ export default function Task() {
 
   const handelOption = (e) => {
     setpost(e.target.value);
-    fetchWorker();
+    // alert(post);
+    // fetchWorker();
   }
 
 
@@ -457,12 +485,12 @@ export default function Task() {
 
 
 
+        {empLoad===true && <><img className='mt-4' src={Magnify} style={{width:"5%"}} alt=''></img></>}
 
-
-        {employee.length > 0 && <div className="input-group mb-3" style={{ display: 'flex', flexDirection: "column" }} >
+        {employee.length > 0 && empLoad===false && <div className="input-group mb-3" style={{ display: 'flex', flexDirection: "column" }} >
           <label className="input-group-text " htmlFor="inputGroupSelect07"><i className="fa-solid fa-id-card"> </i>&nbsp; Employee</label>
-
-          {
+          
+          { empLoad===false &&
             employee.map((employ) => {
               return <button className=" btn btn-light mb-1" key={employ._id} value={employ.email} onClick={(e) => { e.preventDefault(); handelMail(e); localStorage.setItem("NAME", employ.name); localStorage.setItem("DOJ", employ.date) }} style={{ border: "groove grey 1px" }}  >
 
@@ -474,13 +502,14 @@ export default function Task() {
           }
         </div>}
 
-        {post !== "Choose..." && employee.length === 0 && <span className='mx-5 mt-2 mb-5 fa-fade'>NO EMPLOYEE FOUND&nbsp;<i className="fa-solid fa-user-large-slash fa-fade"></i><br></br></span>}
+        {post !== "Choose..." && employee.length === 0 && empLoad===false && <span className='mx-5 mt-2 mb-5 fa-fade'>NO EMPLOYEE FOUND&nbsp;<i className="fa-solid fa-user-large-slash fa-fade"></i><br></br></span>}
 
 
 
 
         
         <button disabled={work2add.Title.length < 5 || content.length < 5 || post === "Choose..." || employee.length === 0} type="submit" className="btn btn-primary mt-3" onClick={handelClick}>ADD A PROJECT&nbsp;<i className="fa-solid fa-share-nodes fa-spin"></i></button>
+        {loadadd===true && <span className='fa-fade my-5'>&nbsp;&nbsp;&nbsp;PROCESSING...</span>}
       </form>
 
 
@@ -677,15 +706,16 @@ export default function Task() {
 
 
       <div className='row card-deck'>
-        {work.length === 0 && 
+        {workload===true && <img src={Spinner} className='my-5 mx-5' style={{width:"20%"}} alt=''></img>}
+        {work.length === 0 && workload === false &&
         <div className='mx-5' ><h3 className='fa-fade my-6 mt-5 mx-6' style={{marginLeft:"27%",color:"cadetblue"}} > ADD A PROJECT TO GET STARTED  <i className="fa-solid fa-person-skiing fa-fade"></i></h3>
 
         <img className='my-0 mx-5 px-5 ' style={{ borderColor: "white", width: "70%" }} src={nimage} alt="" /> </div>
         }
         {
-          work.length >0 && <h3 className='my-5 mx-4' style={{fontFamily:"serif"}}>YOUR COLLABORATIONS <i className="fa-regular fa-handshake"></i> </h3>
+          work.length >0 && workload===false && <h3 className='my-5 mx-4' style={{fontFamily:"serif"}}>YOUR COLLABORATIONS <i className="fa-regular fa-handshake"></i> </h3>
         }
-        {work.map((work) => {
+        {workload===false && work.map((work) => {
           return < > <NoteItem key={work._id} notes={work} updateNotes={updateModal} deleteNote={deleteWork} Chat={updateChat} cloured="false" option="true" />
 
 

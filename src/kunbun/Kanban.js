@@ -48,28 +48,25 @@ function Kanban() {
   const context = useContext(noteContext);
   let navigate = useNavigate();
 
-  const { getAllWork } = context;
-  const { getAccomp } = context;
+  
+  
   const notes = context.notes;
   useEffect(() => {
 
 
-    if(localStorage.getItem('token')){
-      getAllWork();
-      getAccomp();
+    if(!localStorage.getItem('token')){
       
+      
+      navigate("/sign-up");
      
     }
-      else{
-        navigate("/sign-up");
-  
-      }
+      
   
 
   }, [])
   return (
     <>
-        {notes.map((notes) => {
+        {localStorage.getItem('token')&&notes.map((notes) => {
 
 return <Alarm key={notes._id} notes={notes} show="false" />;
 })}
@@ -78,6 +75,84 @@ return <Alarm key={notes._id} notes={notes} show="false" />;
       <div style={{ backgroundColor: "white" }}  ><img className='' style={{ borderColor: "white", width: "45%", marginLeft: "25%" }} src={image} alt="" /></div>
 
 
+
+     
+      <div className='container'>
+  <div className='row'>
+    <div className='col-md-3 col-sm-6 mb-4'>
+      <div style={{ border: 'solid 1px grey' }}>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" style={{ color: '#bfca0c' }}>PENDING/COLLABORATIONS <i className="fa-solid fa-clock"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            {localStorage.getItem('token') && <Doing />}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div className='col-md-3 col-sm-6 mb-4'>
+      <div style={{ border: 'solid 1px grey' }}>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" style={{ color: '#e20404' }}>TO-DO <i className="fa-solid fa-bolt"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            {localStorage.getItem('token') && <MyWork />}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div className='col-md-3 col-sm-6 mb-4'>
+      <div style={{ border: 'solid 1px grey' }}>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" style={{ color: 'ThreeDShadow' }}>MY PROJECTS <i className="fa-solid fa-laptop"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            {localStorage.getItem('token') && <Todo />}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div className='col-md-3 col-sm-6 mb-4'>
+      <div style={{ border: 'solid 1px grey' }}>
+        <table className="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" style={{ color: 'rgb(8 222 54)' }}>COMPLETED <i className="fa-sharp fa-solid fa-square-check"></i></th>
+            </tr>
+          </thead>
+          <tbody>
+            {localStorage.getItem('token') && <Done />}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </>
+  );
+}
+
+export default Kanban;
+
+
+
+
+
+{/*
 
 
       <div style={{ display: 'flex' ,overflow:"scroll",flexWrap:"wrap",justifyContent:"flex-start" }} className='mx-5'>
@@ -92,7 +167,7 @@ return <Alarm key={notes._id} notes={notes} show="false" />;
             <tbody>
 
 
-              <Doing />
+            { localStorage.getItem('token') &&  <Doing />}
 
 
             </tbody>
@@ -110,7 +185,7 @@ return <Alarm key={notes._id} notes={notes} show="false" />;
             <tbody>
 
 
-              <MyWork />
+            { localStorage.getItem('token') &&   <MyWork />}
 
 
             </tbody>
@@ -128,7 +203,7 @@ return <Alarm key={notes._id} notes={notes} show="false" />;
             <tbody>
 
 
-              <Todo />
+            { localStorage.getItem('token') &&  <Todo /> }
 
 
             </tbody>
@@ -147,15 +222,12 @@ return <Alarm key={notes._id} notes={notes} show="false" />;
             <tbody>
 
 
-              <Done />
+            { localStorage.getItem('token') && <Done />  }
 
 
             </tbody>
           </table>
         </div>
       </div>
-    </>
-  );
-}
 
-export default Kanban;
+*/}
