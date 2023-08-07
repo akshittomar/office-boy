@@ -178,7 +178,7 @@ function NoWork() {
 
             </div>
 
-            <div><h6 style={{ height: "10vh" }} className="card-text container overflow-auto" ><strong>Work <i className="fa-sharp fa-solid fa-briefcase"></i></strong><div >EXAMPLE DESCRIPTION 3</div></h6>
+            <div><h6 style={{ height: "10vh" }} className="card-text container overflow-auto" ><strong> Work <i className="fa-sharp fa-solid fa-briefcase"></i></strong><div >EXAMPLE DESCRIPTION 3</div></h6>
 
             </div>
 
