@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.170ef3cf.css",
+    "main.js": "/static/js/main.03e79ed7.js",
+    "static/js/651.c1685161.chunk.js": "/static/js/651.c1685161.chunk.js",
+    "static/media/login.jpg": "/static/media/login.7b2e428d7d57a6f351ba.jpg",
+    "static/media/todo.png": "/static/media/todo.f5121a5de654d919ddf5.png",
+    "static/media/Wedges.gif": "/static/media/Wedges.c07ffebe45c2869971bb.gif",
+    "static/media/My project.png": "/static/media/My project.9a186ef004d28df36927.png",
+    "static/media/membership.png": "/static/media/membership.dade199ddb290c4cf8c9.png",
+    "static/media/done.jpg": "/static/media/done.3f6d731e3546db7a1a56.jpg",
+    "static/media/imgg.jpg": "/static/media/imgg.129328fff7e264addc80.jpg",
+    "static/media/alarm.mp3": "/static/media/alarm.75bcdc6d9ef4632bf8f6.mp3",
+    "static/media/Spinner.gif": "/static/media/Spinner.15753574752c457c657e.gif",
+    "static/media/img.png": "/static/media/img.647ee1c8bd3e28ef2b90.png",
+    "static/media/Bars.gif": "/static/media/Bars.45e31377bb022f1db0c6.gif",
+    "static/media/imgg2.jpg": "/static/media/imgg2.61b1b3621715d7e054e7.jpg",
+    "static/media/img4.jpg": "/static/media/img4.d6a9a8a67f78896b2010.jpg",
+    "static/media/imgg1.jpg": "/static/media/imgg1.34f2be07a08148efe23c.jpg",
+    "static/media/img3.avif": "/static/media/img3.d5ea0cca794ec7ec05ec.avif",
+    "static/media/portable-art-drawing-boards-FA-B.jpg": "/static/media/portable-art-drawing-boards-FA-B.b976c455276090eb7611.jpg",
+    "static/media/pending.jpg": "/static/media/pending.51476b66191bebc180b6.jpg",
+    "static/media/signup.jpg": "/static/media/signup.3cda848463049a01a699.jpg",
+    "static/media/nocollab.png": "/static/media/nocollab.8dee201dfa608b46817b.png",
+    "static/media/Magnify.gif": "/static/media/Magnify.b59de86f178d71ed083f.gif",
+    "static/media/business-social-media-manager-flat-illustration_540907-16.avif": "/static/media/business-social-media-manager-flat-illustration_540907-16.97d2e6947cc24311e511.avif",
+    "index.html": "/index.html",
+    "main.170ef3cf.css.map": "/static/css/main.170ef3cf.css.map",
+    "main.03e79ed7.js.map": "/static/js/main.03e79ed7.js.map",
+    "651.c1685161.chunk.js.map": "/static/js/651.c1685161.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.170ef3cf.css",
+    "static/js/main.03e79ed7.js"
+  ]
+}
