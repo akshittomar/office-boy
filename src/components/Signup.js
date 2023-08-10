@@ -146,7 +146,7 @@ const headingStyle = {
     <label htmlFor="cpassword" className="form-label">Confirm Password</label>
     <input type="password" className="form-control" id="cpassword" onChange={handelOnChange}  value={newUser.password}  name="cpassword"/>
   </div> */}
-  <button type="submit" className="btn btn-dark" disabled={ !newUser.email || !newUser.password || !newUser.name}>Submit <i class="fa-solid fa-power-off"></i></button> {loading===true && <><img src={Spinner} style={{width:"5%"}} alt=''></img><br/><span className='fa-fade' style={{fontFamily:"fantasy"}}>PROCESSING REQUEST.....</span></>}
+  <button type="submit" className="btn btn-dark" disabled={ !newUser.email || !newUser.password || !newUser.name}>Submit <i className="fa-solid fa-power-off"></i></button> {loading===true && <><img src={Spinner} style={{width:"5%"}} alt=''></img><br/><span className='fa-fade' style={{fontFamily:"fantasy"}}>PROCESSING REQUEST.....</span></>}
 </form>
     </div>
     </div>

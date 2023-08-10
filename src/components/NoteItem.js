@@ -96,7 +96,7 @@ useEffect(() => {
       <i className="fa-solid fa-business-time"></i>{" "+note.epost+" "} &nbsp;<i className="fa-solid fa-user-tie "></i> "{note.empname}"
           
   </div>
-  <img class="card-img-top" src={image} alt="Card image cap"></img>
+  <img className="card-img-top" src={image} alt="Card image cap"></img>
         <div className="card-body  ">
 
           <div className='d-flex  '>
