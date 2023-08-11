@@ -77,8 +77,14 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: node-app
+    - name: Sample Azure action
+      with: # Set Azure credentials secret as an input
+        credentials: ${{ secrets.userPWD }}
+ 
     - name: Azure Login
-      uses: Azure/login@v1
+      uses: Azure/login@v1 
+      
+      
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp
