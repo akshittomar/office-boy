@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import image from './imgg1.jpg';
 import image2 from './imgg2.jpg';
 import image3 from './img4.jpg';
-import img from '../work2do/img3.avif';
+import img from './img3.jpg';
 
 
 function NoWork() {

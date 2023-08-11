@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import img from '../work2do/img3.avif';
+import img from '../work2do/img3.jpg';
 
 function Workcard(props) {
     
