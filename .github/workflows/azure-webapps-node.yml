@@ -77,6 +77,8 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: node-app
+    - name: Azure Login
+      uses: Azure/login@v1
 
     - name: 'Deploy to Azure WebApp'
       id: deploy-to-webapp
