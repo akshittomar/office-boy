@@ -8,7 +8,7 @@ import NoteItem from '../components/NoteItem';
 import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import image from './imgg.jpg';
-import nimage from "./business-social-media-manager-flat-illustration_540907-16.avif";
+import nimage from "./business-social-media-manager-flat-illustration_540907-16.jpg";
 import Spinner from '../Bars.gif'
 import Magnify from '../Magnify.gif'
 export default function Task() {
