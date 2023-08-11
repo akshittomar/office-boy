@@ -27,7 +27,7 @@ useEffect(() => {
 
   const createUser = async (name,email,password,epost )=>{
 
-    console.log("PARAMETERS OF USER EMAIL"+name+" "+email+" "+password+" "+epost);
+    //console.log("PARAMETERS OF USER EMAIL"+name+" "+email+" "+password+" "+epost);
 
     setLoading(true);
     const response = await fetch( `https://office-boy-backend.onrender.com/api/auth/createuser`, {
@@ -53,7 +53,7 @@ useEffect(() => {
     }
     else
     {
-      console.log(json.error);
+      //console.log(json.error);
     alert("SORRY A USER WITH THIS EMAIL ALREADY EXSISTS");
     
     // navigate("/sign-up");
@@ -85,7 +85,7 @@ const afterSubmit=(e)=>{
   e.preventDefault();
   
   setnewUser({name:newUser.name,email:newUser.email,password:newUser.password,epost:post});
-  console.log("THE NEW USER IS "+newUser);
+  //console.log("THE NEW USER IS "+newUser);
   createUser(newUser.name,newUser.email,newUser.password,post);
 
 

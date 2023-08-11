@@ -8,7 +8,7 @@ import {useNavigate} from 'react-router-dom';
 
 
 export default function Home(props) {
-  console.log(props.type);
+  //console.log(props.type);
   const context = useContext(noteContext);
 const {getNotes} = context;
 const {user}= context ;

@@ -50,8 +50,8 @@ export default function NoteItem(props) {
       setss(num3);
       setuse(true);
     }
-    console.log("     s   ========>  " + s1 + s2 + s3);
-    console.log(use + "use is thhhis  " + localStorage.getItem(s1) + " " + localStorage.getItem(s2) + " " + localStorage.getItem(s3));
+    
+    
   }, [])
 
 
@@ -110,7 +110,7 @@ export default function NoteItem(props) {
   const handelClick = (e) => {
     e.preventDefault();
     if((time.Hrs !== 0 && time.Hrs !== "0" ) || (time.Min !== 0 && time.Min !== "0" ) || (time.Sec !== 0 && time.Sec !== "0" )){
-      console.log(time.Hrs+" "+time.Min+" "+time.Sec);
+      
     sethh(time.Hrs);
     setmm(time.Min);
     setss(time.Sec);

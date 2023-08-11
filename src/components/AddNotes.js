@@ -72,7 +72,7 @@ export default function AddNotes() {
   
   <small ><p className='mx-6 my-6' style={{fontFamily:"monospace"}} >Enter Time In hh:mm:ss Format </p></small>
   <div className="form-check">
-  <input className="form-check-input" onChange={()=>{ if(ref.current === true)ref.current = false;else ref.current=true;}} onClick={()=>console.log(ref.current)} type="checkbox" value="" id="flexCheckChecked" defaultChecked/>
+  <input className="form-check-input" onChange={()=>{ if(ref.current === true)ref.current = false;else ref.current=true;}} onClick={()=>console.log(" ")} type="checkbox" value="" id="flexCheckChecked" defaultChecked/>
   <label className="form-check-label" htmlFor="flexCheckChecked">
     Notify via email when time runs to zero
   </label>

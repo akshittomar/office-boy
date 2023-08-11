@@ -61,7 +61,7 @@ function Workcard(props) {
                             <div className=" card-footer d-flex  " style={{ maxWidth: "45vp" }} >
 
                               <div className='container'>
-                                        <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { console.log("on click is correct2"); localStorage.setItem("room", new String(note._id)); props.Chat(note) }}><small> <i className="fa fa-commenting" aria-hidden="true"> DISCUSS</i></small></h6>
+                                        <h6 style={{ color: "black", cursor: "pointer" }} onClick={() => { localStorage.setItem("room", new String(note._id)); props.Chat(note) }}><small> <i className="fa fa-commenting" aria-hidden="true"> DISCUSS</i></small></h6>
                                     </div>
 
 

@@ -62,12 +62,12 @@ useEffect(() => {
 }, [note]);
 
 useEffect(() => {
-  console.log("am i infinite");
+  //console.log("am i infinite");
   getNotes();
 }, [load]);
 
   const updateNotes =  (currentNotes) => {// responsibel to update id & eTitle & eDescription iske parameters mai jo currentNotes mille hai voh context API se aa rhe hai Notesitem ne call kiya h is function ko aur "notes" as props bheje gye the Notes.js k dware 
-    console.log(currentNotes);
+    //console.log(currentNotes);
     // setnote({id:currentNotes._id, eTitle:currentNotes.title,eDescription:currentNotes.description, etag:currentNotes.tag});
     
     // setnote({...note, [note.name]:note.value})
@@ -76,8 +76,8 @@ useEffect(() => {
     // settitle({tit:currentNotes.title})   ;
     // console.log("UPDATING TITLE "+title.tit)
     // setnote(currentNotes);99
-    console.log("AFTER SETNOTE");
-    console.log(note);
+    //console.log("AFTER SETNOTE");
+    //console.log(note);
     ref.current.click();
   }
 

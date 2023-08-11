@@ -22,7 +22,7 @@ export default function Mywork() {
     const json1 = await response.json();
     
   const  user =     { name: json1.name, email: json1.email, epost: json1.epost, doj: json1.date };
-  console.log('user is this ' + user.name);
+  //console.log('user is this ' + user.name);
   setUser(user);
   return  user;  
   },[])
@@ -37,7 +37,7 @@ export default function Mywork() {
       body: JSON.stringify({ taskFind: user.email }),
     });
     const json = await response.json();
-    console.log(json);
+    //console.log(json);
     setTodo(json);
     // return json ;
   },[])
@@ -48,7 +48,7 @@ export default function Mywork() {
   useEffect(() => {
     getUser().then(setUser);
     setfirst('jj');
-    console.log("is user clear"+user.name);
+    //console.log("is user clear"+user.name);
 
 
    

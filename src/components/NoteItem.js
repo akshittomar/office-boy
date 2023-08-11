@@ -157,7 +157,7 @@ useEffect(() => {
               
               { props.cloured==="false" && 
               <div className='container'>
-              <h6 style={{ color: "black", cursor: "pointer",fontSize:'70%',fontFamily:'serif' }}  onClick={()=>{console.log("on click is correct2");localStorage.setItem("room",new String(note._id));props.Chat(note)}}> <i className="fa fa-commenting" aria-hidden="true"></i>CHAT</h6>
+              <h6 style={{ color: "black", cursor: "pointer",fontSize:'70%',fontFamily:'serif' }}  onClick={()=>{localStorage.setItem("room",new String(note._id));props.Chat(note)}}> <i className="fa fa-commenting" aria-hidden="true"></i>CHAT</h6>
              </div>}
 
 {/* we have to make a <input> tag to take text as input with just a simpel button to send chat 

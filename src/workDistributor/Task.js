@@ -58,8 +58,8 @@ export default function Task() {
   const navREF = useRef(null);
   const refCloseChat = useRef(null);
   const updateChat = (currentNotes) => {
-    console.log("this is it ");
-    console.log(currentNotes);
+    //console.log("this is it ");
+    //console.log(currentNotes);
 
     // setdummy({Title:currentNotes.title})
     // window.alert(currentNotes.empname); 
@@ -73,8 +73,8 @@ export default function Task() {
     // setnote(currentNotes);99 
     var str = new String(currentNotes.chat);
     setmsg(str.split("\n\n"));
-    console.log("AFTER SETCHAT");
-    console.log(chat);
+    //console.log("AFTER SETCHAT");
+    //console.log(chat);
     refChat.current.click();
   }
 
@@ -99,7 +99,7 @@ export default function Task() {
 
         const devi = document.createElement('div');
         const youLabel = document.createElement('span');
-        console.log(modalWork.Name);
+        //console.log(modalWork.Name);
         youLabel.textContent = localStorage.getItem("WNAME");
         youLabel.style.fontSize = "50%";
         youLabel.style.marginRight = "99%";
@@ -281,15 +281,15 @@ await  getAllWork();
   const handelMail = (e) => {
 
     setmail(e.target.value.slice(e.target.value.lastIndexOf(" ") + 1));
-    console.log('apun chala bhai' + e.target.value);
+    //console.log('apun chala bhai' + e.target.value);
   }
 
 
   const handelOnChange = (e) => {
 
     setwork2add({ ...work2add, [e.target.name]: e.target.value })
-    if (e.target.name === "Empmail")
-      console.log(work2add.Empmail);
+    // if (e.target.name === "Empmail")
+      //console.log(work2add.Empmail);
   }
 
 
@@ -351,7 +351,7 @@ await  getAllWork();
 
 
   const updateModal = (currentNotes) => {// responsibel to update id & eTitle & eDescription iske parameters mai jo currentNotes mille hai voh context API se aa rhe hai Notesitem ne call kiya h is function ko aur "notes" as props bheje gye the Notes.js k dware 
-    console.log(currentNotes);
+    //console.log(currentNotes);
     // setnote({id:currentNotes._id, eTitle:currentNotes.title,eDescription:currentNotes.description, etag:currentNotes.tag});
 
     // setnote({...note, [note.name]:note.value})
@@ -361,8 +361,8 @@ await  getAllWork();
     // settitle({tit:currentNotes.title})   ;
     // console.log("UPDATING TITLE "+title.tit)
     // setnote(currentNotes);
-    console.log("AFTER SETNOTE");
-    console.log(modalWork);
+    //console.log("AFTER SETNOTE");
+    //console.log(modalWork);
     ref.current.click();
   }
 

@@ -64,7 +64,7 @@ const getNotes = async ()=>{
 const json = await response.json();
 
  setnotes(json);
- console.log("i am running"+notes.length);
+ //console.log("i am running"+notes.length);
 }
 
 
@@ -83,7 +83,7 @@ const getTask = async ()=>{
 
 const json = await response.json();
 settask(json);
-console.log("task chal rhi bhai "+user.email+" email yeh hai ");
+//console.log("task chal rhi bhai "+user.email+" email yeh hai ");
 
 
 }
@@ -102,10 +102,10 @@ const getAccomp = async ()=>{
   });
 
 const json = await response.json();
-console.log("length iis "+json.length);
+//console.log("length iis "+json.length);
 setaccomp(json);
-console.log("accomop chal rhi bhai ");
-console.log(accomp);
+//console.log("accomop chal rhi bhai ");
+//console.log(accomp);
 
 
 }
@@ -122,7 +122,7 @@ const response = await fetch(`${host}/api/scheduler/schedulesms`,{
   body: JSON.stringify({hrs,min,sec})
 });
 const json = await response.json();
-console.log(json);
+//console.log(json);
 }
 
 const mailing=async(mail,subject,description)=>{
@@ -157,7 +157,7 @@ const getUser=async()=>{
   json1.then((json1)=>{
   
     setuser({name:json1.name,email:json1.email,epost:json1.epost,doj:json1.date});
-    console.log("user is this "+user);
+    //console.log("user is this "+user);
   });
  }
 
@@ -168,7 +168,7 @@ const getUser=async()=>{
   //ADDING A NOTE 
   const addNote = async (title,description,tag)=>{
 
-    console.log("PARAMETERS OF ADD NOTE"+title+" "+description+" "+tag);
+    //console.log("PARAMETERS OF ADD NOTE"+title+" "+description+" "+tag);
 
 
     const response = await fetch( `${host}/api/notes/addnote`, {
@@ -181,7 +181,7 @@ const getUser=async()=>{
     });
 
     const json = await response.json(title,description,tag);
-    console.log("ADDED NOTE IS THIS "+json.title);
+    //console.log("ADDED NOTE IS THIS "+json.title);
 
 
    
@@ -224,15 +224,15 @@ setnotes(notes.concat(note));
       body: JSON.stringify()
     });
     const json = await response.json();
-    console.log("BECHARA DELETED HUA KA RESPONSE JSON ")
-    console.log(json);
+    //console.log("BECHARA DELETED HUA KA RESPONSE JSON ")
+    //console.log(json);
     
 
 
 
 
 
-console.log("DELETING A NOTE WITH ID "+id)
+//console.log("DELETING A NOTE WITH ID "+id)
 const newNotes =  notes.filter((note)=>{ return note._id!==id})
 setnotes(newNotes);
 
@@ -246,7 +246,7 @@ setnotes(newNotes);
 
   //edit a note 
   const editNote  = async(id,title,description,tag)=>{
-console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
+//console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
     const response = await fetch( `${host}/api/notes/update/${id}`, {
       method: 'PUT',
       headers:{
@@ -260,13 +260,13 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
       body: JSON.stringify({id,title,description,tag})
     });
     const json =await  response.json(id,title,description,tag);
-    console.log("KYA TUM PROMISE HO")
-    console.log(json);
+    //console.log("KYA TUM PROMISE HO")
+    //console.log(json);
     
     
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
-      console.log("ALL OK ");
+      //console.log("ALL OK ");
       if(element._id === id){
         notes[index].title=title;
         notes[index].description=description;
@@ -274,12 +274,12 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
         
       }
       else{
-        console.log("eroooor ");
+        //console.log("eroooor ");
       }
        
     }
-    console.log("YEH HUA H UPDATION MAI NOTES ")
-    console.log(notes);
+    //console.log("YEH HUA H UPDATION MAI NOTES ")
+    //console.log(notes);
     const newNotes = notes;
     setnotes(newNotes);
     
@@ -312,7 +312,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
         });
       
       const json = await response.json();
-      console.log("i am running");
+      //console.log("i am running");
       setwork(json);
       }
 
@@ -323,7 +323,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 
       const addWork = async (title,description,tag,epost,erank,empemail,empname,empdoj)=>{
 
-        console.log("PARAMETERS OF ADD WORK "+title+" "+description+" "+tag+" "+epost+" "+erank+" "+empemail+" "+empname+" "+empdoj);
+        //console.log("PARAMETERS OF ADD WORK "+title+" "+description+" "+tag+" "+epost+" "+erank+" "+empemail+" "+empname+" "+empdoj);
     
     
         const response = await fetch( `${host}/api/sendwork/addwork`, {
@@ -336,15 +336,15 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
         });
     
         const json = await response.json();
-        console.log("isne bc dimaak khrab krdiya ");
-        console.log(json);
+        //console.log("isne bc dimaak khrab krdiya ");
+        //console.log(json);
         if(json.success=== false ){
          
      alert(json.error);
         }
         else{
          
-          console.log("ADDED NOTE IS THIS "+json.title);
+          //console.log("ADDED NOTE IS THIS "+json.title);
           const   wrk = json ;
           setwork(work.concat(wrk));
         }
@@ -373,15 +373,15 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
           body: JSON.stringify()
         });
         const json =await response.json();
-        console.log("BECHARA DELETED HUA KA RESPONSE JSON ")
-        console.log(json);
+        //console.log("BECHARA DELETED HUA KA RESPONSE JSON ")
+        //console.log(json);
         
       
       
       
       
       
-      console.log("DELETING A NOTE WITH ID "+id)
+      //console.log("DELETING A NOTE WITH ID "+id)
       const newWork = work.filter((wrk)=>{ return wrk._id!==id})
       setwork(newWork);
       
@@ -396,7 +396,7 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
 {/*editWork(modalWork.id, modalWork.eTitle, modalDesc, modalWork.eTag, modalWork.Upost, erank, modalWork.Umail,modalWork.chat); */}
 
 
-        console.log("PARAMETERS in frontend ARE : "+id+title+description+tag+empemail+" "+chat);
+        //console.log("PARAMETERS in frontend ARE : "+id+title+description+tag+empemail+" "+chat);
             const response = await fetch( `${host}/api/sendwork/update/${id}`, {
               method: 'PUT',
               
@@ -411,13 +411,13 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
               body: JSON.stringify({id,title,description,tag,epost,erank,empemail,chat})
             });
             const json =await response.json(id,title,description,tag);
-            console.log("KYA TUM PROMISE HO")
-            console.log(json);
+            //console.log("KYA TUM PROMISE HO")
+            //console.log(json);
             
             
             for (let index = 0; index < work.length; index++) {
               const element = work[index];
-              console.log("ALL OK ");
+              //console.log("ALL OK ");
               if(element._id === id){
                 work[index].title=title;
                 work[index].description=description;
@@ -428,12 +428,12 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
                 
               }
               else{
-                console.log("eroooor ");
+                //console.log("eroooor ");
               }
                
             }
-            console.log("YEH HUA H UPDATION MAI work ")
-            console.log(work);
+            //console.log("YEH HUA H UPDATION MAI work ")
+            //console.log(work);
             const newwork = work;
             setwork(newwork);
             
@@ -456,9 +456,9 @@ console.log("PARAMETERS in frontend ARE : "+id+title+description+tag);
               });
             
             const json = await response.json();
-            console.log(json);
+            //console.log(json);
             setemployee(json);
-            console.log("i am employee"+employee.length);
+            //console.log("i am employee"+employee.length);
 
             }
        

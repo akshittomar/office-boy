@@ -25,7 +25,7 @@ export default function Login() {
 
   const addUser = async (email,password )=>{
 
-    console.log("PARAMETERS OF USER EMAIL"+email+" "+password);
+    //console.log("PARAMETERS OF USER EMAIL"+email+" "+password);
 
       setLoading(true);
     const response = await fetch( `https://office-boy-backend.onrender.com/api/auth/login`, {
@@ -39,8 +39,8 @@ export default function Login() {
 
     const json = await response.json();
     setLoading(false);
-    console.log("AFTER RESPONSE FETCHING "+json);
-    console.log("AUTH TOKEN IS THIS "+json.authToken);
+    //console.log("AFTER RESPONSE FETCHING "+json);
+    //console.log("AUTH TOKEN IS THIS "+json.authToken);
     // console.log("ADDED USER  IS THIS "+json.email);
     // setuserInfo(json.email,json.password);
 
@@ -51,7 +51,7 @@ export default function Login() {
   
     
    if(json.success === true ){
-    console.log(json.authToken);
+    //console.log(json.authToken);
     localStorage.setItem('token' , json.authToken);
     setmail(email);
     localStorage.setItem('mail', email);
@@ -62,7 +62,7 @@ export default function Login() {
    {
 
     
-    console.log(json.error);
+    //console.log(json.error);
     alert(json.error);
     
     navigate("/login");
@@ -90,9 +90,9 @@ export default function Login() {
   const afterSubmit= (e) =>{
     e.preventDefault();
     
-      console.log(" before submition  "+userInfo.email+"   "+userInfo.password)
+      //console.log(" before submition  "+userInfo.email+"   "+userInfo.password)
     setuserInfo({email:userInfo.email,password:userInfo.password});
-    console.log(" after submition  "+userInfo.email+"   "+userInfo.password)
+    //console.log(" after submition  "+userInfo.email+"   "+userInfo.password)
    addUser(userInfo.email,userInfo.password);
    
     // setuserInfo({email: "", password: "" });
@@ -100,7 +100,7 @@ export default function Login() {
   }
   const handelOnChange= (e) =>{ 
     e.preventDefault();
-    console.log("GUNGA BOLLA ")
+    //console.log("GUNGA BOLLA ")
     // setLightState(prevLightState => ({...prevLightState, ...newState}))
  
 setuserInfo({...userInfo, [e.target.name]:e.target.value})

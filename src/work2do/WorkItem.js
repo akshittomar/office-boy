@@ -94,7 +94,7 @@ var socket = io(ENDPOINT);
     useEffect(() => {
       socket.on("messageReceived", (newMessage) => { 
 
-        console.log(" i just raaannn ");
+        //console.log(" i just raaannn ");
         if (newMessage.chat !== prevMessageRef.current) {
           // Only update UI if the new message is different from the previous one
           // setmsg(newMessage);
@@ -171,8 +171,8 @@ const refCloseChat = useRef(null);
 
 
 const updateChat=(note2)=>{
-  console.log("notes");
-  console.log("title"+note2.description);
+  //console.log("notes");
+  //console.log("title"+note2.description);
   
   if(note2){refChat.current.click();
   
