@@ -19,7 +19,7 @@ const handelOption=(e)=>{
 
 
 useEffect(() => {
-  console.log(post);
+  // console.log(post);
 
  
 }, [post])
